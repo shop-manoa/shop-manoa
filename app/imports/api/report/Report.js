@@ -6,21 +6,34 @@ import SimpleSchema from 'simpl-schema';
  * It encapsulates state and variable values for users.
  * It stores the info of the inappropriate users.
  */
-class UsersCollection {
+class ReportsCollection {
   constructor() {
     // The name of this collection.
-    this.name = 'UsersCollection';
+    this.name = 'ReportsCollection';
     // Define the Mongo collection.
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      // reasons to categorize the user as inappropriate
-      // details about how the user is inappropriate against the community standards
-      // reasons{
-      //   type: Button or Choice
-      //   allowedValues: ['inappropriate', 'spam', 'offensive', 'other'],}.isRequired(),
-      //   },
-      // details: longString.isRequired(),
+      Type: {
+        type: String,
+        allowedValues: ['Post', 'User'],
+        defaultValue: 'Post',
+      },
+      Category: {
+        type: String,
+        allowedValues: [
+          'Spam',
+          'Sexual conduct',
+          'Hate speech or discriminatory symbols',
+          'Abuse or dangerous groups',
+          'Sale of illegal or regulated goods',
+          'Bullying or harassment',
+          'Infringement of intellectual property rights',
+          'Suicide or self-harm',
+          'False information',
+          'Others'],
+        defaultValue: 'Others',
+      },
     });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);
@@ -31,7 +44,7 @@ class UsersCollection {
 }
 
 /**
- * The singleton instance of the UsersCollection.
- * @type {UsersCollection}
+ * The singleton instance of the ReportsCollection.
+ * @type {ReportCollection}
  */
-export const Users = new UsersCollection();
+export const Reports = new ReportsCollection();
