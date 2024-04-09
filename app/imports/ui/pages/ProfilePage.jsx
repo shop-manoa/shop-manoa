@@ -1,24 +1,14 @@
 import React, { useState } from 'react';
 import { Col, Container, Row, Form, Button } from 'react-bootstrap';
-
-const UserProfileSchema = {
-  profilePicture: String,
-  bio: String,
-  sellingList: [String],
-};
+import { Meteor } from 'meteor/meteor';
 
 const ProfilePage = () => {
-  const [profilePicture, setProfilePicture] = useState(null);
-  const [bio, setBio] = useState('');
+  const user = Meteor.user();
+  const [bio, setBio] = useState(user.profile && user.profile.bio ? user.profile.bio : '');
   const [sellingItem, setSellingItem] = useState('');
   const [sellingList, setSellingList] = useState([]);
   const [lookingForItem, setLookingForItem] = useState('');
   const [lookingForList, setLookingForList] = useState([]);
-
-  const handlePictureUpload = (event) => {
-    const file = event.target.files[0];
-    setProfilePicture(URL.createObjectURL(file));
-  };
 
   const handleAddSellingItem = () => {
     if (sellingItem.trim() !== '') {
@@ -34,19 +24,22 @@ const ProfilePage = () => {
     }
   };
 
+  const handleSaveBio = () => {
+    // Update user profile with new bio
+    Meteor.users.update(Meteor.userId(), { $set: { 'profile.bio': bio } });
+  };
+
   return (
       <Container>
         <Row>
           <Col md={4}>
             <div className="profile-picture-container">
-              <label htmlFor="profile-picture" className="profile-picture-placeholder">
-                {profilePicture ? (
-                    <div className="profile-picture" style={{ backgroundImage: `url(${profilePicture})` }}></div>
-                ) : (
-                    <div className="placeholder">Upload Photo</div>
-                )}
-              </label>
-              <input type="file" id="profile-picture" onChange={handlePictureUpload} style={{ display: 'none' }} />
+              {user.profile && user.profile.pictureUrl ? (
+                  <img src={user.profile.pictureUrl} alt="Profile" className="profile-picture" />
+              ) : (
+                  <div className="placeholder">Upload Photo</div>
+              )}
+              {/* You may also include the option to upload a new photo here */}
             </div>
           </Col>
           <Col md={8}>
@@ -58,6 +51,7 @@ const ProfilePage = () => {
                   value={bio}
                   onChange={(e) => setBio(e.target.value)}
               />
+              <Button onClick={handleSaveBio}>Save Bio</Button>
             </Form.Group>
             <Form.Group>
               <Form.Label>List of items for sale</Form.Label>
