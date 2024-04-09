@@ -9,5 +9,10 @@
     { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
     { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
     { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
+  ],
+
+  "defaultProfile": [
+    { "image": "https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png", "firstName": "0", "lastName": "Admin", "bio": "I am admin", "owner": "admin@foo.com" },
+    { "image": "https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png", "firstName": "0", "lastName": "User", "bio": "I am user", "owner": "john@foo.com" }
   ]
 }
