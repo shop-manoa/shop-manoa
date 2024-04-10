@@ -7,6 +7,7 @@ const ReportItem = ({ report }) => (
     <td>{report.types}</td>
     <td>{report.category}</td>
     <td>{report.details}</td>
+    <td>{report.owner}</td>
   </tr>
 );
 
@@ -17,6 +18,7 @@ ReportItem.propTypes = {
     category: PropTypes.string,
     details: PropTypes.string,
     _id: PropTypes.string,
+    owner: PropTypes.string,
   }).isRequired,
 };
 

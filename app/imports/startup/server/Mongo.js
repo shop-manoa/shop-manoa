@@ -11,7 +11,7 @@ const addData = (data) => {
 };
 
 const addReport = (report) => {
-  console.log(`  Adding: ${report.category} (${report.owner})`);
+  console.log(`  Adding: ${report.types} ${report.category} (${report.owner})`);
   Reports.collection.insert(report);
 };
 
