@@ -12,7 +12,7 @@
   ],
 
   "defaultReport": [
-    { "types": "Post", "category":  "Spam", "details":  "This is a spam post", "owner": "admin@foo.com" },
+    { "types": "Post", "category":  "Spam", "details":  "This is a spam post", "owner": "john@foo.com" },
     { "types": "User", "category":  "False information", "details":  "This user provides false information", "owner": "admin@foo.com" }
   ]
 }

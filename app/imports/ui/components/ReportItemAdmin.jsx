@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 /** Renders a single row in the List Report table. See pages/ListReport.jsx. */
-const ReportItem = ({ report }) => (
+const ReportItemAdmin = ({ report }) => (
   <tr>
     <td>{report.types}</td>
     <td>{report.category}</td>
@@ -12,7 +12,7 @@ const ReportItem = ({ report }) => (
 );
 
 // Require a document to be passed to this component.
-ReportItem.propTypes = {
+ReportItemAdmin.propTypes = {
   report: PropTypes.shape({
     types: PropTypes.string,
     category: PropTypes.string,
@@ -22,4 +22,4 @@ ReportItem.propTypes = {
   }).isRequired,
 };
 
-export default ReportItem;
+export default ReportItemAdmin;

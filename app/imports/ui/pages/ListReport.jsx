@@ -35,6 +35,7 @@ const ListReport = () => {
               <tr>
                 <th>Type</th>
                 <th>Category</th>
+                <th>Details</th>
               </tr>
             </thead>
             <tbody>
