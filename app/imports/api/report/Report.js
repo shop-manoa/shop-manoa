@@ -2,7 +2,7 @@ import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
 /**
- * The UsersCollection.
+ * The ReportsCollection.
  * It encapsulates state and variable values for users.
  * It stores the info of the inappropriate users.
  */
@@ -14,12 +14,12 @@ class ReportsCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      Type: {
+      types: {
         type: String,
         allowedValues: ['Post', 'User'],
         defaultValue: 'Post',
       },
-      Category: {
+      category: {
         type: String,
         allowedValues: [
           'Spam',
@@ -34,6 +34,7 @@ class ReportsCollection {
           'Others'],
         defaultValue: 'Others',
       },
+      details: String,
     });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);
@@ -45,6 +46,6 @@ class ReportsCollection {
 
 /**
  * The singleton instance of the ReportsCollection.
- * @type {ReportCollection}
+ * @type {ReportsCollection}
  */
 export const Reports = new ReportsCollection();
