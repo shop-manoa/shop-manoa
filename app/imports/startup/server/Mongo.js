@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/Stuff.js';
 import { Profiles } from '../../api/user/Profiles.js';
 import { Reports } from '../../api/report/Report.js';
+import { Ratings } from '../../api/rating/Ratings.js';
 
 /* eslint-disable no-console */
 
@@ -21,7 +22,9 @@ if (Stuffs.collection.find().count() === 0) {
 
 const addProfiles = (profile) => {
   console.log(`  Adding: ${profile.lastName} (${profile.owner})`);
-  Profiles.collection.insert(profile);
+  const newProfile = Profiles.collection.insert(profile);
+  console.log(`  Adding rating to id: ${newProfile} (${profile.owner})`);
+  Ratings.collection.insert({ userProfileID: newProfile });
 };
 
 // Initialize the StuffsCollection if empty.
