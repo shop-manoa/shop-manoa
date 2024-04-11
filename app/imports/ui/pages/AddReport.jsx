@@ -1,34 +1,52 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, NumField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, LongTextField, SubmitField, SelectField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
-import { Stuffs } from '../../api/stuff/Stuff';
+import { Reports } from '../../api/report/Report';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
-  name: String,
-  quantity: Number,
-  condition: {
+  types: {
     type: String,
-    allowedValues: ['excellent', 'good', 'fair', 'poor'],
-    defaultValue: 'good',
+    allowedValues: ['Post', 'User'],
+    defaultValue: 'Post',
   },
+  category: {
+    type: String,
+    allowedValues: [
+      'Spam',
+      'Sexual conduct',
+      'Hate speech or discriminatory symbols',
+      'Abuse or dangerous groups',
+      'Sale of illegal or regulated goods',
+      'Bullying or harassment',
+      'Infringement of intellectual property rights',
+      'Suicide or self-harm',
+      'False information',
+      'Others'],
+    defaultValue: 'Others',
+  },
+  details: String,
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
 
+
 /* Renders the CreateItem page for adding a document. */
 const AddStuff = () => {
 
+/* Renders the AddReport page for adding a document. */
+const AddReport = () => {
+
   // On submit, insert the data.
   const submit = (data, formRef) => {
-    const { name, quantity, condition } = data;
+    const { types, category, details } = data;
     const owner = Meteor.user().username;
-    Stuffs.collection.insert(
-      { name, quantity, condition, owner },
+    Reports.collection.insert(
+      { types, category, details, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -46,13 +64,13 @@ const AddStuff = () => {
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col xs={5}>
-          <Col className="text-center"><h2>Add Stuff</h2></Col>
+          <Col className="text-center"><h2>Add Report</h2></Col>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
-                <TextField name="name" />
-                <NumField name="quantity" decimal={null} />
-                <SelectField name="condition" />
+                <SelectField name="types" />
+                <SelectField name="category" />
+                <LongTextField name="details" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>
@@ -64,4 +82,4 @@ const AddStuff = () => {
   );
 };
 
-export default AddStuff;
+export default AddReport;
