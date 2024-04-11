@@ -35,13 +35,14 @@ Meteor.publish(CategoryStuffs.userPublicationName, function () {
 
   return CategoryStuffs.collection.find();
 
+});
+
 Meteor.publish(Reports.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
     return Reports.collection.find({ owner: username });}
   return this.ready();
 });
-
 
 Meteor.publish(Ratings.userPublicationName, function () {
   if (this.userId) {

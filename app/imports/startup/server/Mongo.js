@@ -5,7 +5,6 @@ import { CategoryStuffs } from '../../api/category/CategoryStuff';
 import { Reports } from '../../api/report/Report.js';
 import { Ratings } from '../../api/rating/Ratings.js';
 
-
 /* eslint-disable no-console */
 
 // Initialize the database with a default data document.
@@ -37,7 +36,6 @@ if (Profiles.collection.find().count() === 0) {
   }
 }
 
-
 const addCategory = (category) => {
   console.log(`  Adding: ${category.name} (${category.owner})`);
   CategoryStuffs.collection.insert(category);
@@ -47,7 +45,9 @@ if (CategoryStuffs.collection.find().count() === 0) {
   if (Meteor.settings.defaultCategories) {
     console.log('Creating default Category');
     Meteor.settings.defaultCategories.forEach(category => addCategory(category));
-	
+  }
+}
+
 const addReport = (report) => {
   console.log(`  Adding: ${report.types} ${report.category} (${report.owner})`);
   Reports.collection.insert(report);
