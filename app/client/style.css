@@ -26,3 +26,15 @@ body {
   padding-top: 10px;
   padding-bottom: 20px;
 }
+
+.custom-button {
+  font-size: 0.8rem;
+  padding: 0.25rem 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}

@@ -1,17 +1,28 @@
 import React from 'react';
-import { Col, Container, Image, Row } from 'react-bootstrap';
+import { Card, CardTitle, CardSubtitle, CardText, CardLink, Col, Container, Row, CardBody } from 'react-bootstrap';
+import { CardImage } from 'react-bootstrap-icons';
 
 /* A simple static component to render some text for the landing page. */
 const Landing = () => (
   <Container id="landing-page" fluid className="py-3">
-    <Row className="align-middle text-center">
-      <Col xs={4}>
-        <Image roundedCircle src="/images/meteor-logo.png" width="150px" />
+    <Row className="align-middle">
+      <Col xs={5} className="px-5">
+        <Card className="mx-5">
+          <Card.Img src="https://www.fivebranches.edu/wp-content/uploads/2021/08/default-image.jpg" alt="#" className="img-fluid" />
+          <CardBody>
+            <CardTitle>Item listed</CardTitle>
+            <CardSubtitle>Lister info</CardSubtitle>
+            <CardText>Item description</CardText>
+            <CardLink href="#">Lister profile</CardLink>
+          </CardBody>
+        </Card>
       </Col>
 
-      <Col xs={8} className="d-flex flex-column justify-content-center">
-        <h1>Welcome to this template</h1>
-        <p>Now get to work and modify this app!</p>
+      <Col xs={7} className="d-flex flex-column justify-content-center">
+        <h1>What is Shop Manoa?</h1>
+        <p>Shop Manoa is a marketplace designed by and for University of Hawaii at Manoa students and faculty to facilitate the buying and selling of various student-related goods and services.</p>
+        <h1>How do I use Shop Manoa?</h1>
+        <p>TBD</p>
       </Col>
 
     </Row>
