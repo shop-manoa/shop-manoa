@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/Stuff.js';
 import { Profiles } from '../../api/user/Profiles.js';
 import { CategoryStuffs } from '../../api/category/CategoryStuff';
+import { Reports } from '../../api/report/Report.js';
 import { Ratings } from '../../api/rating/Ratings.js';
 
 
@@ -36,6 +37,7 @@ if (Profiles.collection.find().count() === 0) {
   }
 }
 
+
 const addCategory = (category) => {
   console.log(`  Adding: ${category.name} (${category.owner})`);
   CategoryStuffs.collection.insert(category);
@@ -45,5 +47,15 @@ if (CategoryStuffs.collection.find().count() === 0) {
   if (Meteor.settings.defaultCategories) {
     console.log('Creating default Category');
     Meteor.settings.defaultCategories.forEach(category => addCategory(category));
+	
+const addReport = (report) => {
+  console.log(`  Adding: ${report.types} ${report.category} (${report.owner})`);
+  Reports.collection.insert(report);
+};
+
+if (Reports.collection.find().count() === 0) {
+  if (Meteor.settings.defaultReport) {
+    console.log('Creating default report');
+    Meteor.settings.defaultReport.forEach(report => addReport(report));
   }
 }

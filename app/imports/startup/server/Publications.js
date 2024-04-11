@@ -3,7 +3,11 @@ import { Roles } from 'meteor/alanning:roles';
 import { Stuffs } from '../../api/stuff/Stuff';
 import { Profiles } from '../../api/user/Profiles';
 
+
 import { CategoryStuffs } from '../../api/category/CategoryStuff';
+
+
+import { Reports } from '../../api/report/Report';
 
 import { Ratings } from '../../api/rating/Ratings';
 
@@ -26,9 +30,18 @@ Meteor.publish(Profiles.userPublicationName, function () {
 });
 
 
+
 Meteor.publish(CategoryStuffs.userPublicationName, function () {
 
   return CategoryStuffs.collection.find();
+
+Meteor.publish(Reports.userPublicationName, function () {
+  if (this.userId) {
+    const username = Meteor.users.findOne(this.userId).username;
+    return Reports.collection.find({ owner: username });}
+  return this.ready();
+});
+
 
 Meteor.publish(Ratings.userPublicationName, function () {
   if (this.userId) {
@@ -50,6 +63,13 @@ Meteor.publish(Stuffs.adminPublicationName, function () {
 Meteor.publish(Profiles.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return Profiles.collection.find();
+  }
+  return this.ready();
+});
+
+Meteor.publish(Reports.adminPublicationName, function () {
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    return Reports.collection.find();
   }
   return this.ready();
 });
