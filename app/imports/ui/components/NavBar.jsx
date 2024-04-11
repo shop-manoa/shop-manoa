@@ -24,7 +24,7 @@ const NavBar = () => {
             {currentUser ? ([
 
               <Nav.Link id="list-stuff-nav" as={NavLink} to="/userhome" key="userhome">Home</Nav.Link>,
-              <Nav.Link id="add-stuff-nav" as={NavLink} to="/add" key="add">Create Item</Nav.Link>,
+              <Nav.Link id="add-stuff-nav" as={NavLink} to="/create" key="create">Create Item</Nav.Link>,
 
               <Nav.Link id="list-stuff-nav" as={NavLink} to="/list" key="list">List Profile</Nav.Link>,
               <Nav.Link id="add-stuff-nav" as={NavLink} to="/addReport" key="addReport">Add Report</Nav.Link>,
