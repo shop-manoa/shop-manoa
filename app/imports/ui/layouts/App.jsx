@@ -8,8 +8,8 @@ import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListProfile from '../pages/ListProfile';
 import ListStuffAdmin from '../pages/ListStuffAdmin';
-import AddStuff from '../pages/AddStuff';
-import EditStuff from '../pages/EditStuff';
+import CreateItem from '../pages/CreateItem';
+import EditItem from '../pages/EditItem';
 import NotFound from '../pages/NotFound';
 import SignUp from '../pages/SignUp';
 import SignOut from '../pages/SignOut';
@@ -21,6 +21,8 @@ import Categories from '../pages/Categories';
 import ListStuff from '../pages/ListStuff';
 import AddCategories from '../pages/AddCategories';
 import Category from '../pages/Category';
+import ProfilePage from '../pages/ProfilePage';
+import UserHome from '../pages/UserHome';
 import AddReport from '../pages/AddReport';
 import ListReport from '../pages/ListReport';
 import ListReportAdmin from '../pages/ListReportAdmin';
@@ -50,6 +52,10 @@ const App = () => {
           <Route path="/liststuff" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
+          <Route path="/userhome" element={<UserHome />} />
+          <Route path="/list" element={<ProtectedRoute><ListProfile /></ProtectedRoute>} />
+          <Route path="/create" element={<ProtectedRoute><CreateItem /></ProtectedRoute>} />
+          <Route path="/edit/:_id" element={<ProtectedRoute><EditItem /></ProtectedRoute>} />
           <Route path="/addReport" element={<ProtectedRoute><AddReport /></ProtectedRoute>} />
           <Route path="/listReport" element={<ProtectedRoute><ListReport /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListStuffAdmin /></AdminProtectedRoute>} />
