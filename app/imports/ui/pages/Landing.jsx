@@ -6,7 +6,7 @@ import { CardImage } from 'react-bootstrap-icons';
 const Landing = () => (
   <Container id="landing-page" fluid className="py-3">
     <Row className="align-middle">
-      <Col xs={5} className="5">
+      <Col xs={5} className="px-5">
         <Card className="mx-5">
           <Card.Img src="https://www.fivebranches.edu/wp-content/uploads/2021/08/default-image.jpg" alt="#" className="img-fluid" />
           <CardBody>
