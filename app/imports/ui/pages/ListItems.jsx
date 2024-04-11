@@ -1,107 +1,41 @@
-// ListItems.jsx
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Stuffs } from '../../api/stuff/Stuff';
 
 const ListItems = () => {
-  // State to manage list of items
   const [items, setItems] = useState([]);
 
-  // State to manage form inputs
-  const [product, setProduct] = useState('');
-  const [price, setPrice] = useState('');
-  const [condition, setCondition] = useState('Good');
-  const [description, setDescription] = useState('');
-  const [photo, setPhoto] = useState(null);
-
-  // Function to handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add item to the list
-    setItems([...items, { product, price, condition, description, photo }]);
-    // Clear form inputs
-    setProduct('');
-    setPrice('');
-    setCondition('Good');
-    setDescription('');
-    setPhoto(null);
-  };
-
-  // Function to handle file upload
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setPhoto(file);
-  };
+  useEffect(() => {
+    // Fetch items from the collection and update state
+    const fetchItems = async () => {
+      const fetchedItems = await Stuffs.collection.find().fetch();
+      setItems(fetchedItems);
+    };
+    fetchItems();
+  }, []);
 
   return (
       <div>
         <h2>List of Products</h2>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Product:
-            <input
-                type="text"
-                value={product}
-                onChange={(e) => setProduct(e.target.value)}
-            />
-          </label>
-          <label>
-            Price:
-            <input
-                type="text"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-            />
-          </label>
-          <label>
-            Condition:
-            <select
-                value={condition}
-                onChange={(e) => setCondition(e.target.value)}
-            >
-              <option value="Good">Good</option>
-              <option value="Damaged">Damaged</option>
-              <option value="Used">Used</option>
-            </select>
-          </label>
-          <label>
-            Description:
-            <textarea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-            />
-          </label>
-          <label>
-            Photo:
-            <input
-                type="file"
-                accept="image/*"
-                onChange={handleFileChange}
-            />
-          </label>
-          <button type="submit">Add Item</button>
-        </form>
         <table>
           <thead>
           <tr>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Condition</th>
+            <th>Title</th>
             <th>Description</th>
-            <th>Photo</th>
+            <th>Image</th>
+            <th>Category</th>
+            <th>Condition</th>
+            <th>Price</th>
           </tr>
           </thead>
           <tbody>
           {items.map((item, index) => (
               <tr key={index}>
-                <td>{item.product}</td>
-                <td>{item.price}</td>
-                <td>{item.condition}</td>
+                <td>{item.title}</td>
                 <td>{item.description}</td>
-                <td>
-                  {item.photo && (
-                      <img src={URL.createObjectURL(item.photo)} alt="Product" style={{ width: '100px', height: '100px' }} />
-                  )}
-                </td>
+                <td><img src={item.image} alt={item.title} style={{ width: '50px', height: '50px' }} /></td>
+                <td>{item.category}</td>
+                <td>{item.condition}</td>
+                <td>{item.price}</td>
               </tr>
           ))}
           </tbody>

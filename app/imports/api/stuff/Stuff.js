@@ -17,8 +17,8 @@ class StuffsCollection {
       owner: String,
       condition: {
         type: String,
-        allowedValues: ['excellent', 'good', 'fair', 'poor'],
-        defaultValue: 'good',
+        allowedValues: ['excellent', 'good', 'fair', 'poor', 'Good'], // Include 'Good' in the allowed values
+        defaultValue: 'good', // Update defaultValue to match the case of allowed values
       },
     });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
@@ -26,6 +26,11 @@ class StuffsCollection {
     // Define names for publications and subscriptions
     this.userPublicationName = `${this.name}.publication.user`;
     this.adminPublicationName = `${this.name}.publication.admin`;
+  }
+
+  // Method to insert data into the StuffsCollection
+  insertData(data) {
+    this.collection.insert(data);
   }
 }
 
