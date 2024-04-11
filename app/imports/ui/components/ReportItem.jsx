@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-/** Renders a single row in the List Report table. See pages/ListReport.jsx. */
+/** Renders a single row in the List Report table. See pages/ListReport.jsx */
 const ReportItem = ({ report }) => (
   <tr>
     <td>{report.types}</td>
