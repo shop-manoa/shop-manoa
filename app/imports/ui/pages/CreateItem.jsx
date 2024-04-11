@@ -35,42 +35,42 @@ const CreateItem = () => {
     const { title, description, image, category, condition, price } = data;
     const owner = Meteor.user().username;
     Stuffs.collection.insert(
-        { title, description, image, category, condition, price, owner },
-        (error) => {
-          if (error) {
-            swal('Error', error.message, 'error');
-          } else {
-            swal('Success', 'Item added successfully', 'success');
-            formRef.reset();
-          }
-        },
+      { title, description, image, category, condition, price, owner },
+      (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          swal('Success', 'Item added successfully', 'success');
+          formRef.reset();
+        }
+      },
     );
   };
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   let fRef = null;
   return (
-      <Container className="py-3">
-        <Row className="justify-content-center">
-          <Col xs={7}>
-            <Col className="text-center"><h2>Create Item</h2></Col>
-            <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
-              <Card>
-                <Card.Body>
-                  <TextField name="title" />
-                  <LongTextField name="description" />
-                  <TextField name="image" />
-                  <SelectField name="category" />
-                  <SelectField name="condition" />
-                  <NumField name="price" decimal={null} />
-                  <SubmitField value="Submit" />
-                  <ErrorsField />
-                </Card.Body>
-              </Card>
-            </AutoForm>
-          </Col>
-        </Row>
-      </Container>
+    <Container className="py-3">
+      <Row className="justify-content-center">
+        <Col xs={7}>
+          <Col className="text-center"><h2>Create Item</h2></Col>
+          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
+            <Card>
+              <Card.Body>
+                <TextField name="title" />
+                <LongTextField name="description" />
+                <TextField name="image" />
+                <SelectField name="category" />
+                <SelectField name="condition" />
+                <NumField name="price" decimal={null} />
+                <SubmitField value="Submit" />
+                <ErrorsField />
+              </Card.Body>
+            </Card>
+          </AutoForm>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
