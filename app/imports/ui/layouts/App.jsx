@@ -14,6 +14,7 @@ import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
 import AddReport from '../pages/AddReport';
+import ListReport from '../pages/ListReport';
 import ListReportAdmin from '../pages/ListReportAdmin';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
@@ -35,6 +36,7 @@ const App = () => {
           <Route path="/signout" element={<SignOut />} />
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/addReport" element={<ProtectedRoute><AddReport /></ProtectedRoute>} />
+          <Route path="/listReport" element={<ProtectedRoute><ListReport /></ProtectedRoute>} />
           <Route path="/adminReport" element={<AdminProtectedRoute ready={ready}><ListReportAdmin /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />
