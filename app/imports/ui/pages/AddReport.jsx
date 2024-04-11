@@ -34,10 +34,6 @@ const formSchema = new SimpleSchema({
 
 const bridge = new SimpleSchema2Bridge(formSchema);
 
-
-/* Renders the CreateItem page for adding a document. */
-const AddStuff = () => {
-
 /* Renders the AddReport page for adding a document. */
 const AddReport = () => {
 
