@@ -46,7 +46,7 @@ class ReportsCollection {
 }
 
 /**
- * The singleton instance of the ReportsCollection.
+ * The singleton instance of the ReportsCollection
  * @type {ReportsCollection}
  */
 export const Reports = new ReportsCollection();

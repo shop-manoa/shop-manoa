@@ -54,7 +54,7 @@ const AddReport = () => {
     );
   };
 
-  // Render the form. Use Uniforms: https://github.com/vazco/uniforms
+  // Render the form. Use Uniforms: https://github.com/vazco/uniforms.
   let fRef = null;
   return (
     <Container className="py-3">
