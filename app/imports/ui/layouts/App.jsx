@@ -17,11 +17,7 @@ import NavBar from '../components/NavBar';
 import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
-import UserHome from '../pages/UserHome';
-import AddReport from '../pages/AddReport';
-import ListReport from '../pages/ListReport';
-import ListReportAdmin from '../pages/ListReportAdmin';
-
+import ProfilePage from '../pages/ProfilePage';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
