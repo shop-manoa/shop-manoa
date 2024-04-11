@@ -1,14 +1,20 @@
+// DisplayProfile.js
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Card, Image, Form, Button, Modal } from 'react-bootstrap';
+import { Card, Image, Form, Button, Modal, Alert } from 'react-bootstrap';
 import { Ratings } from '../../api/rating/Ratings';
 
 const DisplayProfile = ({ profile, currentUser }) => {
   const [rating, setRating] = useState(0);
   const [averageRating, setAverageRating] = useState('No Ratings');
   const [show, setShow] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    setSubmitted(false);
+  };
+
   const handleShow = () => setShow(true);
 
   useEffect(() => {
@@ -40,8 +46,7 @@ const DisplayProfile = ({ profile, currentUser }) => {
       const total = ratings.rating.reduce((acc, curr) => acc + curr, 0);
       setAverageRating((total / ratings.rating.length).toFixed(1));
     }
-    setRating(0);
-    handleClose();
+    setSubmitted(true);
   };
 
   return (
@@ -53,7 +58,7 @@ const DisplayProfile = ({ profile, currentUser }) => {
       </Card.Header>
       <Card.Body>
         <Card.Text>{profile.bio}</Card.Text>
-        <Button variant="primary" onClick={handleShow}>
+        <Button variant="primary" onClick={handleShow} className="btn-sm custom-button">
           Give Rating
         </Button>
 
@@ -63,14 +68,21 @@ const DisplayProfile = ({ profile, currentUser }) => {
           </Modal.Header>
           <Modal.Body>
             <Form onSubmit={handleSubmit}>
-              <Form.Group controlId="formBasicRange">
+              <Form.Group controlId="formBasicSelect">
                 <Form.Label>Rating</Form.Label>
-                <Form.Control type="range" min="1" max="5" value={rating} onChange={(e) => setRating(e.target.value)} />
+                <Form.Control as="select" value={rating} onChange={(e) => setRating(e.target.value)}>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </Form.Control>
               </Form.Group>
-              <Button variant="primary" type="submit">
+              <Button variant="primary" type="submit" className="custom-button">
                 Submit
               </Button>
             </Form>
+            {submitted && <Alert variant="success" onClose={() => setSubmitted(false)} dismissible>Rating submitted successfully!</Alert>}
           </Modal.Body>
         </Modal>
       </Card.Body>
