@@ -1,18 +1,19 @@
-import SimpleSchema from 'simpl-schema';
+import React, { useState, useEffect } from 'react';
+import { Stuffs } from '../../api/stuff/Stuff';
 
-const formSchema = new SimpleSchema({
-  title: String,
-  description: String,
-  image: String,
-  category: {
-    type: String,
-    allowedValues: ['Electronics', 'Transportation', 'Furniture', 'Books', 'Services'],
-    defaultValue: 'Electronics',
-  },
-  condition: {
-    type: String,
-    allowedValues: ['Excellent', 'Good', 'Fair', 'Poor'],
-    defaultValue: 'Good',
-  },
-  price: Number,
-});
+const ItemList = () => {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    // Fetch items from the collection and update state
+    const fetchItems = async () => {
+      const fetchedItems = await Stuffs.collection.find().fetch();
+      setItems(fetchedItems);
+    };
+    fetchItems();
+  }, []);
+
+  return items;
+};
+
+export default ItemList;
