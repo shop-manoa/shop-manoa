@@ -35,11 +35,6 @@
       "owner": "admin@foo.com",
       "condition": "excellent"
     }
-    { "title": "Bicycle", "description": "Description here", "image": "https://tinyurl/DefaultIm", "condition": "good", "price": 25, "owner": "john@foo.com" },
-    { "title": "Skateboard", "description": "Description here", "image": "https://tinyurl/DefaultIm", "condition": "excellent", "price": 30, "owner": "john@foo.com" },
-    { "title": "Scooter", "description": "Description here", "image": "https://tinyurl/DefaultIm", "condition": "fair", "price": 75, "owner": "john@foo.com" },
-    { "title": "Bag", "description": "Description here", "image": "https://tinyurl/DefaultIm", "condition": "poor", "price": 10, "owner": "john@foo.com" }
-
   ],
   "defaultProfile": [
     {
