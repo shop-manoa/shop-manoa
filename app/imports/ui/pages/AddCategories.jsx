@@ -4,7 +4,8 @@ import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstra
 import swal from 'sweetalert';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
-import { CategoryStuffs } from '../../api/stuff/CategoryStuff';
+import { Meteor } from 'meteor/meteor';
+import { CategoryStuffs } from '../../api/category/CategoryStuff';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
@@ -20,8 +21,9 @@ const AddCategories = () => {
   // On submit, insert the data.
   const submit = (data, formRef) => {
     const { name, categoryIndex } = data;
+    const owner = Meteor.user().username;
     CategoryStuffs.collection.insert(
-      { name, categoryIndex },
+      { name, categoryIndex, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');

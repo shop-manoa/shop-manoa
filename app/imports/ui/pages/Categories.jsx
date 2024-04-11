@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { CategoryStuffs } from '../../api/stuff/CategoryStuff';
+import { CategoryStuffs } from '../../api/category/CategoryStuff';
 import CategoryList from '../components/CategoryList';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
@@ -17,9 +17,9 @@ const Categories = () => {
     // Determine if the subscription is ready
     const rdy = subscription.ready();
     // Get the Stuff documents
-    const stuffItems = CategoryStuffs.collection.find({}).fetch();
+    const cattegoryItems = CategoryStuffs.collection.find({}).fetch();
     return {
-      categorystuff: stuffItems,
+      categorystuff: cattegoryItems,
       ready: rdy,
     };
   }, []);
@@ -27,18 +27,15 @@ const Categories = () => {
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col md={7}>
-          <Col className="text-center">
-            <h2>List Stuff</h2>
-          </Col>
+          <Col className="text-center" />
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Category Index</th>
+                <th>Categories</th>
               </tr>
             </thead>
             <tbody>
-              {categorystuff.map((categorystuffs) => <CategoryList key={categorystuffs._id} categorystuff={categorystuffs} />)}
+              {categorystuff.map((category) => <CategoryList key={category._id} categorystuff={category} />)}
             </tbody>
           </Table>
         </Col>

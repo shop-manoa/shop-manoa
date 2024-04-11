@@ -20,6 +20,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import Categories from '../pages/Categories';
 import ListStuff from '../pages/ListStuff';
 import AddCategories from '../pages/AddCategories';
+import Category from '../pages/Category';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -39,6 +40,7 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
           <Route path="/categories" element={<Categories />} />
+          <Route path="/categories/:_name" element={<Category />} />
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/list" element={<ProtectedRoute><ListProfile /></ProtectedRoute>} />
           <Route path="/liststuff" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />

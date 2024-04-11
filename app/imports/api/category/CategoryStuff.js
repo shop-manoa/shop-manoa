@@ -14,6 +14,7 @@ class CategoryStuffsCollection {
     this.schema = new SimpleSchema({
       name: String,
       categoryIndex: String,
+      owner: String,
     });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);

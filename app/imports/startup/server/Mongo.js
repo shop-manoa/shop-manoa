@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/Stuff.js';
 import { Profiles } from '../../api/user/Profiles.js';
+import { CategoryStuffs } from '../../api/category/CategoryStuff';
 
 /* eslint-disable no-console */
 
@@ -28,5 +29,17 @@ if (Profiles.collection.find().count() === 0) {
   if (Meteor.settings.defaultProfile) {
     console.log('Creating default profile.');
     Meteor.settings.defaultProfile.forEach(profile => addProfiles(profile));
+  }
+}
+
+const addCategory = (category) => {
+  console.log(`  Adding: ${category.name} (${category.owner})`);
+  CategoryStuffs.collection.insert(category);
+};
+
+if (CategoryStuffs.collection.find().count() === 0) {
+  if (Meteor.settings.defaultCategories) {
+    console.log('Creating default Category');
+    Meteor.settings.defaultCategories.forEach(category => addCategory(category));
   }
 }
