@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Stuffs } from '../../api/stuff/Stuff';
 import { Profiles } from '../../api/user/Profiles';
+import { Ratings } from '../../api/rating/Ratings';
 
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise, publish nothing.
@@ -16,6 +17,13 @@ Meteor.publish(Stuffs.userPublicationName, function () {
 Meteor.publish(Profiles.userPublicationName, function () {
   if (this.userId) {
     return Profiles.collection.find();
+  }
+  return this.ready();
+});
+
+Meteor.publish(Ratings.userPublicationName, function () {
+  if (this.userId) {
+    return Ratings.collection.find();
   }
   return this.ready();
 });
@@ -38,6 +46,10 @@ Meteor.publish(Profiles.adminPublicationName, function () {
 
 // alanning:roles publication
 // Recommended code to publish roles for each user.
+Meteor.publish(null, function () {
+  return Ratings.collection.find();
+});
+
 Meteor.publish(null, function () {
   if (this.userId) {
     return Meteor.roleAssignment.find({ 'user._id': this.userId });
