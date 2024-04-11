@@ -17,6 +17,8 @@ import NavBar from '../components/NavBar';
 import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
+import ProfilePage from '../pages/ProfilePage';
+import UserHome from '../pages/UserHome';
 import AddReport from '../pages/AddReport';
 import ListReport from '../pages/ListReport';
 import ListReportAdmin from '../pages/ListReportAdmin';
@@ -38,7 +40,7 @@ const App = () => {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
-          <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
+          <Route path="/userhome" element={<UserHome />} />
           <Route path="/list" element={<ProtectedRoute><ListProfile /></ProtectedRoute>} />
 
           <Route path="/create" element={<ProtectedRoute><CreateItem /></ProtectedRoute>} />
