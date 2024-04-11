@@ -28,15 +28,15 @@ const ListReportAdmin = () => {
           <Col className="text-center"><h2>List Reports(Admin)</h2></Col>
           <Table striped bordered hover>
             <thead>
-            <tr className="text-center">
-              <th>Types</th>
-              <th>Category</th>
-              <th>Details</th>
-              <th>Owner</th>
-            </tr>
+              <tr className="text-center">
+                <th>Types</th>
+                <th>Category</th>
+                <th>Details</th>
+                <th>Owner</th>
+              </tr>
             </thead>
             <tbody>
-            {reports.map((report) => <ReportItemAdmin key={report._id} report={report} />)}
+              {reports.map((report) => <ReportItemAdmin key={report._id} report={report} />)}
             </tbody>
           </Table>
         </Col>

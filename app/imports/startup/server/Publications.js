@@ -25,11 +25,10 @@ Meteor.publish(Profiles.userPublicationName, function () {
 Meteor.publish(Reports.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
-    return Reports.collection.find({ owner: username });
-    }
+    return Reports.collection.find({ owner: username });}
   return this.ready();
 });
-    
+
 Meteor.publish(Ratings.userPublicationName, function () {
   if (this.userId) {
     return Ratings.collection.find();

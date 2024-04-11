@@ -32,14 +32,14 @@ const ListReport = () => {
           </Col>
           <Table striped bordered hover>
             <thead>
-            <tr>
-              <th>Type</th>
-              <th>Category</th>
-              <th>Details</th>
-            </tr>
+              <tr>
+                <th>Type</th>
+                <th>Category</th>
+                <th>Details</th>
+              </tr>
             </thead>
             <tbody>
-            {reports.map((report) => <ReportItem key={report._id} report={report} />)}
+              {reports.map((report) => <ReportItem key={report._id} report={report} />)}
             </tbody>
           </Table>
         </Col>
