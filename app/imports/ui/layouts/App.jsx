@@ -28,6 +28,7 @@ import ListReportAdmin from '../pages/ListReportAdmin';
 import EditItem from '../pages/EditItem';
 import CreateItem from '../pages/CreateItem';
 import UserHome from '../pages/UserHome';
+import AdminHome from '../pages/AdminHome';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -51,7 +52,7 @@ const App = () => {
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/list" element={<ProtectedRoute><ListProfile /></ProtectedRoute>} />
           <Route path="/liststuff" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
-          <Route path="/userhome" element={<UserHome />} />
+          <Route path="/userHome" element={<UserHome />} />
           <Route path="/list" element={<ProtectedRoute><ListProfile /></ProtectedRoute>} />
           <Route path="/create" element={<ProtectedRoute><CreateItem /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditItem /></ProtectedRoute>} />
@@ -59,6 +60,7 @@ const App = () => {
           <Route path="/listReport" element={<ProtectedRoute><ListReport /></ProtectedRoute>} />
           <Route path="/addCategory" element={<AddCategories />} />
           <Route path="/adminReport" element={<AdminProtectedRoute ready={ready}><ListReportAdmin /></AdminProtectedRoute>} />
+          <Route path="/adminHome" element={<AdminProtectedRoute ready={ready}><AdminHome /></AdminProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
