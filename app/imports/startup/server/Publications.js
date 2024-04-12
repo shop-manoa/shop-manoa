@@ -42,7 +42,6 @@ Meteor.publish(Ratings.userPublicationName, function () {
     return Ratings.collection.find();
   }
   return this.ready();
-
 });
 
 // Admin-level publication.
@@ -70,6 +69,10 @@ Meteor.publish(Reports.adminPublicationName, function () {
 
 // alanning:roles publication
 // Recommended code to publish roles for each user.
+Meteor.publish(null, function () {
+  return Ratings.collection.find();
+});
+
 Meteor.publish(null, function () {
   if (this.userId) {
     return Meteor.roleAssignment.find({ 'user._id': this.userId });

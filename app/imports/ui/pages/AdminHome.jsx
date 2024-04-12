@@ -13,7 +13,7 @@ import ReportItemAdmin from '../components/ReportItemAdmin';
 const AdminHome = () => {
   const { ready, profiles, reports } = useTracker(() => {
     const subscription0 = Meteor.subscribe(Profiles.userPublicationName);
-    const subscription = Meteor.subscribe(Reports.userPublicationName);
+    // const subscription = Meteor.subscribe(Reports.userPublicationName);
     // Determine if the subscription is ready
     const rdy = subscription0.ready();
     // Get the profile documents
@@ -25,6 +25,8 @@ const AdminHome = () => {
       ready: rdy,
     };
   }, []);
+
+  const currentUser = Meteor.user();
 
   return (ready ? (
     <>
@@ -45,7 +47,7 @@ const AdminHome = () => {
               <h2>List Seller Profile</h2>
             </Col>
             <Row xs={1} md={2} lg={3} className="g-4">
-              {profiles.map((profile) => (<Col key={profile._id}><DisplayProfile profile={profile} /> </Col>))}
+              {profiles.map((profile) => (<Col key={profile._id}><DisplayProfile profile={profile} currentUser={currentUser} /> </Col>))}
             </Row>
           </Col>
         </Row>
@@ -56,15 +58,15 @@ const AdminHome = () => {
             <Col className="text-center"><h2>List Reports(Admin)</h2></Col>
             <Table striped bordered hover>
               <thead>
-              <tr className="text-center">
-                <th>Types</th>
-                <th>Category</th>
-                <th>Details</th>
-                <th>Owner</th>
-              </tr>
+                <tr className="text-center">
+                  <th>Types</th>
+                  <th>Category</th>
+                  <th>Details</th>
+                  <th>Owner</th>
+                </tr>
               </thead>
               <tbody>
-              {reports.map((report) => <ReportItemAdmin key={report._id} report={report} />)}
+                {reports.map((report) => <ReportItemAdmin key={report._id} report={report} />)}
               </tbody>
             </Table>
           </Col>
