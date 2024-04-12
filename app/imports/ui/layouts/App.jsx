@@ -21,7 +21,9 @@ import ListStuff from '../pages/ListStuff';
 import AddCategories from '../pages/AddCategories';
 import Category from '../pages/Category';
 import ProfilePage from '../pages/ProfilePage';
-
+import AddReport from '../pages/AddReport';
+import ListReport from '../pages/ListReport';
+import ListReportAdmin from '../pages/ListReportAdmin';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
