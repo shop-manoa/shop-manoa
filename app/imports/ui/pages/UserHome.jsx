@@ -1,6 +1,6 @@
 import React from 'react';
-import ItemListing from '../components/ItemListing';
 import { Container, Row } from 'react-bootstrap';
+import ItemListing from '../components/ItemListing';
 
 /* A simple static component to render some text for the landing page. */
 const UserHome = () => {
