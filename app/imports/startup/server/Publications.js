@@ -2,6 +2,9 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Stuffs } from '../../api/stuff/Stuff';
 import { Profiles } from '../../api/user/Profiles';
+import { CategoryStuffs } from '../../api/category/CategoryStuff';
+import { Reports } from '../../api/report/Report';
+import { Ratings } from '../../api/rating/Ratings';
 
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise, publish nothing.
@@ -19,6 +22,30 @@ Meteor.publish(Profiles.userPublicationName, function () {
   }
   return this.ready();
 });
+
+
+Meteor.publish(CategoryStuffs.userPublicationName, function () {
+
+  return CategoryStuffs.collection.find();
+
+});
+
+Meteor.publish(Reports.userPublicationName, function () {
+  if (this.userId) {
+    const username = Meteor.users.findOne(this.userId).username;
+    return Reports.collection.find({ owner: username });
+  }
+  return this.ready();
+});
+
+Meteor.publish(Ratings.userPublicationName, function () {
+  if (this.userId) {
+    return Ratings.collection.find();
+  }
+  return this.ready();
+
+});
+
 
 // Admin-level publication.
 // If logged in and with admin role, then publish all documents from all users. Otherwise, publish nothing.
