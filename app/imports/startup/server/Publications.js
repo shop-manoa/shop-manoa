@@ -23,7 +23,6 @@ Meteor.publish(Profiles.userPublicationName, function () {
   return this.ready();
 });
 
-
 Meteor.publish(CategoryStuffs.userPublicationName, function () {
 
   return CategoryStuffs.collection.find();
@@ -46,7 +45,6 @@ Meteor.publish(Ratings.userPublicationName, function () {
 
 });
 
-
 // Admin-level publication.
 // If logged in and with admin role, then publish all documents from all users. Otherwise, publish nothing.
 Meteor.publish(Stuffs.adminPublicationName, function () {
@@ -59,6 +57,13 @@ Meteor.publish(Stuffs.adminPublicationName, function () {
 Meteor.publish(Profiles.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return Profiles.collection.find();
+  }
+  return this.ready();
+});
+
+Meteor.publish(Reports.adminPublicationName, function () {
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    return Reports.collection.find();
   }
   return this.ready();
 });
