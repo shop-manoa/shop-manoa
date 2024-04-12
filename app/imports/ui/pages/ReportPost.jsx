@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, LongTextField, NumField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, NumField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -9,33 +9,26 @@ import { Stuffs } from '../../api/stuff/Stuff';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
-  title: String,
-  description: String,
-  image: String,
-  category: {
-    type: String,
-    allowedValues: ['Electronics', 'Transportation', 'Furniture', 'Books', 'Services'],
-    defaultValue: 'Electronics',
-  },
+  name: String,
+  quantity: Number,
   condition: {
     type: String,
-    allowedValues: ['Excellent', 'Good', 'Fair', 'Poor'],
-    defaultValue: 'Good',
+    allowedValues: ['excellent', 'good', 'fair', 'poor'],
+    defaultValue: 'good',
   },
-  price: Number,
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
 
-/* Renders the CreateItem page for adding a document. */
-const CreateItem = () => {
+/* Renders the AddStuff page for adding a document. */
+const AddStuff = () => {
 
   // On submit, insert the data.
   const submit = (data, formRef) => {
-    const { title, description, image, category, condition, price } = data;
+    const { name, quantity, condition } = data;
     const owner = Meteor.user().username;
     Stuffs.collection.insert(
-      { title, description, image, category, condition, price, owner },
+      { name, quantity, condition, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -52,17 +45,14 @@ const CreateItem = () => {
   return (
     <Container className="py-3">
       <Row className="justify-content-center">
-        <Col xs={7}>
-          <Col className="text-center"><h2>Create Item</h2></Col>
+        <Col xs={5}>
+          <Col className="text-center"><h2>Add Stuff</h2></Col>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
-                <TextField name="title" />
-                <LongTextField name="description" />
-                <TextField name="image" />
-                <SelectField name="category" />
+                <TextField name="name" />
+                <NumField name="quantity" decimal={null} />
                 <SelectField name="condition" />
-                <NumField name="price" decimal={null} />
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>
@@ -74,4 +64,4 @@ const CreateItem = () => {
   );
 };
 
-export default CreateItem;
+export default AddStuff;

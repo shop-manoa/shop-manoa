@@ -19,8 +19,6 @@ const ListProfile = () => {
     };
   }, []);
 
-  const currentUser = Meteor.user();
-
   return (ready ? (
     <Container className="py-3">
       <Row className="justify-content-center">
@@ -29,7 +27,8 @@ const ListProfile = () => {
             <h2>List Seller Profile</h2>
           </Col>
           <Row xs={1} md={2} lg={3} className="g-4">
-            {profiles.map((profile) => (<Col key={profile._id}><DisplayProfile profile={profile} currentUser={currentUser} /> </Col>))}
+            {profiles.map((profile) => (<Col key={profile._id}><DisplayProfile profile={profile} /> </Col>))}
+
           </Row>
         </Col>
       </Row>

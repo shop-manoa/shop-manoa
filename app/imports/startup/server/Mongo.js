@@ -23,9 +23,7 @@ if (Stuffs.collection.find().count() === 0) {
 
 const addProfiles = (profile) => {
   console.log(`  Adding: ${profile.lastName} (${profile.owner})`);
-  const newProfile = Profiles.collection.insert(profile);
-  console.log(`  Adding rating to id: ${newProfile} (${profile.owner})`);
-  Ratings.collection.insert({ userProfileID: newProfile });
+  Profiles.collection.insert(profile);
 };
 
 // Initialize the StuffsCollection if empty.

@@ -23,6 +23,7 @@ Meteor.publish(Profiles.userPublicationName, function () {
   return this.ready();
 });
 
+
 Meteor.publish(CategoryStuffs.userPublicationName, function () {
 
   return CategoryStuffs.collection.find();
@@ -45,6 +46,7 @@ Meteor.publish(Ratings.userPublicationName, function () {
 
 });
 
+
 // Admin-level publication.
 // If logged in and with admin role, then publish all documents from all users. Otherwise, publish nothing.
 Meteor.publish(Stuffs.adminPublicationName, function () {
@@ -61,19 +63,8 @@ Meteor.publish(Profiles.adminPublicationName, function () {
   return this.ready();
 });
 
-Meteor.publish(Reports.adminPublicationName, function () {
-  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
-    return Reports.collection.find();
-  }
-  return this.ready();
-});
-
 // alanning:roles publication
 // Recommended code to publish roles for each user.
-Meteor.publish(null, function () {
-  return Ratings.collection.find();
-});
-
 Meteor.publish(null, function () {
   if (this.userId) {
     return Meteor.roleAssignment.find({ 'user._id': this.userId });
