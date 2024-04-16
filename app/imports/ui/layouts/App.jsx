@@ -17,7 +17,6 @@ import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Categories from '../pages/Categories';
-import ListStuff from '../pages/ListStuff';
 import AddCategories from '../pages/AddCategories';
 import Category from '../pages/Category';
 import ProfilePage from '../pages/ProfilePage';
@@ -51,7 +50,6 @@ const App = () => {
           <Route path="/categories/:_name" element={<Category />} />
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/list" element={<ProtectedRoute><ListProfile /></ProtectedRoute>} />
-          <Route path="/liststuff" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
           <Route path="/userHome" element={<UserHome />} />
           <Route path="/list" element={<ProtectedRoute><ListProfile /></ProtectedRoute>} />
           <Route path="/create" element={<ProtectedRoute><CreateItem /></ProtectedRoute>} />
