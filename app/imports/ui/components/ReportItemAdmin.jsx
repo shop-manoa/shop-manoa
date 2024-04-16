@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 /** Renders a single row in the List Report table. See pages/ListReport.jsx */
 const ReportItemAdmin = ({ report }) => (
   <tr>
+    <td>{report._id}</td>
     <td>{report.types}</td>
     <td>{report.category}</td>
     <td>{report.details}</td>

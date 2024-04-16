@@ -32,11 +32,11 @@ const AdminHome = () => {
           <ItemListing />
         </Row>
       </Container>
-      <Container>
+      <Container fluid className="pt-3">
         {/* Calling ListProfile to show the table */}
         <ListProfile />
       </Container>
-      <Container>
+      <Container fluid className="pt-3">
         {/* Calling ListReportAdmin to show the table */}
         <ListReportAdmin />
       </Container>
