@@ -31,7 +31,7 @@ const ListItems = () => {
           ))}
           </tbody>
         </table>
-      </div>
+      </div>)
 import { Meteor } from 'meteor/meteor';
 import { Col, Container, Row, Card } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
