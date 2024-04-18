@@ -1,10 +1,10 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Col, Container, Row, Card } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ItemListing from '../components/ItemListing';
-import { ItemsList } from './ListItems'; // Import the ItemsList collection
+import { ItemsList } from '../../api/items/ListItems'; // Import the ItemsList collection
 
 const ListItems = () => {
   const { stuffs, ready } = useTracker(() => {

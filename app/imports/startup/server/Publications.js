@@ -5,6 +5,7 @@ import { Profiles } from '../../api/user/Profiles';
 import { CategoryStuffs } from '../../api/category/CategoryStuff';
 import { Reports } from '../../api/report/Report';
 import { Ratings } from '../../api/rating/Ratings';
+import { ItemsList } from '../../api/items/ListItems';
 
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise, publish nothing.
@@ -12,6 +13,14 @@ Meteor.publish(Stuffs.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
     return Stuffs.collection.find({ owner: username });
+  }
+  return this.ready();
+});
+
+Meteor.publish(ItemsList.userPublicationName, function () {
+  if (this.userId) {
+    const username = Meteor.users.findOne(this.userId).username;
+    return ItemsList.collection.find({ owner: username });
   }
   return this.ready();
 });
@@ -49,6 +58,13 @@ Meteor.publish(Ratings.userPublicationName, function () {
 Meteor.publish(Stuffs.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return Stuffs.collection.find();
+  }
+  return this.ready();
+});
+
+Meteor.publish(ItemsList.adminPublicationName, function () {
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    return ItemsList.collection.find();
   }
   return this.ready();
 });
