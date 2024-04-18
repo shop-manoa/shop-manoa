@@ -5,6 +5,7 @@ import { Profiles } from '../../api/user/Profiles';
 import { CategoryStuffs } from '../../api/category/CategoryStuff';
 import { Reports } from '../../api/report/Report';
 import { Ratings } from '../../api/rating/Ratings';
+import { ItemsList } from '../../api/items/ListItems';
 
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise, publish nothing.
