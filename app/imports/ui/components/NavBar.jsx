@@ -13,6 +13,7 @@ const NavBar = () => {
   }), []);
 
   return (
+
     <Navbar bg="light" expand="lg">
       <Container>
         <Navbar.Brand as={NavLink} to="/">
@@ -22,14 +23,21 @@ const NavBar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto justify-content-start">
             {currentUser ? ([
-              <Nav.Link id="add-stuff-nav" as={NavLink} to="/add" key="add">Add Stuff</Nav.Link>,
+
+              <Nav.Link id="list-stuff-nav" as={NavLink} to="/userHome" key="userHome">Home</Nav.Link>,
+              <Nav.Link id="list-stuff-nav" as={NavLink} to="/profile" key="userHome">My Profile</Nav.Link>,
+              <Nav.Link id="add-stuff-nav" as={NavLink} to="/create" key="create">Create Item</Nav.Link>,
               <Nav.Link id="list-stuff-nav" as={NavLink} to="/list" key="list">List Profile</Nav.Link>,
               <Nav.Link id="list-stuff-nav" as={NavLink} to="/items" key="items">Items</Nav.Link>,
               <Nav.Link id="list-stuff-nav" as={NavLink} to="/create" key="createItem">Create</Nav.Link>,
+              <Nav.Link id="add-stuff-nav" as={NavLink} to="/addReport" key="addReport">Add Report</Nav.Link>,
+              <Nav.Link id="list-stuff-nav" as={NavLink} to="/categories" key="categoires">Categories</Nav.Link>,
+              <Nav.Link id="list-stuff-nav" as={NavLink} to="/items" key="items">Items</Nav.Link>,
+
             ]) : ''}
-            {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-              <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/admin" key="admin">Admin</Nav.Link>
-            ) : ''}
+            {Roles.userIsInRole(Meteor.userId(), 'admin') ? ([
+              <Nav.Link id="admin-home-nav" as={NavLink} to="/adminHome" key="adminHome">Admin Home</Nav.Link>,
+            ]) : ''}
           </Nav>
           <Nav className="justify-content-end">
             {currentUser === '' ? (

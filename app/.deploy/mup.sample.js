@@ -1,7 +1,7 @@
 module.exports = {
   servers: {
     one: {
-      host: '167.172.120.50',
+      host: 'shop-manoa.com',
       username: 'root',
       password: '24shopManoa'
     }
@@ -14,7 +14,7 @@ module.exports = {
     servers: { one: {}, },
     buildOptions: { serverOnly: true },
     env: {
-      ROOT_URL: 'http://167.172.120.50',
+      ROOT_URL: 'https://shop-manoa.com',
       MONGO_URL: 'mongodb://mongodb/meteor',
       MONGO_OPLOG_URL: 'mongodb://mongodb/local',
     },
@@ -22,5 +22,12 @@ module.exports = {
     enableUploadProgressBar: true
   },
   mongo: { version: '5.0', servers: { one: {} }
+  },
+  proxy: {
+    domains: 'shop-manoa.com',
+    ssl: {
+      letsEncryptEmail: 'latoyac@hawaii.edu',
+      forceSSL: true
+    }
   },
 };

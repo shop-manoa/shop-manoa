@@ -4,7 +4,6 @@ import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Roles } from 'meteor/alanning:roles';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListProfile from '../pages/ListProfile';
 import ListStuffAdmin from '../pages/ListStuffAdmin';
@@ -19,6 +18,18 @@ import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ListItems from '../pages/ListItems';
 import CreateItem from '../pages/CreateItem';
+import Categories from '../pages/Categories';
+import AddCategories from '../pages/AddCategories';
+import Category from '../pages/Category';
+import ProfilePage from '../pages/ProfilePage';
+// eslint-disable-next-line import/no-named-as-default
+import AddReport from '../pages/AddReport';
+import ListReport from '../pages/ListReport';
+import ListReportAdmin from '../pages/ListReportAdmin';
+import EditItem from '../pages/EditItem';
+import CreateItem from '../pages/CreateItem';
+import UserHome from '../pages/UserHome';
+import AdminHome from '../pages/AdminHome';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -37,17 +48,29 @@ const App = () => {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
+          <Route path="/categories" element={<Categories />} />
+          <Route path="/categories/:_name" element={<Category />} />
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/list" element={<ProtectedRoute><ListProfile /></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
           <Route path="/items" element={<ProtectedRoute><ListItems /></ProtectedRoute>} />
           <Route path="/create" element={<ProtectedRoute><CreateItem /></ProtectedRoute>} />
+          <Route path="/userHome" element={<UserHome />} />
+          <Route path="/list" element={<ProtectedRoute><ListProfile /></ProtectedRoute>} />
+          <Route path="/create" element={<ProtectedRoute><CreateItem /></ProtectedRoute>} />
+          <Route path="/edit/:_id" element={<ProtectedRoute><EditItem /></ProtectedRoute>} />
+          <Route path="/addReport" element={<ProtectedRoute><AddReport /></ProtectedRoute>} />
+          <Route path="/listReport" element={<ProtectedRoute><ListReport /></ProtectedRoute>} />
+          <Route path="/addCategory" element={<AddCategories />} />
+          <Route path="/adminReport" element={<AdminProtectedRoute ready={ready}><ListReportAdmin /></AdminProtectedRoute>} />
+          <Route path="/adminHome" element={<AdminProtectedRoute ready={ready}><AdminHome /></AdminProtectedRoute>} />
+          <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListStuffAdmin /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <Footer />
       </div>
     </Router>
   );

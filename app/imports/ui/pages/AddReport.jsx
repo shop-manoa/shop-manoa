@@ -1,47 +1,48 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, LongTextField, NumField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, LongTextField, SubmitField, SelectField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
-import { Stuffs } from '../../api/stuff/Stuff';
+import { Reports } from '../../api/report/Report';
+
 // Create a schema to specify the structure of the data to appear in the form.
-import { ItemsList } from '../../api/items/ListItems'; // Import ItemsList collection
 const formSchema = new SimpleSchema({
-  title: String,
-  description: String,
-  image: String,
+  types: {
+    type: String,
+    allowedValues: ['Post', 'User'],
+    defaultValue: 'Post',
+  },
   category: {
     type: String,
-    allowedValues: ['Electronics', 'Transportation', 'Furniture', 'Books', 'Services'],
-    defaultValue: 'Electronics',
+    allowedValues: [
+      'Spam',
+      'Sexual conduct',
+      'Hate speech or discriminatory symbols',
+      'Abuse or dangerous groups',
+      'Sale of illegal or regulated goods',
+      'Bullying or harassment',
+      'Infringement of intellectual property rights',
+      'Suicide or self-harm',
+      'False information',
+      'Others'],
+    defaultValue: 'Others',
   },
-  condition: {
-    type: String,
-    allowedValues: ['Excellent', 'Good', 'Fair', 'Poor'],
-    defaultValue: 'Good',
-  },
-  price: Number,
+  details: String,
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
 
-/* Renders the CreateItem page for adding a document. */
-const CreateItem = () => {
+/* Renders the AddReport page for adding a document. */
+const AddReport = () => {
 
   // On submit, insert the data.
   const submit = (data, formRef) => {
-    const { title, description, image, category, condition, price } = data;
+    const { types, category, details } = data;
     const owner = Meteor.user().username;
-    Stuffs.collection.insert(
-const CreateItem = () => {
-  const submit = (data, formRef) => {
-    const { title, description, image, category, condition, price } = data;
-    const owner = Meteor.user().username;
-
-    ItemsList.collection.insert(
-      { title, description, image, category, condition, price, owner },
+    Reports.collection.insert(
+      { types, category, details, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -57,17 +58,14 @@ const CreateItem = () => {
   return (
     <Container className="py-3">
       <Row className="justify-content-center">
-        <Col xs={7}>
-          <Col className="text-center"><h2>Create Item</h2></Col>
+        <Col xs={5}>
+          <Col className="text-center"><h2>Add Report</h2></Col>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
-                <TextField name="title" />
-                <LongTextField name="description" />
-                <TextField name="image" />
+                <SelectField name="types" />
                 <SelectField name="category" />
-                <SelectField name="condition" />
-                <NumField name="price" decimal={null} />
+                <LongTextField name="details" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>
@@ -79,4 +77,4 @@ const CreateItem = () => {
   );
 };
 
-export default CreateItem;
+export default AddReport;
