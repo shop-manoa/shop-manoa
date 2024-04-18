@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 /** Renders a single row in the List Report table. See pages/ListReport.jsx */
 const ReportItemAdmin = ({ report }) => (
   <tr>
-    <td>{report._id}</td>
+    <Link to={`${report._id}`}>{report._id}</Link>
     <td>{report.types}</td>
     <td>{report.category}</td>
     <td>{report.details}</td>
