@@ -5,9 +5,8 @@ import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
-import { Stuffs } from '../../api/stuff/Stuff';
+import { ItemsList } from '../../api/items/ListItems';
 
-// Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
   title: String,
   description: String,
@@ -27,14 +26,17 @@ const formSchema = new SimpleSchema({
 
 const bridge = new SimpleSchema2Bridge(formSchema);
 
-/* Renders the CreateItem page for adding a document. */
 const CreateItem = () => {
 
-  // On submit, insert the data.
   const submit = (data, formRef) => {
     const { title, description, image, category, condition, price } = data;
-    const owner = Meteor.user().username;
-    Stuffs.collection.insert(
+    const owner = Meteor.user()?.username; // handle null or undefined case
+    if (!owner) {
+      swal('Error', 'User not logged in', 'error');
+      return;
+    }
+
+    ItemsList.collection.insert(
       { title, description, image, category, condition, price, owner },
       (error) => {
         if (error) {
@@ -47,7 +49,6 @@ const CreateItem = () => {
     );
   };
 
-  // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   let fRef = null;
   return (
     <Container className="py-3">
