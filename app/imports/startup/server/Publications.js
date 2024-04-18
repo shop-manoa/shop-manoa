@@ -16,6 +16,15 @@ Meteor.publish(Stuffs.userPublicationName, function () {
   return this.ready();
 });
 
+Meteor.publish(ItemsList.userPublicationName, function () {
+  if (this.userId) {
+    const username = Meteor.users.findOne(this.userId).username;
+    return ItemsList.collection.find({ owner: username });
+  }
+  return this.ready();
+});
+
+
 Meteor.publish(Profiles.userPublicationName, function () {
   if (this.userId) {
     return Profiles.collection.find();
@@ -49,6 +58,13 @@ Meteor.publish(Ratings.userPublicationName, function () {
 Meteor.publish(Stuffs.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return Stuffs.collection.find();
+  }
+  return this.ready();
+});
+
+Meteor.publish(ItemsList.adminPublicationName, function () {
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    return ItemsList.collection.find();
   }
   return this.ready();
 });
