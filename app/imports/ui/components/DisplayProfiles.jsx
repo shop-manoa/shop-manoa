@@ -6,7 +6,7 @@ import { Card, Image, Form, Button, Modal, Alert } from 'react-bootstrap';
 import { Ratings } from '../../api/rating/Ratings';
 
 const DisplayProfile = ({ profile, currentUser }) => {
-  let imgSrc = profile.image ? profile.image : '/images/default-profile-pic.png';
+  const imgSrc = profile.image ? profile.image : '/images/default-profile-pic.png';
   const [rating, setRating] = useState(0);
   const [averageRating, setAverageRating] = useState('No Ratings');
   const [show, setShow] = useState(false);
