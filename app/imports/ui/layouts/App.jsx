@@ -62,7 +62,7 @@ const App = () => {
           <Route path="/adminReport" element={<AdminProtectedRoute ready={ready}><ListReportAdmin /></AdminProtectedRoute>} />
           <Route path="/adminHome" element={<AdminProtectedRoute ready={ready}><AdminHome /></AdminProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
-          <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+          <Route path="/profile/:owner" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListStuffAdmin /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />

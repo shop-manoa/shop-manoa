@@ -1,10 +1,12 @@
-// DisplayProfile.js
+// DisplayProfile.jsx
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { Card, Image, Form, Button, Modal, Alert } from 'react-bootstrap';
 import { Ratings } from '../../api/rating/Ratings';
 
 const DisplayProfile = ({ profile, currentUser }) => {
+  let imgSrc = profile.image ? profile.image : '/images/default-profile-pic.png';
   const [rating, setRating] = useState(0);
   const [averageRating, setAverageRating] = useState('No Ratings');
   const [show, setShow] = useState(false);
@@ -50,17 +52,20 @@ const DisplayProfile = ({ profile, currentUser }) => {
   };
 
   return (
-    <Card className="h-100">
-      <Card.Header>
-        <Image src={profile.image} width={75} />
+    <Card className="h-100 shadow">
+      <Card.Header className="bg-primary text-white">
+        <Image src={imgSrc} width={100} height={100} roundedCircle />
         <Card.Title>{profile.firstName} {profile.lastName}</Card.Title>
         <Card.Subtitle>Average Rating: {averageRating}</Card.Subtitle>
       </Card.Header>
       <Card.Body>
         <Card.Text>{profile.bio}</Card.Text>
-        <Button variant="primary" onClick={handleShow} className="btn-sm custom-button">
+        <Button variant="outline-primary" onClick={handleShow} className="btn-sm custom-button" style={{ marginRight: '10px' }}>
           Give Rating
         </Button>
+        <Link to={`/profile/${profile.owner}`} className="btn btn-outline-primary btn-sm custom-button">
+          View Profile
+        </Link>
 
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
