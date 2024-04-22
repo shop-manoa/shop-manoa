@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Row, Container } from 'react-bootstrap';
+import { Image, Col, Row, Container } from 'react-bootstrap';
 
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
 const Footer = () => (
@@ -8,7 +8,7 @@ const Footer = () => (
       <Row>
         {/* Make 3 Cols 1)Logo, 2)Menu, and 3)website info */}
         <Col className="justify-content-lg-start">
-          <Image src="/images/uhLogo.png" className="footer-logo" />
+          <Image roundedCircle src="/images/uhLogo.png" width="60px" />
         </Col>
         <Col className="text-content">
           Department of Information and Computer Sciences
