@@ -25,9 +25,7 @@ const Footer = () => (
           </a>
         </Col>
         <Col className="justify-content-lg-end">
-          <h5>Quick Links</h5>
-          <h5>Quick Links</h5>
-          <h5>Quick Links</h5>
+          <Image src="/images/uhLogo2.jpg" className="img-fluid" />
         </Col>
       </Row>
     </Container>
