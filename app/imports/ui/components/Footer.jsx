@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
 const Footer = () => (
-  <footer className="mt-auto py-3 bg-info-subtle">
+  <footer className="mt-auto py-3 bg-light">
     {/* You can change the color whatever you think it fits */}
     <Container>
       <Row>
