@@ -4,7 +4,6 @@ import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Roles } from 'meteor/alanning:roles';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { Image } from 'react-bootstrap';
 import Landing from '../pages/Landing';
 import ListProfile from '../pages/ListProfile';
 import ListStuffAdmin from '../pages/ListStuffAdmin';
@@ -69,7 +68,6 @@ const App = () => {
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <Image src="/images/uhLogo.png" width="130px" />
         <Footer />
       </div>
     </Router>
