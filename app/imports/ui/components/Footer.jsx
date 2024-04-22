@@ -8,7 +8,7 @@ const Footer = () => (
       <Row>
         {/* Make 3 Cols 1)Logo, 2)Menu, and 3)website info */}
         <Col className="justify-content-lg-start">
-          <Image roundedCircle src="/images/uhLogo.png" width="60px" />
+          <Image roundedCircle src="/images/uhLogo.png" width="130px" />
         </Col>
         <Col className="text-content">
           Department of Information and Computer Sciences
