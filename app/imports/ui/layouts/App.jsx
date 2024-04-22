@@ -29,6 +29,7 @@ import CreateItem from '../pages/CreateItem';
 import UserHome from '../pages/UserHome';
 import AdminHome from '../pages/AdminHome';
 import ListItems from '../pages/ListItems';
+import Footer from '../components/Footer';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -68,6 +69,7 @@ const App = () => {
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <Footer />
       </div>
     </Router>
   );
