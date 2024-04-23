@@ -9,7 +9,7 @@ import { Reports } from '../../api/report/Report';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
-  // terget ID: String,
+  target_id: String,
   types: {
     type: String,
     allowedValues: ['Post', 'User'],
@@ -37,9 +37,9 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 
 /* Renders the AddReport page for adding a document. */
 const AddReport = () => {
-
   // On submit, insert the data.
   const submit = (data, formRef) => {
+    // const target_id = ???;
     const { types, category, details } = data;
     const owner = Meteor.user().username;
     Reports.collection.insert(
@@ -48,7 +48,7 @@ const AddReport = () => {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Item added successfully', 'success');
+          swal('Success', 'The report is successfully submitted', 'success');
           formRef.reset();
         }
       },
