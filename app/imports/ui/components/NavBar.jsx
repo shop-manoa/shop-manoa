@@ -29,7 +29,6 @@ const NavBar = () => {
               <Nav.Link id="add-stuff-nav" as={NavLink} to="/create" key="create">Create Item</Nav.Link>,
               <Nav.Link id="list-stuff-nav" as={NavLink} to="/items" key="items">Items</Nav.Link>,
               <Nav.Link id="list-stuff-nav" as={NavLink} to="/list" key="listprofile">List Profile</Nav.Link>,
-              <Nav.Link id="list-stuff-nav" as={NavLink} to="/create" key="createItem">Create</Nav.Link>,
               <Nav.Link id="add-stuff-nav" as={NavLink} to="/addReport" key="addReport">Add Report</Nav.Link>,
               <Nav.Link id="list-stuff-nav" as={NavLink} to="/categories" key="categoires">Categories</Nav.Link>,
 
