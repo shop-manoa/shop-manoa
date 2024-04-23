@@ -23,7 +23,6 @@ const Landing = () => (
         <h1>How do I use Shop Manoa?</h1>
         <p>TBD</p>
       </Col>
-
     </Row>
   </Container>
 );

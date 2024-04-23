@@ -25,9 +25,10 @@ const NavBar = () => {
             {currentUser ? ([
 
               <Nav.Link id="list-stuff-nav" as={NavLink} to="/userHome" key="userHome">Home</Nav.Link>,
-              <Nav.Link id="list-stuff-nav" as={NavLink} to="/profile" key="userHome">My Profile</Nav.Link>,
+              <Nav.Link id="list-stuff-nav" as={NavLink} to="/profile/:owner" key="userprofile">My Profile</Nav.Link>,
               <Nav.Link id="add-stuff-nav" as={NavLink} to="/create" key="create">Create Item</Nav.Link>,
-              <Nav.Link id="list-stuff-nav" as={NavLink} to="/list" key="list">List Profile</Nav.Link>,
+              <Nav.Link id="list-stuff-nav" as={NavLink} to="/items" key="items">Items</Nav.Link>,
+              <Nav.Link id="list-stuff-nav" as={NavLink} to="/list" key="listprofile">List Profile</Nav.Link>,
               <Nav.Link id="add-stuff-nav" as={NavLink} to="/addReport" key="addReport">Add Report</Nav.Link>,
               <Nav.Link id="list-stuff-nav" as={NavLink} to="/categories" key="categoires">Categories</Nav.Link>,
 

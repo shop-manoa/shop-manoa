@@ -42,14 +42,14 @@
   ],
   "defaultProfile": [
     {
-      "image": "https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png",
+      "image": "",
       "firstName": "0",
       "lastName": "Admin",
       "bio": "I am admin",
       "owner": "admin@foo.com"
     },
     {
-      "image": "https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png",
+      "image": "",
       "firstName": "0",
       "lastName": "User",
       "bio": "I am user",
@@ -71,11 +71,6 @@
   "defaultReport": [
     { "types": "Post", "category":  "Spam", "details":  "This is a spam post", "owner": "john@foo.com" },
     { "types": "User", "category":  "False information", "details":  "This user provides false information", "owner": "admin@foo.com" }
-    ],
-
-  "defaultProfile": [
-    { "image": "https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png", "firstName": "0", "lastName": "Admin", "bio": "I am admin", "owner": "admin@foo.com" },
-    { "image": "https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png", "firstName": "0", "lastName": "User", "bio": "I am user", "owner": "john@foo.com" }
-  ]
+    ]
 }
 

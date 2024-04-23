@@ -12,6 +12,8 @@
  */
 body {
   --bs-dark-rgb: var(--matr-navbar-bg-rgb);
+  background: fixed center url("images/uhBg.png");
+  background-size: cover;
 }
 
 body .navbar {
