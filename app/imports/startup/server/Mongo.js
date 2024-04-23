@@ -23,8 +23,18 @@ if (Stuffs.collection.find().count() === 0) {
 
 const addProfiles = (profile) => {
   console.log(`  Adding: ${profile.lastName} (${profile.owner})`);
-  Profiles.collection.insert(profile);
+  const newProfile = Profiles.collection.insert(profile);
+  console.log(`  Adding rating to id: ${newProfile} (${profile.owner})`);
+  Ratings.collection.insert({ userProfileID: newProfile });
 };
+
+// Initialize the StuffsCollection if empty.
+if (Profiles.collection.find().count() === 0) {
+  if (Meteor.settings.defaultProfile) {
+    console.log('Creating default profile.');
+    Meteor.settings.defaultProfile.forEach(profile => addProfiles(profile));
+  }
+}
 
 // Initialize the StuffsCollection if empty.
 if (Profiles.collection.find().count() === 0) {

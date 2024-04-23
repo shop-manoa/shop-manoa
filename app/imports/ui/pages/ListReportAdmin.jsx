@@ -24,11 +24,12 @@ const ListReportAdmin = () => {
   return (ready ? (
     <Container className="py-3">
       <Row className="justify-content-center">
-        <Col md={7}>
+        <Col md="auto">
           <Col className="text-center"><h2>List Reports(Admin)</h2></Col>
           <Table striped bordered hover>
             <thead>
               <tr className="text-center">
+                <th>ID</th>
                 <th>Types</th>
                 <th>Category</th>
                 <th>Details</th>

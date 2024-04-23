@@ -53,7 +53,6 @@ const AddReport = () => {
       },
     );
   };
-
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   let fRef = null;
   return (

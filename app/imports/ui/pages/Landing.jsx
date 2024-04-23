@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardTitle, CardSubtitle, CardText, CardLink, Col, Container, Row, CardBody } from 'react-bootstrap';
-import { CardImage } from 'react-bootstrap-icons';
+import Footer from '../components/Footer';
 
 /* A simple static component to render some text for the landing page. */
 const Landing = () => (
@@ -24,7 +24,6 @@ const Landing = () => (
         <h1>How do I use Shop Manoa?</h1>
         <p>TBD</p>
       </Col>
-
     </Row>
   </Container>
 );

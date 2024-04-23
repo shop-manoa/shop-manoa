@@ -1,70 +1,93 @@
-import React, { useState } from 'react';
-import { Col, Container, Row, Table, Form, Button } from 'react-bootstrap';
-
-// Define a schema for user profile
-const UserProfileSchema = {
-  profilePicture: String,
-  bio: String,
-  sellingList: [String]
-};
+import React, { useState, useEffect } from 'react';
+import { Meteor } from 'meteor/meteor';
+import { useParams } from 'react-router-dom';
+import { Container, Button, Card, Form, Modal, Image } from 'react-bootstrap';
+import { Profiles } from '../../api/user/Profiles';
 
 const ProfilePage = () => {
-  const [profilePicture, setProfilePicture] = useState('');
-  const [bio, setBio] = useState('');
-  const [sellingItem, setSellingItem] = useState('');
-  const [sellingList, setSellingList] = useState([]);
+  let { owner } = useParams();
+  if (owner === ':owner') {
+    owner = Meteor.user().username;
+  }
+  const [profileData, setProfileData] = useState(null);
+  const [newBio, setNewBio] = useState('');
+  const [newImage, setNewImage] = useState('');
 
-  // Function to handle profile picture upload
-  const handlePictureUpload = (event) => {
-    const file = event.target.files[0];
-    // Handle file upload logic here
-    setProfilePicture(URL.createObjectURL(file));
+  // State for managing the visibility of the modal
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    const profile = Profiles.collection.findOne({ owner: owner });
+    setProfileData(profile);
+    setNewBio(profile ? profile.bio : '');
+    setNewImage(profile ? profile.image : '');
+  }, [owner]);
+
+  const handleSaveProfile = () => {
+    Profiles.collection.update(profileData._id, { $set: { bio: newBio, image: newImage } });
+    setProfileData(prevState => ({
+      ...prevState,
+      bio: newBio,
+      image: newImage,
+    }));
+    setShowModal(false); // Hide the modal when the profile is saved
   };
 
-  // Function to handle adding items to selling list
-  const handleAddItem = () => {
-    if (sellingItem.trim() !== '') {
-      setSellingList([...sellingList, sellingItem]);
-      setSellingItem('');
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setNewImage(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
   return (
-      <Container>
-        <Row>
-          <Col md={4}>
-            <div className="profile-picture">
-              <img src={profilePicture} alt="Profile" />
-              <input type="file" onChange={handlePictureUpload} />
-            </div>
-          </Col>
-          <Col md={8}>
-            <Form.Group>
-              <Form.Label>Bio</Form.Label>
-              <Form.Control
-                  as="textarea"
-                  rows={3}
-                  value={bio}
-                  onChange={(e) => setBio(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>List of items for sale</Form.Label>
-              <Form.Control
-                  type="text"
-                  value={sellingItem}
-                  onChange={(e) => setSellingItem(e.target.value)}
-              />
-              <Button onClick={handleAddItem}>Add Item</Button>
-              <ul>
-                {sellingList.map((item, index) => (
-                    <li key={index}>{item}</li>
-                ))}
-              </ul>
-            </Form.Group>
-          </Col>
-        </Row>
-      </Container>
+    <Container className="d-flex justify-content-center align-items-center" style={{ height: '80vh' }}>
+      <Card className="shadow-lg p-3 mb-5 bg-white rounded text-center">
+        <div className="profile-picture-container d-flex flex-column align-items-center">
+          {profileData && profileData.image ? (
+            <Image src={newImage || profileData.image} alt="Profile" className="profile-picture" roundedCircle style={{ width: '200px', height: '200px' }} />
+          ) : (
+            <Image src="/images/default-profile-pic.png" roundedCircle style={{ width: '200px', height: '200px' }} />
+          )}
+          <h2 className="mt-3">{profileData ? `${profileData.firstName} ${profileData.lastName}` : 'Name'}</h2>
+          <Button variant="link" onClick={() => setShowModal(true)}>Edit Profile</Button>
+        </div>
+        <h3>About Me</h3>
+        <p>{profileData ? profileData.bio : ''}</p>
+      </Card>
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Profile</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form.Group>
+            <Form.Label>Profile Picture</Form.Label>
+            <Form.Control type="file" onChange={handleFileChange} />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Bio</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              value={newBio}
+              onChange={(e) => setNewBio(e.target.value)}
+            />
+          </Form.Group>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleSaveProfile}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </Container>
   );
 };
 
