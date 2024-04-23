@@ -18,31 +18,31 @@ const ListItems = () => {
   }, []);
 
   return (
-      ready ? (
-          <Container className="py-3">
+    ready ? (
+      <Container className="py-3">
+        <Row className="justify-content-center">
+          <Col md={12}>
             <Row className="justify-content-center">
-              <Col md={12}>
-                <Row className="justify-content-center">
-                  {stuffs.map((stuff) => (
-                      <Col key={stuff._id} md={4}>
-                        <Card>
-                          <Card.Body>
-                            <Card.Title>{stuff.title}</Card.Title>
-                            <Card.Text>{stuff.description}</Card.Text>
-                            <img src={stuff.image} alt={stuff.title} style={{ width: '100px', height: '100px' }} />
-                            <Card.Text>Category: {stuff.category}</Card.Text>
-                            <Card.Text>Condition: {stuff.condition}</Card.Text>
-                            <Card.Text>Price: ${stuff.price}</Card.Text>
-                            <Card.Text>Owner: {stuff.owner}</Card.Text>
-                          </Card.Body>
-                        </Card>
-                      </Col>
-                  ))}
-                </Row>
-              </Col>
+              {stuffs.map((stuff) => (
+                <Col key={stuff._id} md={4}>
+                  <Card>
+                    <Card.Body>
+                      <Card.Title>{stuff.title}</Card.Title>
+                      <Card.Text>{stuff.description}</Card.Text>
+                      <img src={stuff.image} alt={stuff.title} style={{ width: '100px', height: '100px' }} />
+                      <Card.Text>Category: {stuff.category}</Card.Text>
+                      <Card.Text>Condition: {stuff.condition}</Card.Text>
+                      <Card.Text>Price: ${stuff.price}</Card.Text>
+                      <Card.Text>Owner: {stuff.owner}</Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
             </Row>
-          </Container>
-      ) : <LoadingSpinner />
+          </Col>
+        </Row>
+      </Container>
+    ) : <LoadingSpinner />
   );
 };
 
