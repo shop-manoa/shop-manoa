@@ -58,12 +58,32 @@
   ],
   "defaultCategories": [
     {
-      "name": "Food",
+      "name": "Electronics",
       "categoryIndex": "F",
       "owner": "need"
     },
     {
-      "name": "Hard",
+      "name": "Transportation",
+      "categoryIndex": "H",
+      "owner": "nted"
+    },
+    {
+      "name": "Furniture",
+      "categoryIndex": "F",
+      "owner": "need"
+    },
+    {
+      "name": "Books",
+      "categoryIndex": "H",
+      "owner": "nted"
+    },
+    {
+      "name": "Services",
+      "categoryIndex": "F",
+      "owner": "need"
+    },
+    {
+      "name": "Other",
       "categoryIndex": "H",
       "owner": "nted"
     }
