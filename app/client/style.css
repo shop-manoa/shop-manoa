@@ -11,6 +11,8 @@
  See https://getbootstrap.com/docs/5.2/customize/css-variables/
  */
 body {
+  background: fixed center url("images/uhBg.png");
+  background-size: cover;
   --bs-light-rgb: var(--matr-navbar-bg-rgb);
 }
 
