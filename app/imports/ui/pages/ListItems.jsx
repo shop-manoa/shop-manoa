@@ -36,6 +36,9 @@ const ListItems = () => {
                     </Card.Body>
                   </Card>
                 </Col>
+            <Row>
+              {stuffs.map((stuff) => (
+                <ItemListing key={stuff._id} stuff={stuff} />
               ))}
             </Row>
           </Col>

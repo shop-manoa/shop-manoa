@@ -1,157 +1,92 @@
 import React, { useState, useEffect } from 'react';
-import { Col, Container, Row, Form, Button } from 'react-bootstrap';
+import { Meteor } from 'meteor/meteor';
+import { useParams } from 'react-router-dom';
+import { Container, Button, Card, Form, Modal, Image } from 'react-bootstrap';
+import { Profiles } from '../../api/user/Profiles';
 
 const ProfilePage = () => {
-  const [profilePicture, setProfilePicture] = useState(localStorage.getItem('profilePicture') || null);
-  const [bio, setBio] = useState(localStorage.getItem('bio') || '');
-  const [bioChanged, setBioChanged] = useState(false);
-  const [sellingItem, setSellingItem] = useState('');
-  const [sellingList, setSellingList] = useState(JSON.parse(localStorage.getItem('sellingList')) || []);
-  const [sellingListChanged, setSellingListChanged] = useState(false);
-  const [lookingForItem, setLookingForItem] = useState('');
-  const [lookingForList, setLookingForList] = useState(JSON.parse(localStorage.getItem('lookingForList')) || []);
-  const [lookingForListChanged, setLookingForListChanged] = useState(false);
+  let { owner } = useParams();
+  if (owner === ':owner') {
+    owner = Meteor.user().username;
+  }
+  const [profileData, setProfileData] = useState(null);
+  const [newBio, setNewBio] = useState('');
+  const [newImage, setNewImage] = useState('');
+
+  // State for managing the visibility of the modal
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    // Save data to local storage whenever it changes
-    localStorage.setItem('profilePicture', profilePicture);
-    localStorage.setItem('bio', bio);
-    localStorage.setItem('sellingList', JSON.stringify(sellingList));
-    localStorage.setItem('lookingForList', JSON.stringify(lookingForList));
-  }, [profilePicture, bio, sellingList, lookingForList]);
+    const profile = Profiles.collection.findOne({ owner: owner });
+    setProfileData(profile);
+    setNewBio(profile ? profile.bio : '');
+    setNewImage(profile ? profile.image : '');
+  }, [owner]);
 
-  const handlePictureUpload = (event) => {
-    const file = event.target.files[0];
-    setProfilePicture(URL.createObjectURL(file));
+  const handleSaveProfile = () => {
+    Profiles.collection.update(profileData._id, { $set: { bio: newBio, image: newImage } });
+    setProfileData(prevState => ({
+      ...prevState,
+      bio: newBio,
+      image: newImage,
+    }));
+    setShowModal(false); // Hide the modal when the profile is saved
   };
 
-  const handleAddSellingItem = () => {
-    if (sellingItem.trim() !== '') {
-      setSellingList([...sellingList, sellingItem]);
-      setSellingItem('');
-      setSellingListChanged(true);
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setNewImage(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
-  };
-
-  const handleDeleteSellingItem = (index) => {
-    const updatedList = sellingList.filter((_, i) => i !== index);
-    setSellingList(updatedList);
-    setSellingListChanged(true);
-  };
-
-  const handleAddLookingForItem = () => {
-    if (lookingForItem.trim() !== '') {
-      setLookingForList([...lookingForList, lookingForItem]);
-      setLookingForItem('');
-      setLookingForListChanged(true);
-    }
-  };
-
-  const handleDeleteLookingForItem = (index) => {
-    const updatedList = lookingForList.filter((_, i) => i !== index);
-    setLookingForList(updatedList);
-    setLookingForListChanged(true);
-  };
-
-  const handleBioChange = (e) => {
-    setBio(e.target.value);
-    setBioChanged(true);
-  };
-
-  const handleConfirmBioChanges = () => {
-    setBioChanged(false);
-  };
-
-  const handleConfirmSellingListChanges = () => {
-    setSellingListChanged(false);
-  };
-
-  const handleConfirmLookingForListChanges = () => {
-    setLookingForListChanged(false);
   };
 
   return (
-    <Container>
-      <Row>
-        <Col md={4}>
-          <div className="profile-picture-container">
-            <label htmlFor="profile-picture" className="profile-picture-placeholder">
-              {profilePicture ? (
-                <div className="profile-picture" style={{ backgroundImage: `url(${profilePicture})` }} />
-              ) : (
-                <div className="placeholder">Upload Photo</div>
-              )}
-            </label>
-            <input type="file" id="profile-picture" onChange={handlePictureUpload} style={{ display: 'none' }} />
-          </div>
-        </Col>
-        <Col md={8}>
+    <Container className="d-flex justify-content-center align-items-center" style={{ height: '80vh' }}>
+      <Card className="shadow-lg p-3 mb-5 bg-white rounded text-center">
+        <div className="profile-picture-container d-flex flex-column align-items-center">
+          {profileData && profileData.image ? (
+            <Image src={newImage || profileData.image} alt="Profile" className="profile-picture" roundedCircle style={{ width: '200px', height: '200px' }} />
+          ) : (
+            <Image src="/images/default-profile-pic.png" roundedCircle style={{ width: '200px', height: '200px' }} />
+          )}
+          <h2 className="mt-3">{profileData ? `${profileData.firstName} ${profileData.lastName}` : 'Name'}</h2>
+          <Button variant="link" onClick={() => setShowModal(true)}>Edit Profile</Button>
+        </div>
+        <h3>About Me</h3>
+        <p>{profileData ? profileData.bio : ''}</p>
+      </Card>
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Profile</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form.Group>
+            <Form.Label>Profile Picture</Form.Label>
+            <Form.Control type="file" onChange={handleFileChange} />
+          </Form.Group>
           <Form.Group>
             <Form.Label>Bio</Form.Label>
             <Form.Control
               as="textarea"
               rows={3}
-              value={bio}
-              onChange={handleBioChange}
+              value={newBio}
+              onChange={(e) => setNewBio(e.target.value)}
             />
-            {bioChanged && (
-              <Button onClick={handleConfirmBioChanges}>Confirm Bio Changes</Button>
-            )}
           </Form.Group>
-          <Form.Group>
-            <Form.Label>List of items for sale</Form.Label>
-            <Form.Control
-              type="text"
-              value={sellingItem}
-              onChange={(e) => setSellingItem(e.target.value)}
-            />
-            {sellingItem.trim() !== '' && (
-              <Button onClick={handleAddSellingItem}>Add Item</Button>
-            )}
-            <ul>
-              {sellingList.map((item, index) => (
-                <li key={index}>
-                  {item}
-                  <Button
-                    onClick={() => handleDeleteSellingItem(index)}
-                    variant="danger"
-                    size="sm"
-                    className="delete-button"
-                  >
-                    Delete
-                  </Button>
-                </li>
-              ))}
-            </ul>
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>List of items looking for</Form.Label>
-            <Form.Control
-              type="text"
-              value={lookingForItem}
-              onChange={(e) => setLookingForItem(e.target.value)}
-            />
-            {lookingForItem.trim() !== '' && (
-              <Button onClick={handleAddLookingForItem}>Add Item</Button>
-            )}
-            <ul>
-              {lookingForList.map((item, index) => (
-                <li key={index}>
-                  {item}
-                  <Button
-                    onClick={() => handleDeleteLookingForItem(index)}
-                    variant="danger"
-                    size="sm"
-                    className="delete-button"
-                  >
-                    Delete
-                  </Button>
-                </li>
-              ))}
-            </ul>
-          </Form.Group>
-        </Col>
-      </Row>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleSaveProfile}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };

@@ -20,8 +20,6 @@ import Categories from '../pages/Categories';
 import AddCategories from '../pages/AddCategories';
 import Category from '../pages/Category';
 import ProfilePage from '../pages/ProfilePage';
-// eslint-disable-next-line import/no-named-as-default
-import AddReport from '../pages/AddReport';
 import ListReport from '../pages/ListReport';
 import ListReportAdmin from '../pages/ListReportAdmin';
 import EditItem from '../pages/EditItem';
@@ -29,6 +27,8 @@ import CreateItem from '../pages/CreateItem';
 import UserHome from '../pages/UserHome';
 import AdminHome from '../pages/AdminHome';
 import ListItems from '../pages/ListItems';
+import Footer from '../components/Footer';
+import AddReport from '../pages/AddReport';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -62,12 +62,13 @@ const App = () => {
           <Route path="/adminReport" element={<AdminProtectedRoute ready={ready}><ListReportAdmin /></AdminProtectedRoute>} />
           <Route path="/adminHome" element={<AdminProtectedRoute ready={ready}><AdminHome /></AdminProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
-          <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+          <Route path="/profile/:owner" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListStuffAdmin /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <Footer />
       </div>
     </Router>
   );
