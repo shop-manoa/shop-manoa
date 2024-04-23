@@ -14,6 +14,7 @@ class ReportsCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
+      // terget ID: String,
       types: {
         type: String,
         allowedValues: ['Post', 'User'],

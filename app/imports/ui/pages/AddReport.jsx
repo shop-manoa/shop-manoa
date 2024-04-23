@@ -9,6 +9,7 @@ import { Reports } from '../../api/report/Report';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
+  // terget ID: String,
   types: {
     type: String,
     allowedValues: ['Post', 'User'],

@@ -9,17 +9,17 @@ const Footer = () => (
     <Container>
       <Row>
         {/* Make 4 Cols 1)Logo, 2)Menu, and 3)website info */}
-        <Col className="justify-content-sm-start">
+        <Col>
           <Image roundedCircle src="/images/uhLogo.png" width="130px" />
           {/*  Another choice for logo: <Image src="/images/uhLogo2.jpg" className="img-fluid" /> */}
         </Col>
-        <Col className="justify-content-md-center">
+        <Col>
           <Col className="py-md-1"><Link to="/home">Home</Link></Col>
           <Col className="py-md-1"><Link to="/list">Seller Profiles</Link></Col>
           <Col className="py-md-1"><Link to="/items">Items</Link></Col>
           <Col className="py-md-1"><Link to="/adminHome">Admin</Link></Col>
         </Col>
-        <Col className="justify-content-lg-end">
+        <Col>
           <h3>Shop Manoa</h3>
           <p>__A brief info here__</p>
         </Col>

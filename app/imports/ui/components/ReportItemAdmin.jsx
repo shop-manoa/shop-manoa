@@ -16,6 +16,7 @@ const ReportItemAdmin = ({ report }) => (
 // Require a document to be passed to this component.
 ReportItemAdmin.propTypes = {
   report: PropTypes.shape({
+    // terget ID: String,
     types: PropTypes.string,
     category: PropTypes.string,
     details: PropTypes.string,
