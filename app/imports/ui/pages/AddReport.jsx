@@ -7,7 +7,7 @@ import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Reports } from '../../api/report/Report';
 import { Profiles } from '../../api/user/Profiles';
-// import { ItemsList } from '../../api/items/ItemsList';
+import { ItemsList } from '../../api/items/ListItems';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
@@ -55,7 +55,7 @@ const AddReport = () => {
     let target;
     let target_id;
     if (types === 'Post') {
-      // target = ItemsList.collection.find(reportee);
+      target = ItemsList.collection.find({ owner: reportee });
     } else {
       target = Profiles.collection.find({ owner: reportee });
     }
