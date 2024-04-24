@@ -29,7 +29,8 @@ const ListReportAdmin = () => {
           <Table striped bordered hover>
             <thead>
               <tr className="text-center">
-                <th>ID</th>
+                {/* <th>ID</th> */}
+                {/* <th>Reportee</th> */}
                 <th>Types</th>
                 <th>Category</th>
                 <th>Details</th>

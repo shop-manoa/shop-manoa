@@ -16,7 +16,6 @@ const DisplayProfile = ({ profile, currentUser }) => {
     setShow(false);
     setSubmitted(false);
   };
-
   const handleShow = () => setShow(true);
 
   useEffect(() => {
@@ -65,6 +64,10 @@ const DisplayProfile = ({ profile, currentUser }) => {
         </Button>
         <Link to={`/profile/${profile.owner}`} className="btn btn-outline-primary btn-sm custom-button">
           View Profile
+        </Link>
+        {/* Added a link to AddReport page */}
+        <Link to="../addReport" className="btn btn-outline-danger btn-sm custom-button" style={{ marginLeft: '10px' }}>
+          Report
         </Link>
 
         <Modal show={show} onHide={handleClose}>
