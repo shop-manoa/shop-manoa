@@ -75,11 +75,14 @@ test('Test the List Profile page', async (testController) => {
   await listProfilePage.isDisplayed(testController);
 });
 
-test.only('Test the Add Report page', async (testController) => {
+test('Test the Add Report page', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
-  await navBar.gotoHomePage(testController);
-  await homePage.addReport(testController);
+  await navBar.gotoListProfilePage(testController);
+  await listProfilePage.isDisplayed(testController);
+  await listProfilePage.checkReportButton(testController);
+  await addReportPage.isDisplayed(testController);
+  await addReportPage.addReport(testController);
 });
 
 test('Test the Categories page', async (testController) => {
