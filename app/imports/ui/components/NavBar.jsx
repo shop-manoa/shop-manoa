@@ -14,7 +14,7 @@ const NavBar = () => {
 
   return (
 
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="dark" expand="lg">
       <Container>
         <Navbar.Brand as={NavLink} to="/">
           <h2>Shop-Manoa</h2>
