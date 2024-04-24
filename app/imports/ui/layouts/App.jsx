@@ -53,7 +53,9 @@ const App = () => {
           <Route path="/list" element={<ProtectedRoute><ListProfile /></ProtectedRoute>} />
           <Route path="/items" element={<ProtectedRoute><ListItems /></ProtectedRoute>} />
           <Route path="/userHome" element={<UserHome />} />
+          {/* Duplicated /list path */}
           <Route path="/list" element={<ProtectedRoute><ListProfile /></ProtectedRoute>} />
+          {/* --- */}
           <Route path="/create" element={<ProtectedRoute><CreateItem /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditItem /></ProtectedRoute>} />
           <Route path="/addReport" element={<ProtectedRoute><AddReport /></ProtectedRoute>} />
