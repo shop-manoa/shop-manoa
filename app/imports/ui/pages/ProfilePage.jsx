@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useParams } from 'react-router-dom';
-import { Container, Button, Card, Form, Modal, Image } from 'react-bootstrap';
+import { Container, Button, Card, Form, Modal, Image, Row, Col } from 'react-bootstrap';
 import { Profiles } from '../../api/user/Profiles';
+import { ItemsList } from '../../api/items/ListItems';
 
 const ProfilePage = () => {
   let { owner } = useParams();
@@ -12,6 +13,7 @@ const ProfilePage = () => {
   const [profileData, setProfileData] = useState(null);
   const [newBio, setNewBio] = useState('');
   const [newImage, setNewImage] = useState('');
+  const [items, setItems] = useState([]);
 
   // State for managing the visibility of the modal
   const [showModal, setShowModal] = useState(false);
@@ -21,6 +23,9 @@ const ProfilePage = () => {
     setProfileData(profile);
     setNewBio(profile ? profile.bio : '');
     setNewImage(profile ? profile.image : '');
+
+    const itemsList = ItemsList.collection.find({ owner: owner }).fetch();
+    setItems(itemsList);
   }, [owner]);
 
   const handleSaveProfile = () => {
@@ -45,8 +50,8 @@ const ProfilePage = () => {
   };
 
   return (
-    <Container id="myprofile-page" className="d-flex justify-content-center align-items-center" style={{ height: '80vh' }}>
-      <Card className="shadow-lg p-3 mb-5 bg-white rounded text-center">
+    <Container id="myprofile-page" className="d-flex flex-column align-items-center" style={{ height: 'vh' }}>
+      <Card className="shadow-lg p-3 mb-5 bg-white rounded text-center" style={{ marginTop: '50px' }}>
         <div className="profile-picture-container d-flex flex-column align-items-center">
           {profileData && profileData.image ? (
             <Image src={newImage || profileData.image} alt="Profile" className="profile-picture" roundedCircle style={{ width: '200px', height: '200px' }} />
@@ -61,6 +66,25 @@ const ProfilePage = () => {
         <h3>About Me</h3>
         <p>{profileData ? profileData.bio : ''}</p>
       </Card>
+      {/* Display items */}
+      <Row xs={1} md={3} className="g-4" style={{ marginBottom: '50px' }}>  {/* Wrap items in a Row */}
+        {items.map(item => (
+          <Col key={item._id}>  {/* Wrap each Card in a Col */}
+            <Card className="mb-3" style={{ width: '300px' }}>
+              <Card.Img variant="top" src={item.image} style={{ width: '100px', height: '100px' }} />
+              <Card.Body>
+                <Card.Title>{item.title}</Card.Title>
+                <Card.Text>
+                  {item.description}
+                </Card.Text>
+              </Card.Body>
+              <Card.Footer>
+                <small className="text-muted">{item.category} - {item.condition} - ${item.price}</small>
+              </Card.Footer>
+            </Card>
+          </Col>
+        ))}
+      </Row>
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Edit Profile</Modal.Title>
