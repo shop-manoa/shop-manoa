@@ -51,7 +51,7 @@ const CreateItem = () => {
 
   let fRef = null;
   return (
-    <Container className="py-3">
+    <Container id="createitem-page" className="py-3">
       <Row className="justify-content-center">
         <Col xs={7}>
           <Col className="text-center"><h2>Create Item</h2></Col>

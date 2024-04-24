@@ -19,7 +19,7 @@ const ListItems = () => {
 
   return (
     ready ? (
-      <Container className="py-3">
+      <Container id="items-page" className="py-3">
         <Row className="justify-content-center">
           <Col md={12}>
             <Row className="justify-content-center">

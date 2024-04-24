@@ -31,6 +31,86 @@ class NavBar {
     await testController.expect(loggedInUser).eql(username);
   }
 
+  /** Check that home page is visible. */
+  async gotoHomePage(testController) {
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.expect(Selector('#navbar-current-user').exists).ok();
+    await testController.click('#user-home-nav');
+  }
+
+  /** Check that home page is visible. */
+  async gotoAdminHomePage(testController) {
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.expect(Selector('#navbar-current-user').exists).ok();
+    await testController.click('#admin-home-nav');
+  }
+
+  /** Check that my profile page is visible. */
+  async gotoMyProfilePage(testController) {
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.expect(Selector('#navbar-current-user').exists).ok();
+    await testController.click('#user-profile-nav');
+  }
+
+  /** Check that create item page is visible. */
+  async gotoCreateItemPage(testController) {
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.expect(Selector('#navbar-current-user').exists).ok();
+    await testController.click('#create-item-nav');
+  }
+
+  /** Check that items page is visible. */
+  async gotoItemsPage(testController) {
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.expect(Selector('#navbar-current-user').exists).ok();
+    await testController.click('#items-nav');
+  }
+
+  /** Check that list profile page is visible. */
+  async gotoListProfilePage(testController) {
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.expect(Selector('#navbar-current-user').exists).ok();
+    await testController.click('#list-profile-nav');
+  }
+
+  /** Check that add report page is visible. */
+  async gotoAddReportPage(testController) {
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.expect(Selector('#navbar-current-user').exists).ok();
+    await testController.click('#add-report-nav');
+  }
+
+  /** Check that categories page is visible. */
+  async gotoCategoriesPage(testController) {
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.expect(Selector('#navbar-current-user').exists).ok();
+    await testController.click('#categories-nav');
+  }
+
   /** Check that someone is logged in, then click items to logout. */
   async logout(testController) {
     const visible = await Selector('#basic-navbar-nav').visible;

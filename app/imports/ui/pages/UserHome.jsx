@@ -4,7 +4,7 @@ import ItemListing from '../components/ItemListing';
 
 /* A simple static component to render some text for the landing page. */
 const UserHome = () => (
-  <Container fluid className="pt-3">
+  <Container id="userhome-page" fluid className="pt-3">
     <Row>
       <ItemListing />
       <ItemListing />
