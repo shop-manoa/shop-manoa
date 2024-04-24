@@ -54,7 +54,9 @@ const ProfilePage = () => {
             <Image src="/images/default-profile-pic.png" roundedCircle style={{ width: '200px', height: '200px' }} />
           )}
           <h2 className="mt-3">{profileData ? `${profileData.firstName} ${profileData.lastName}` : 'Name'}</h2>
-          <Button variant="link" onClick={() => setShowModal(true)}>Edit Profile</Button>
+          {owner === Meteor.user().username && (
+            <Button variant="link" onClick={() => setShowModal(true)}>Edit Profile</Button>
+          )}
         </div>
         <h3>About Me</h3>
         <p>{profileData ? profileData.bio : ''}</p>
