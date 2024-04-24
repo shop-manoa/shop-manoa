@@ -3,8 +3,8 @@ import { Meteor } from 'meteor/meteor';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { ItemsList } from '../../api/items/ListItems'; // Import the ItemsList collection
-import ItemListing from '../components/ItemListing';
+import { ItemsList } from '../../api/items/ListItems';
+// import ItemListing from './ItemListing'; Import ItemListing component
 
 const ListItems = () => {
   const { stuffs, ready } = useTracker(() => {
@@ -37,11 +37,6 @@ const ListItems = () => {
                     </Card.Body>
                   </Card>
                 </Col>
-              ))}
-            </Row>
-            <Row>
-              {stuffs.map((stuff) => (
-                <ItemListing key={stuff._id} stuff={stuff} />
               ))}
             </Row>
           </Col>

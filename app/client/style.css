@@ -3,17 +3,25 @@
 
 /* Set up some CSS variables to theme the application. */
 :root {
-  --matr-navbar-bg: #ECECEC;
-  --matr-navbar-bg-rgb: 236, 236, 236;
+  --matr-navbar-bg: #024731;
+  --matr-navbar-bg-rgb: 2, 71, 49;
 }
 
 /* Change bootstrap variable values.
  See https://getbootstrap.com/docs/5.2/customize/css-variables/
  */
 body {
+  --bs-dark-rgb: var(--matr-navbar-bg-rgb);
   background: fixed center url("images/uhBg.png");
   background-size: cover;
-  --bs-light-rgb: var(--matr-navbar-bg-rgb);
+}
+
+body .navbar {
+  --bs-navbar-color: white;
+  --bs-navbar-brand-color: white;
+  --bs-navbar-active-color: white;
+  --bs-navbar-hover-color: white;
+  --bs-navbar-brand-hover-color: white;
 }
 
 /* Set the alert background on the signin and signup pages. */
@@ -24,7 +32,7 @@ body {
 /* Define custom styles */
 .gray-background {
   background-color: var(--matr-navbar-bg);
-  color: var(--bs-dark);
+  color: var(--bs-light);
   padding-top: 10px;
   padding-bottom: 20px;
 }
