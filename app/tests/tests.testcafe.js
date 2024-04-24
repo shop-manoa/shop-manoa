@@ -59,6 +59,7 @@ test('Test the Create Item page', async (testController) => {
   await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.gotoCreateItemPage(testController);
   await createItemPage.isDisplayed(testController);
+  await createItemPage.createItem(testController);
 });
 test('Test the Items page', async (testController) => {
   await navBar.gotoSignInPage(testController);
@@ -79,6 +80,7 @@ test('Test the Add Report page', async (testController) => {
   await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.gotoAddReportPage(testController);
   await addReportPage.isDisplayed(testController);
+  await addReportPage.addReport(testController);
 });
 
 test('Test the Categories page', async (testController) => {

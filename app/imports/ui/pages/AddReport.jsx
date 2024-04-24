@@ -63,10 +63,10 @@ const AddReport = () => {
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
-                <SelectField name="types" />
-                <SelectField name="category" />
-                <LongTextField name="details" />
-                <SubmitField value="Submit" />
+                <SelectField id="addReportFormTypes" name="types" />
+                <SelectField id="addReportFormCategory" name="category" />
+                <LongTextField id="addReportFormDetails" name="details" />
+                <SubmitField id="addReportFormSubmit" value="Submit" />
                 <ErrorsField />
               </Card.Body>
             </Card>
