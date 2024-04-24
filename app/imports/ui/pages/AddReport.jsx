@@ -6,21 +6,21 @@ import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Reports } from '../../api/report/Report';
-import { Profiles } from '../../api/user/Profiles';
-import { ItemsList } from '../../api/items/ListItems';
+// import { Profiles } from '../../api/user/Profiles';
+// import { ItemsList } from '../../api/items/ListItems';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
-  target_id: {
-    type: String,
-    optional: true,
-  },
-  users: {
-    type: String,
-    allowedValues: 'John@foo.com',
-    defaultValue: 'John@foo.com',
-    optional: true,
-  },
+  // target_id: {
+  //   type: String,
+  //   optional: true,
+  // },
+  // users: {
+  //   type: String,
+  //   allowedValues: 'John@foo.com',
+  //   defaultValue: 'John@foo.com',
+  //   optional: true,
+  // },
   types: {
     type: String,
     allowedValues: ['Post', 'User'],
@@ -50,19 +50,19 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 const AddReport = () => {
   // On submit, insert the data.
   const submit = (data, formRef) => {
-    const { reportee, types, category, details } = data;
+    const { types, category, details } = data;
     const owner = Meteor.user().username;
-    let target;
-    let target_id;
-    if (types === 'Post') {
-      target = ItemsList.collection.find({ owner: reportee });
-    } else {
-      target = Profiles.collection.find({ owner: reportee });
-    }
-    target_id = target._id;
+    // let target;
+    // let target_id;
+    // if (types === 'Post') {
+    //   target = ItemsList.collection.find({ owner: reportee });
+    // } else {
+    //   target = Profiles.collection.find({ owner: reportee });
+    // }
+    // target_id = target._id;
 
     Reports.collection.insert(
-      { target_id, reportee, types, category, details, owner },
+      { types, category, details, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -83,8 +83,8 @@ const AddReport = () => {
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
-                <TextField name="target_id" />
-                <SelectField name="users" />
+                {/* <TextField name="target_id" /> */}
+                {/* <SelectField name="users" /> */}
                 <SelectField name="types" />
                 <SelectField name="category" />
                 <LongTextField name="details" />

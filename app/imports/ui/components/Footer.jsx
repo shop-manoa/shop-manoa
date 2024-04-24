@@ -15,13 +15,21 @@ const Footer = () => (
         </Col>
         <Col>
           <Col className="py-md-1"><Link to="/home">Home</Link></Col>
-          <Col className="py-md-1"><Link to="/list">Seller Profiles</Link></Col>
+          <Col className="py-md-1"><Link to="/list">Sellers</Link></Col>
           <Col className="py-md-1"><Link to="/items">Items</Link></Col>
+        </Col>
+        <Col>
+          <Col className="py-md-1"><Link to="/profile/:owner">Account</Link></Col>
           <Col className="py-md-1"><Link to="/adminHome">Admin</Link></Col>
         </Col>
         <Col>
-          <h3>Shop Manoa</h3>
-          <p>__A brief info here__</p>
+          <h4 className="text-center">Shop Manoa</h4>
+          <p className="text-sm-center py-0">
+            Well come to Shop-Manoa! We are a platform for UH students to buy and sell items.
+          </p>
+          <p className="text-sm-center py-0">
+            University of Hawaii at Manoa, Honolulu, HI 96822
+          </p>
         </Col>
       </Row>
     </Container>

@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 /** Renders a single row in the List Report table. See pages/ListReport.jsx */
 const ReportItemAdmin = ({ report }) => (
   <tr>
-    <td>{report.target_id}</td>
-    <td>{report.users}</td>
+    {/* <td>{report.target_id}</td> */}
+    {/* <td>{report.users}</td> */}
     <td>{report.types}</td>
     <td>{report.category}</td>
     <td>{report.details}</td>
@@ -23,8 +23,8 @@ ReportItemAdmin.propTypes = {
     _id: PropTypes.string,
     owner: PropTypes.string,
   }).isRequired,
-  target_id: PropTypes.string,
-  users: PropTypes.string,
+  // target_id: PropTypes.string,
+  // users: PropTypes.string,
 };
 
 export default ReportItemAdmin;
