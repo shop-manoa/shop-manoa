@@ -66,7 +66,7 @@ const DisplayProfile = ({ profile, currentUser }) => {
           View Profile
         </Link>
         {/* Added a link to AddReport page */}
-        <Link to="../addReport" className="btn btn-outline-danger btn-sm custom-button" style={{ marginLeft: '10px' }}>
+        <Link to="../addReport" id="addReportButton" className="btn btn-outline-danger btn-sm custom-button" style={{ marginLeft: '10px' }}>
           Report
         </Link>
 
