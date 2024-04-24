@@ -13,8 +13,10 @@ import { categoriesPage } from './categories.page';
 
 /* global fixture:false, test:false */
 
-/** Credentials for one of the sample users defined in settings.development.json. */
+/** Credentials for the sample users defined in settings.development.json. */
 const credentials = { username: 'john@foo.com', password: 'changeme' };
+
+const adminCredentials = { username: 'admin@foo.com', password: 'changeme' };
 
 fixture('meteor-application-template-react localhost test with default db')
   .page('http://localhost:3000');
@@ -31,7 +33,7 @@ test('Test that signin and signout work', async (testController) => {
   await signoutPage.isDisplayed(testController);
 });
 
-test.only('Test the Home page', async (testController) => {
+test('Test the Home page', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.gotoHomePage(testController);
@@ -40,7 +42,7 @@ test.only('Test the Home page', async (testController) => {
 
 test('Test the Admin Home page', async (testController) => {
   await navBar.gotoSignInPage(testController);
-  await signinPage.signin(testController, credentials.username, credentials.password);
+  await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
   await navBar.gotoAdminHomePage(testController);
   await adminHomePage.isDisplayed(testController);
 });

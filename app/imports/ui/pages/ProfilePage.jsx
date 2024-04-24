@@ -45,7 +45,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <Container className="d-flex justify-content-center align-items-center" style={{ height: '80vh' }}>
+    <Container id="myprofile-page" className="d-flex justify-content-center align-items-center" style={{ height: '80vh' }}>
       <Card className="shadow-lg p-3 mb-5 bg-white rounded text-center">
         <div className="profile-picture-container d-flex flex-column align-items-center">
           {profileData && profileData.image ? (
