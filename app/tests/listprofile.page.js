@@ -11,10 +11,6 @@ class ListProfilePage {
     await testController.expect(this.pageSelector.exists).ok();
   }
 
-  async gotoAddReportPage(testController) {
-    await testController.click('#addReportButton');
-  }
-
 }
 
 export const listProfilePage = new ListProfilePage();

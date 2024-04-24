@@ -78,9 +78,7 @@ test('Test the List Profile page', async (testController) => {
 test('Test the Add Report page', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
-  await navBar.gotoListProfilePage(testController);
-  await listProfilePage.isDisplayed(testController);
-  await listProfilePage.gotoAddReportPage(testController);
+  await navBar.gotoAddReportPage(testController);
   await addReportPage.isDisplayed(testController);
   await addReportPage.addReport(testController);
 });
