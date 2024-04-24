@@ -22,7 +22,7 @@ const AdminHome = () => {
   }, []);
   return (ready ? (
     <>
-      <Container fluid className="pt-3">
+      <Container id="adminhome-page" fluid className="pt-3">
         <Row>
           <ItemListing />
           <ItemListing />

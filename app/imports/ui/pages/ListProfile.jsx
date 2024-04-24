@@ -22,7 +22,7 @@ const ListProfile = () => {
   const currentUser = Meteor.user();
 
   return (ready ? (
-    <Container className="py-3">
+    <Container id="listprofile-page" className="py-3">
       <Row className="justify-content-center">
         <Col>
           <Col className="text-center">
