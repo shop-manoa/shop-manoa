@@ -34,7 +34,7 @@ const ListItems = () => {
                       <Card.Text>Condition: {stuff.condition}</Card.Text>
                       <Card.Text>Price: ${stuff.price}</Card.Text>
                       <Card.Text>Owner: {stuff.owner}</Card.Text>
-                      <Card.Link href="/AddReport">Report</Card.Link>
+                      <Card.Link href="/addReport">Report</Card.Link>
                     </Card.Body>
                   </Card>
                 </Col>
