@@ -30,6 +30,7 @@ const ListReportAdmin = () => {
             <thead>
               <tr className="text-center">
                 <th>ID</th>
+                <th>Reportee</th>
                 <th>Types</th>
                 <th>Category</th>
                 <th>Details</th>

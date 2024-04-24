@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 /** Renders a single row in the List Report table. See pages/ListReport.jsx */
 const ReportItemAdmin = ({ report }) => (
   <tr>
-    <Link to={`${report._id}`}>{report._id}</Link>
+    <td>{report.target_id}</td>
+    <td>{report.users}</td>
     <td>{report.types}</td>
     <td>{report.category}</td>
     <td>{report.details}</td>
@@ -16,13 +16,15 @@ const ReportItemAdmin = ({ report }) => (
 // Require a document to be passed to this component.
 ReportItemAdmin.propTypes = {
   report: PropTypes.shape({
-    // terget ID: String,
+    // target_id, users should be optional
     types: PropTypes.string,
     category: PropTypes.string,
     details: PropTypes.string,
     _id: PropTypes.string,
     owner: PropTypes.string,
   }).isRequired,
+  target_id: PropTypes.string,
+  users: PropTypes.string,
 };
 
 export default ReportItemAdmin;
