@@ -17,14 +17,6 @@ Meteor.publish(Stuffs.userPublicationName, function () {
   return this.ready();
 });
 
-Meteor.publish(ItemsList.userPublicationName, function () {
-  if (this.userId) {
-    const username = Meteor.users.findOne(this.userId).username;
-    return ItemsList.collection.find({ owner: username });
-  }
-  return this.ready();
-});
-
 Meteor.publish(Profiles.userPublicationName, function () {
   if (this.userId) {
     return Profiles.collection.find();
@@ -45,6 +37,13 @@ Meteor.publish(Ratings.userPublicationName, function () {
   return this.ready();
 });
 
+Meteor.publish(ItemsList.userPublicationName, function () {
+  if (this.userId) {
+    return ItemsList.collection.find();
+  }
+  return this.ready();
+});
+
 // Admin-level publication.
 // If logged in and with admin role, then publish all documents from all users. Otherwise, publish nothing.
 Meteor.publish(Stuffs.adminPublicationName, function () {
@@ -54,16 +53,16 @@ Meteor.publish(Stuffs.adminPublicationName, function () {
   return this.ready();
 });
 
-Meteor.publish(ItemsList.adminPublicationName, function () {
+Meteor.publish(Reports.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
-    return ItemsList.collection.find();
+    return Reports.collection.find();
   }
   return this.ready();
 });
 
-Meteor.publish(Reports.adminPublicationName, function () {
-  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
-    return Reports.collection.find();
+Meteor.publish(ItemsList.adminPublicationName, function () {
+  if (this.userId) {
+    return ItemsList.collection.find();
   }
   return this.ready();
 });
@@ -76,6 +75,10 @@ Meteor.publish(null, function () {
 
 Meteor.publish(null, function () {
   return Profiles.collection.find();
+});
+
+Meteor.publish(null, function () {
+  return ItemsList.collection.find();
 });
 
 Meteor.publish(null, function () {
