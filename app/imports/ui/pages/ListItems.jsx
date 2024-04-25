@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Card, Col, Container, Row, Button } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
+import { CiStar } from 'react-icons/ci';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { ItemsList } from '../../api/items/ListItems';
 
@@ -16,6 +17,18 @@ const ListItems = () => {
       ready: rdy,
     };
   }, []);
+
+  // Function to handle toggling item favorite status
+  const toggleFavorite = (itemId) => {
+    // Update the state or send a request to the server to mark the item as favorited
+    // For demonstration, I'll just update the state to mark the item as favorited
+    setStuffs(prevStuffs => prevStuffs.map(stuff => {
+      if (stuff._id === itemId) {
+        return { ...stuff, favorited: !stuff.favorited };
+      }
+      return stuff;
+    }));
+  };
 
   return (
     ready ? (
@@ -33,8 +46,14 @@ const ListItems = () => {
                       <Card.Text>Category: {stuff.category}</Card.Text>
                       <Card.Text>Condition: {stuff.condition}</Card.Text>
                       <Card.Text>Price: ${stuff.price}</Card.Text>
+                      {/* Button to toggle favorite status */}
+                      <Button variant="outline-warning" onClick={() => toggleFavorite(stuff._id)} style={{ marginRight: '10px' }}>
+                        {/* Display CiStar icon */}
+                        <CiStar style={{ marginRight: '5px' }} /> {/* Adjust styling if needed */}
+                        {stuff.favorited ? 'Unfavorite' : 'Favorite'}
+                      </Button>
                       {/* Link to the user's profile page */}
-                      <Link to={`/profile/${stuff.owner}`} className="btn btn-outline-primary btn-sm custom-button" style={{ marginLeft: '10px' }}>View Profile</Link>
+                      <Link to={`/profile/${stuff.owner}`} className="btn btn-outline-primary btn-sm custom-button">View Profile</Link>
                     </Card.Body>
                   </Card>
                 </Col>
