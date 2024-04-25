@@ -18,32 +18,32 @@ const ListItems = () => {
   }, []);
 
   return (
-      ready ? (
-          <Container id="items-page" className="py-3">
+    ready ? (
+      <Container id="items-page" className="py-3">
+        <Row className="justify-content-center">
+          <Col md={12}>
             <Row className="justify-content-center">
-              <Col md={12}>
-                <Row className="justify-content-center">
-                  {stuffs.map((stuff) => (
-                      <Col key={stuff._id} md={4}>
-                        <Card>
-                          <Card.Body>
-                            <Card.Title>{stuff.title}</Card.Title>
-                            <Card.Text>{stuff.description}</Card.Text>
-                            <img src={stuff.image} alt={stuff.title} style={{ width: '100px', height: '100px' }} />
-                            <Card.Text>Category: {stuff.category}</Card.Text>
-                            <Card.Text>Condition: {stuff.condition}</Card.Text>
-                            <Card.Text>Price: ${stuff.price}</Card.Text>
-                            {/* Link to the user's profile page */}
-                            <Link to={`/profile/${stuff.owner}`} className="btn btn-outline-primary btn-sm custom-button" style={{ marginLeft: '10px' }}>View Profile</Link>
-                          </Card.Body>
-                        </Card>
-                      </Col>
-                  ))}
-                </Row>
-              </Col>
+              {stuffs.map((stuff) => (
+                <Col key={stuff._id} md={4}>
+                  <Card>
+                    <Card.Body>
+                      <Card.Title>{stuff.title}</Card.Title>
+                      <Card.Text>{stuff.description}</Card.Text>
+                      <img src={stuff.image} alt={stuff.title} style={{ width: '100px', height: '100px' }} />
+                      <Card.Text>Category: {stuff.category}</Card.Text>
+                      <Card.Text>Condition: {stuff.condition}</Card.Text>
+                      <Card.Text>Price: ${stuff.price}</Card.Text>
+                      {/* Link to the user's profile page */}
+                      <Link to={`/profile/${stuff.owner}`} className="btn btn-outline-primary btn-sm custom-button" style={{ marginLeft: '10px' }}>View Profile</Link>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
             </Row>
-          </Container>
-      ) : <LoadingSpinner />
+          </Col>
+        </Row>
+      </Container>
+    ) : <LoadingSpinner />
   );
 };
 
