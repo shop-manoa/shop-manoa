@@ -5,7 +5,6 @@ import { Card, Col, Container, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { ItemsList } from '../../api/items/ListItems';
-// import ItemListing from './ItemListing'; Import ItemListing component
 
 const ListItems = () => {
   const { stuffs, ready } = useTracker(() => {
@@ -34,8 +33,8 @@ const ListItems = () => {
                       <Card.Text>Category: {stuff.category}</Card.Text>
                       <Card.Text>Condition: {stuff.condition}</Card.Text>
                       <Card.Text>Price: ${stuff.price}</Card.Text>
-                      <Card.Text>Owner: {stuff.owner}</Card.Text>
-                      <Link to="../addReport" className="btn btn-outline-danger btn-sm custom-button" style={{ marginLeft: '10px' }}>report</Link>
+                      {/* Link to the user's profile page */}
+                      <Link to={`/profile/${stuff.owner}`} className="btn btn-outline-primary btn-sm custom-button" style={{ marginLeft: '10px' }}>View Profile</Link>
                     </Card.Body>
                   </Card>
                 </Col>
