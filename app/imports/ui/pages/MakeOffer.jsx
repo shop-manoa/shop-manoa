@@ -5,7 +5,7 @@ import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
-import { Stuffs } from '../../api/stuff/Stuff';
+import { ItemsList } from '../../api/items/ListItems';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
@@ -35,7 +35,7 @@ const MakeOffer = () => {
   const submit = (data, formRef) => {
     const { title, description, category, condition, price, offer, contact } = data;
     const owner = Meteor.user().username;
-    Stuffs.collection.insert(
+    ItemsList.collection.insert(
       { title, description, category, condition, price, offer, contact, owner },
       (error) => {
         if (error) {

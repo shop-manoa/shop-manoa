@@ -5,10 +5,38 @@
   ],
 
   "defaultData": [
-    { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
-    { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
-    { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
-    { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
+    {
+      "title": "Basket",
+      "image": "N/A",
+      "category": "Other",
+      "condition": "excellent",
+      "price": 10,
+      "owner": "john@foo.com"
+    },
+    {
+      "name": "Bicycle",
+      "image": "N/A",
+      "category": "Other",
+      "condition": "poor",
+      "price": 30,
+      "owner": "john@foo.com"
+    },
+    {
+      "name": "Banana",
+      "image": "N/A",
+      "category": "Other",
+      "condition": "good",
+      "price": 3,
+      "owner": "admin@foo.com"
+    },
+    {
+      "name": "Boogie Board",
+      "image": "N/A",
+      "category": "Other",
+      "condition": "excellent",
+      "price": 15,
+      "owner": "admin@foo.com"
+    }
   ],
 
   "monti": {

@@ -11,6 +11,11 @@ class ListProfilePage {
     await testController.expect(this.pageSelector.exists).ok();
   }
 
+  async checkReportButton(testController) {
+    const reportButton = Selector('#reportButton');
+    await testController.click(reportButton);
+  }
+
 }
 
 export const listProfilePage = new ListProfilePage();

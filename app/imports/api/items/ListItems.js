@@ -3,7 +3,7 @@ import SimpleSchema from 'simpl-schema';
 
 class ListItems {
   constructor() {
-    this.name = 'ListItems';
+    this.name = 'ItemsList';
     this.collection = new Mongo.Collection(this.name);
     this.schema = new SimpleSchema({
       title: String,
