@@ -12,33 +12,41 @@
   ],
   "defaultData": [
     {
-      "name": "Basket",
-      "quantity": 3,
-      "owner": "john@foo.com",
-      "condition": "excellent"
+      "title": "Basket",
+      "description": "N/A",
+      "image": "N/A",
+      "category": "Other",
+      "condition": "Excellent",
+      "price": 10,
+      "owner": "john@foo.com"
     },
     {
-      "name": "Bicycle",
-      "quantity": 2,
-      "owner": "john@foo.com",
-      "condition": "poor"
+      "title": "Bicycle",
+      "description": "N/A",
+      "image": "N/A",
+      "category": "Other",
+      "condition": "Poor",
+      "price": 30,
+      "owner": "john@foo.com"
     },
     {
-      "name": "Banana",
-      "quantity": 2,
-      "owner": "admin@foo.com",
-      "condition": "good"
+      "title": "Banana",
+      "description": "N/A",
+      "image": "N/A",
+      "category": "Other",
+      "condition": "Good",
+      "price": 3,
+      "owner": "admin@foo.com"
     },
     {
-      "name": "Boogie Board",
-      "quantity": 2,
-      "owner": "admin@foo.com",
-      "condition": "excellent"
-    },
-    { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
-    { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
-    { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
-    { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
+      "title": "Boogie Board",
+      "description": "N/A",
+      "image": "N/A",
+      "category": "Other",
+      "condition": "Excellent",
+      "price": 15,
+      "owner": "admin@foo.com"
+    }
   ],
   "defaultProfile": [
     {

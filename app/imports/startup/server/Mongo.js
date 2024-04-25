@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Stuffs } from '../../api/stuff/Stuff.js';
+import { ItemsList } from '../../api/items/ListItems';
 import { Profiles } from '../../api/user/Profiles.js';
 import { CategoryStuffs } from '../../api/category/CategoryStuff';
 import { Reports } from '../../api/report/Report.js';
@@ -10,11 +10,11 @@ import { Ratings } from '../../api/rating/Ratings.js';
 // Initialize the database with a default data document.
 const addData = (data) => {
   console.log(`  Adding: ${data.name} (${data.owner})`);
-  Stuffs.collection.insert(data);
+  ItemsList.collection.insert(data);
 };
 
 // Initialize the StuffsCollection if empty.
-if (Stuffs.collection.find().count() === 0) {
+if (ItemsList.collection.find().count() === 0) {
   if (Meteor.settings.defaultData) {
     console.log('Creating default data.');
     Meteor.settings.defaultData.forEach(data => addData(data));

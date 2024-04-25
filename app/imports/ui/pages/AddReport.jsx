@@ -6,9 +6,21 @@ import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Reports } from '../../api/report/Report';
+// import { Profiles } from '../../api/user/Profiles';
+// import { ItemsList } from '../../api/items/ListItems';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
+  // target_id: {
+  //   type: String,
+  //   optional: true,
+  // },
+  // users: {
+  //   type: String,
+  //   allowedValues: 'John@foo.com',
+  //   defaultValue: 'John@foo.com',
+  //   optional: true,
+  // },
   types: {
     type: String,
     allowedValues: ['Post', 'User'],
@@ -36,18 +48,26 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 
 /* Renders the AddReport page for adding a document. */
 const AddReport = () => {
-
   // On submit, insert the data.
   const submit = (data, formRef) => {
     const { types, category, details } = data;
     const owner = Meteor.user().username;
+    // let target;
+    // let target_id;
+    // if (types === 'Post') {
+    //   target = ItemsList.collection.find({ owner: reportee });
+    // } else {
+    //   target = Profiles.collection.find({ owner: reportee });
+    // }
+    // target_id = target._id;
+
     Reports.collection.insert(
       { types, category, details, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Item added successfully', 'success');
+          swal('Success', 'The report is successfully submitted', 'success');
           formRef.reset();
         }
       },
@@ -56,17 +76,19 @@ const AddReport = () => {
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   let fRef = null;
   return (
-    <Container className="py-3">
+    <Container id="addreport-page" className="py-3">
       <Row className="justify-content-center">
         <Col xs={5}>
           <Col className="text-center"><h2>Add Report</h2></Col>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
-                <SelectField name="types" />
-                <SelectField name="category" />
-                <LongTextField name="details" />
-                <SubmitField value="Submit" />
+                {/* <TextField name="target_id" /> */}
+                {/* <SelectField name="users" /> */}
+                <SelectField id="addReportFormTypes" name="types" />
+                <SelectField id="addReportFormCategory" name="category" />
+                <LongTextField id="addReportFormDetails" name="details" />
+                <SubmitField id="addReportFormSubmit" value="Submit" />
                 <ErrorsField />
               </Card.Body>
             </Card>

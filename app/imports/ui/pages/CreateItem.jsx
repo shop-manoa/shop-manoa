@@ -51,20 +51,20 @@ const CreateItem = () => {
 
   let fRef = null;
   return (
-    <Container className="py-3">
+    <Container id="createitem-page" className="py-3">
       <Row className="justify-content-center">
         <Col xs={7}>
           <Col className="text-center"><h2>Create Item</h2></Col>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
-                <TextField name="title" />
-                <LongTextField name="description" />
-                <TextField name="image" />
-                <SelectField name="category" />
-                <SelectField name="condition" />
-                <NumField name="price" decimal={null} />
-                <SubmitField value="Submit" />
+                <TextField id="createItemFormTitle" name="title" />
+                <LongTextField id="createItemFormDescription" name="description" />
+                <TextField id="createItemFormImage" name="image" />
+                <SelectField id="createItemFormCategory" name="category" />
+                <SelectField id="createItemFormCondition" name="condition" />
+                <NumField id="createItemFormPrice" name="price" decimal={null} />
+                <SubmitField id="createItemFormSubmit" value="Submit" />
                 <ErrorsField />
               </Card.Body>
             </Card>

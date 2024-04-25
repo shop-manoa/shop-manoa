@@ -1,5 +1,6 @@
 import { Card, CardBody, CardLink, CardSubtitle, CardText, CardTitle, Col } from 'react-bootstrap';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ItemListing = () => (
   <Col xs={2}>
@@ -10,6 +11,8 @@ const ItemListing = () => (
         <CardSubtitle>Lister info</CardSubtitle>
         <CardText>Item description</CardText>
         <CardLink href="#">Lister profile</CardLink>
+        {/* Added a link to AddReport page */}
+        <Link to="../addReport" id="report-button" className="btn btn-outline-danger btn-sm custom-button" style={{ marginLeft: '10px' }}>report</Link>
       </CardBody>
     </Card>
   </Col>

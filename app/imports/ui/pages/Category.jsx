@@ -25,7 +25,7 @@ const Categories = () => {
 
   return (
     ready ? (
-      <Container className="py-3">
+      <Container id="category-page" className="py-3">
         <h2>This page is for {pageName}</h2>
         <Row className="justify-content-center">
           <Col md={12}>

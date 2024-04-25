@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
@@ -19,7 +20,7 @@ const ListItems = () => {
 
   return (
     ready ? (
-      <Container className="py-3">
+      <Container id="items-page" className="py-3">
         <Row className="justify-content-center">
           <Col md={12}>
             <Row className="justify-content-center">
@@ -34,6 +35,7 @@ const ListItems = () => {
                       <Card.Text>Condition: {stuff.condition}</Card.Text>
                       <Card.Text>Price: ${stuff.price}</Card.Text>
                       <Card.Text>Owner: {stuff.owner}</Card.Text>
+                      <Link to="../addReport" className="btn btn-outline-danger btn-sm custom-button" style={{ marginLeft: '10px' }}>report</Link>
                     </Card.Body>
                   </Card>
                 </Col>

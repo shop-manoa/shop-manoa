@@ -6,9 +6,6 @@ import { Roles } from 'meteor/alanning:roles';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Landing from '../pages/Landing';
 import ListProfile from '../pages/ListProfile';
-import ListStuffAdmin from '../pages/ListStuffAdmin';
-import AddStuff from '../pages/AddStuff';
-import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
 import SignUp from '../pages/SignUp';
 import SignOut from '../pages/SignOut';
@@ -53,7 +50,9 @@ const App = () => {
           <Route path="/list" element={<ProtectedRoute><ListProfile /></ProtectedRoute>} />
           <Route path="/items" element={<ProtectedRoute><ListItems /></ProtectedRoute>} />
           <Route path="/userHome" element={<UserHome />} />
+          {/* Duplicated /list path */}
           <Route path="/list" element={<ProtectedRoute><ListProfile /></ProtectedRoute>} />
+          {/* --- */}
           <Route path="/create" element={<ProtectedRoute><CreateItem /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditItem /></ProtectedRoute>} />
           <Route path="/addReport" element={<ProtectedRoute><AddReport /></ProtectedRoute>} />
@@ -61,10 +60,7 @@ const App = () => {
           <Route path="/addCategory" element={<AddCategories />} />
           <Route path="/adminReport" element={<AdminProtectedRoute ready={ready}><ListReportAdmin /></AdminProtectedRoute>} />
           <Route path="/adminHome" element={<AdminProtectedRoute ready={ready}><AdminHome /></AdminProtectedRoute>} />
-          <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
           <Route path="/profile/:owner" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
-          <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
-          <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListStuffAdmin /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
