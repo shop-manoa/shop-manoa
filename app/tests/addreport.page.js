@@ -16,6 +16,16 @@ class AddReportPage {
     const details = 'This is a spam post.';
     await this.isDisplayed(testController);
 
+    // Enter firstName.
+    const firstNameSelector = Selector('#addReportFormFirstName');
+    await testController.click(firstNameSelector).click(firstNameSelector.find('option').nth(0));
+    // Enter lastName
+    const lastNameSelector = Selector('#addReportFormLastName');
+    await testController.click(lastNameSelector).click(lastNameSelector.find('option').nth(0));
+
+    // Enter title
+    const titleSelector = Selector('#addReportFormTitle');
+    await testController.click(titleSelector).click(titleSelector.find('option').nth(0));
     // Select type.
     const typesSelector = Selector('#addReportFormTypes');
     await testController.click(typesSelector).click(typesSelector.find('option').nth(0));

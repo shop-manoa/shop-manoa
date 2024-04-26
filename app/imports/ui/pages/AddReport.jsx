@@ -84,9 +84,9 @@ const AddReport = () => {
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
-                <TextField name="firstName" placeholder="N/A" />
-                <TextField name="lastName" placeholder="N/A" />
-                <TextField name="title" placeholder="N/A" />
+                <TextField id="addReportFormFirstName" name="firstName" placeholder="N/A" />
+                <TextField id="addReportFormLastName" name="lastName" placeholder="N/A" />
+                <TextField id="addReportFormTitle" name="title" placeholder="N/A" />
                 <SelectField id="addReportFormTypes" name="types" />
                 <SelectField id="addReportFormCategory" name="category" />
                 <LongTextField id="addReportFormDetails" name="details" />
