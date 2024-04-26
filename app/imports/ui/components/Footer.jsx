@@ -14,13 +14,12 @@ const Footer = () => (
           {/*  Another choice for logo: <Image src="/images/uhLogo2.jpg" className="img-fluid" /> */}
         </Col>
         <Col>
-          <Col className="py-md-1"><Link to="/home">Home</Link></Col>
           <Col className="py-md-1"><Link to="/list">Sellers</Link></Col>
           <Col className="py-md-1"><Link to="/items">Items</Link></Col>
         </Col>
         <Col>
+          <Col className="py-md-1"><Link to="/home">Home</Link></Col>
           <Col className="py-md-1"><Link to="/profile/:owner">Account</Link></Col>
-          <Col className="py-md-1"><Link to="/adminHome">Admin</Link></Col>
         </Col>
         <Col>
           <h4 className="text-center">Shop Manoa</h4>
