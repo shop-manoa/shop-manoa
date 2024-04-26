@@ -97,8 +97,8 @@
     }
   ],
   "defaultReport": [
-    { "types": "Post", "category":  "Spam", "details":  "This is a spam post", "owner": "john@foo.com" },
-    { "types": "User", "category":  "False information", "details":  "This user provides false information", "owner": "admin@foo.com" }
-    ]
+    { "title": "Banana", "types": "Post", "category":  "Spam", "details":  "This is a spam post", "owner": "john@foo.com" },
+    { "firstName": "0", "lastName": "User", "types": "User", "category":  "False information", "details":  "This user provides false information", "owner": "admin@foo.com" }
+  ]
 }
 

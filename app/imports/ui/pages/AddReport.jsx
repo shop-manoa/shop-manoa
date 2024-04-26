@@ -1,26 +1,29 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, LongTextField, SubmitField, SelectField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, TextField, LongTextField, SubmitField, SelectField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Reports } from '../../api/report/Report';
-// import { Profiles } from '../../api/user/Profiles';
-// import { ItemsList } from '../../api/items/ListItems';
+import { Profiles } from '../../api/user/Profiles';
+import { ItemsList } from '../../api/items/ListItems';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
-  // target_id: {
-  //   type: String,
-  //   optional: true,
-  // },
-  // users: {
-  //   type: String,
-  //   allowedValues: 'John@foo.com',
-  //   defaultValue: 'John@foo.com',
-  //   optional: true,
-  // },
+  firstName: {
+    type: String,
+    defaultValue: 'N/A',
+  },
+  lastName: {
+    type: String,
+    defaultValue: 'N/A',
+  },
+  title: {
+    type: String,
+    defaultValue: 'None',
+    optional: true,
+  },
   types: {
     type: String,
     allowedValues: ['Post', 'User'],
@@ -50,19 +53,18 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 const AddReport = () => {
   // On submit, insert the data.
   const submit = (data, formRef) => {
-    const { types, category, details } = data;
+    const { firstName, lastName, title, types, category, details } = data;
     const owner = Meteor.user().username;
-    // let target;
-    // let target_id;
-    // if (types === 'Post') {
-    //   target = ItemsList.collection.find({ owner: reportee });
-    // } else {
-    //   target = Profiles.collection.find({ owner: reportee });
-    // }
-    // target_id = target._id;
+    let targets;
+    if (types === 'Post') {
+      targets = ItemsList.collection.find({ title: title }, { _id: 1 }).fetch();
+    } else {
+      targets = Profiles.collection.find({ firstName: firstName, lastName: lastName }, { _id: 1 }).fetch();
+    }
+    const target_id = targets.length > 0 ? targets[0]._id : null;
 
     Reports.collection.insert(
-      { types, category, details, owner },
+      { firstName, lastName, title, target_id, types, category, details, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -83,8 +85,9 @@ const AddReport = () => {
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
-                {/* <TextField name="target_id" /> */}
-                {/* <SelectField name="users" /> */}
+                <TextField name="firstName" />
+                <TextField name="lastName" />
+                <TextField name="title" />
                 <SelectField id="addReportFormTypes" name="types" />
                 <SelectField id="addReportFormCategory" name="category" />
                 <LongTextField id="addReportFormDetails" name="details" />

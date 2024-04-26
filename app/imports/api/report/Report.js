@@ -14,14 +14,26 @@ class ReportsCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      // target_id: {
-      //   type: String,
-      //   optional: true,
-      // },
-      // users: {
-      //   type: String,
-      //   optional: true,
-      // },
+      firstName: {
+        type: String,
+        defaultValue: 'N/A',
+        optional: true,
+      },
+      lastName: {
+        type: String,
+        defaultValue: 'N/A',
+        optional: true,
+      },
+      title: {
+        type: String,
+        defaultValue: 'None',
+        optional: true,
+      },
+      target_id: {
+        type: String,
+        defaultValue: '000-000',
+        optional: true,
+      },
       types: {
         type: String,
         allowedValues: ['Post', 'User'],
