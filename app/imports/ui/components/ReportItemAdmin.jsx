@@ -26,15 +26,15 @@ const ReportItemAdmin = ({ report }) => {
 // Require a document to be passed to this component.
 ReportItemAdmin.propTypes = {
   report: PropTypes.shape({
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    title: PropTypes.string,
     target_id: PropTypes.string,
     types: PropTypes.string,
     category: PropTypes.string,
     details: PropTypes.string,
     owner: PropTypes.string,
   }).isRequired,
-  firstName: PropTypes.string,
-  lastName: PropTypes.string,
-  title: PropTypes.string,
 };
 
 export default ReportItemAdmin;
