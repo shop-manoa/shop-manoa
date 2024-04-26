@@ -13,15 +13,12 @@ import { ItemsList } from '../../api/items/ListItems';
 const formSchema = new SimpleSchema({
   firstName: {
     type: String,
-    defaultValue: 'N/A',
   },
   lastName: {
     type: String,
-    defaultValue: 'N/A',
   },
   title: {
     type: String,
-    defaultValue: 'None',
     optional: true,
   },
   types: {
@@ -61,7 +58,7 @@ const AddReport = () => {
     } else {
       targets = Profiles.collection.find({ firstName: firstName, lastName: lastName }, { _id: 1 }).fetch();
     }
-    const target_id = targets.length > 0 ? targets[0]._id : null;
+    const target_id = targets.length > 0 ? targets[0]._id : '-Not Found-';
 
     Reports.collection.insert(
       { firstName, lastName, title, target_id, types, category, details, owner },
@@ -85,9 +82,9 @@ const AddReport = () => {
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
-                <TextField name="firstName" />
-                <TextField name="lastName" />
-                <TextField name="title" />
+                <TextField name="firstName" placeholder="N/A" />
+                <TextField name="lastName" placeholder="N/A" />
+                <TextField name="title" placeholder="N/A" />
                 <SelectField id="addReportFormTypes" name="types" />
                 <SelectField id="addReportFormCategory" name="category" />
                 <LongTextField id="addReportFormDetails" name="details" />

@@ -35,6 +35,7 @@ const ListItems = () => {
                       <Card.Text>Price: ${stuff.price}</Card.Text>
                       {/* Link to the user's profile page */}
                       <Link to={`/profile/${stuff.owner}`} className="btn btn-outline-primary btn-sm custom-button" style={{ marginLeft: '10px' }}>View Profile</Link>
+                      <Link to="../addReport" id="report-button" className="btn btn-outline-danger btn-sm custom-button" style={{ marginLeft: '10px' }}>report</Link>
                     </Card.Body>
                   </Card>
                 </Col>
