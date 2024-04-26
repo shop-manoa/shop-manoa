@@ -13,9 +13,11 @@ import { ItemsList } from '../../api/items/ListItems';
 const formSchema = new SimpleSchema({
   firstName: {
     type: String,
+    optional: true,
   },
   lastName: {
     type: String,
+    optional: true,
   },
   title: {
     type: String,
