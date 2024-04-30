@@ -23,6 +23,24 @@ Meteor.publish(Profiles.userPublicationName, function () {
   return this.ready();
 });
 
+Meteor.publish(Profiles.userPublicationName, function () {
+  if (this.userId) {
+    const username = Meteor.users.findOne(this.userId).username;
+    // Find the user's profile
+    const userProfile = Profiles.collection.findOne({ username });
+
+    // Find all items favorited by the user
+    const favoritedItems = ItemsList.collection.find({ favoritedBy: username });
+
+    // Return user profile along with favorited items
+    return [
+      Profiles.collection.find(),
+      favoritedItems,
+    ];
+  }
+  return this.ready();
+});
+
 Meteor.publish(CategoryStuffs.userPublicationName, function () {
 
   return CategoryStuffs.collection.find();

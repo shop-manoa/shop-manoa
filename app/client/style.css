@@ -82,3 +82,8 @@ body .navbar {
   background-color: red;
 }
 
+.favorite-button {
+  background-color: yellow !important;
+}
+
+

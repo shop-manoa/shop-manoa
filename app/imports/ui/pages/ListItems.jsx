@@ -24,7 +24,17 @@ const ListItems = () => {
     // For demonstration, I'll just update the state to mark the item as favorited
     setStuffs(prevStuffs => prevStuffs.map(stuff => {
       if (stuff._id === itemId) {
-        return { ...stuff, favorited: !stuff.favorited };
+        // Toggle favorite status
+        const favorited = !stuff.favorited;
+
+        // Update favoritedBy field in the database
+        Meteor.call('items.toggleFavorite', itemId, favorited, (error) => {
+          if (error) {
+            console.error('Error toggling favorite:', error);
+          }
+        });
+
+        return { ...stuff, favorited };
       }
       return stuff;
     }));
@@ -47,10 +57,14 @@ const ListItems = () => {
                       <Card.Text>Condition: {stuff.condition}</Card.Text>
                       <Card.Text>Price: ${stuff.price}</Card.Text>
                       {/* Button to toggle favorite status */}
-                      <Button variant="outline-warning" onClick={() => toggleFavorite(stuff._id)} style={{ marginRight: '10px' }}>
-                        {/* Display CiStar icon */}
+                      <Button
+                        variant={stuff.favorited ? 'warning' : 'outline-warning'}
+                        onClick={() => toggleFavorite(stuff._id)}
+                        style={{ marginRight: '10px', color: stuff.favorited ? 'white' : undefined }}
+                        className={stuff.favorited ? 'favorite-button' : ''}
+                      >
                         <CiStar style={{ marginRight: '5px' }} /> {/* Adjust styling if needed */}
-                        {stuff.favorited ? 'Unfavorite' : 'Favorite'}
+                        {stuff.favorited ? 'Favorited' : 'Favorite'}
                       </Button>
                       {/* Link to the user's profile page */}
                       <Link to={`/profile/${stuff.owner}`} className="btn btn-outline-primary btn-sm custom-button">View Profile</Link>
