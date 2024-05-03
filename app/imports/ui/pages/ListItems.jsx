@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { Card, Col, Container, Row, Button } from 'react-bootstrap';
@@ -20,24 +20,31 @@ const ListItems = () => {
 
   // Function to handle toggling item favorite status
   const toggleFavorite = (itemId) => {
-    // Update the state or send a request to the server to mark the item as favorited
-    // For demonstration, I'll just update the state to mark the item as favorited
-    setStuffs(prevStuffs => prevStuffs.map(stuff => {
-      if (stuff._id === itemId) {
-        // Toggle favorite status
-        const favorited = !stuff.favorited;
+    // Find the item index in the stuffs array
+    const itemIndex = stuffs.findIndex(item => item._id === itemId);
 
-        // Update favoritedBy field in the database
-        Meteor.call('items.toggleFavorite', itemId, favorited, (error) => {
-          if (error) {
-            console.error('Error toggling favorite:', error);
-          }
-        });
+    // If the item is not found, return
+    if (itemIndex === -1) return;
 
-        return { ...stuff, favorited };
+    // Get the item object from the stuffs array
+    const item = stuffs[itemIndex];
+
+    // Toggle favorite status locally
+    const favorited = !item.favorited;
+
+    // Optimistically update UI
+    const updatedStuffs = [...stuffs];
+    updatedStuffs[itemIndex] = { ...item, favorited };
+    setStuffs(updatedStuffs);
+
+    // Update favoritedBy field in the database
+    ItemsList.collection.update({ _id: itemId }, { $set: { favoritedBy: favorited ? Meteor.user().username : null } }, (error) => {
+      if (error) {
+        console.error('Error toggling favorite:', error);
+        // Revert UI changes if database update fails
+        setStuffs(stuffs => stuffs.map(item => (item._id === itemId ? { ...item, favorited: !favorited } : item)));
       }
-      return stuff;
-    }));
+    });
   };
 
   return (

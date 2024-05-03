@@ -23,40 +23,22 @@ Meteor.publish(Profiles.userPublicationName, function () {
   return this.ready();
 });
 
-Meteor.publish(Profiles.userPublicationName, function () {
+Meteor.publish('userFavorites', function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
-    // Find the user's profile
-    const userProfile = Profiles.collection.findOne({ username });
-
     // Find all items favorited by the user
-    const favoritedItems = ItemsList.collection.find({ favoritedBy: username });
-
-    // Return user profile along with favorited items
-    return [
-      Profiles.collection.find(),
-      favoritedItems,
-    ];
+    return ItemsList.collection.find({ favoritedBy: username });
   }
   return this.ready();
 });
 
 Meteor.publish(CategoryStuffs.userPublicationName, function () {
-
   return CategoryStuffs.collection.find();
-
 });
 
 Meteor.publish(Ratings.userPublicationName, function () {
   if (this.userId) {
     return Ratings.collection.find();
-  }
-  return this.ready();
-});
-
-Meteor.publish(ItemsList.userPublicationName, function () {
-  if (this.userId) {
-    return ItemsList.collection.find();
   }
   return this.ready();
 });
@@ -73,13 +55,6 @@ Meteor.publish(ItemsList.adminPublicationName, function () {
 Meteor.publish(Reports.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return Reports.collection.find();
-  }
-  return this.ready();
-});
-
-Meteor.publish(ItemsList.adminPublicationName, function () {
-  if (this.userId) {
-    return ItemsList.collection.find();
   }
   return this.ready();
 });
