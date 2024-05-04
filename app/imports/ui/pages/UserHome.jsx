@@ -1,54 +1,55 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row } from 'react-bootstrap';
-import ItemListing from '../components/ItemListing';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
-import { ItemsList } from '../../api/items/ListItems'; // Importing ItemsList
+import { ItemsList } from '../../api/items/ListItems';
 
 const UserHome = () => {
   const [favoriteItems, setFavoriteItems] = useState([]);
 
   useEffect(() => {
-    // Fetch favorite items when component mounts
-    const subscription = Meteor.subscribe(ItemsList.userPublicationName);
-    subscription.ready(() => {
-      // Assuming ItemsList.collection.find() fetches the items from the publication
-      const favorites = ItemsList.collection.find().fetch();
-      setFavoriteItems(favorites);
-    });
+    const fetchFavoriteItems = async () => {
+      try {
+        // Fetch favorite items for the current user
+        const response = await fetch('/api/favoriteItems'); // Assuming you have an API endpoint for fetching favorite items
+        if (!response.ok) {
+          throw new Error('Failed to fetch favorite items');
+        }
+        const favoriteItemsData = await response.json();
+        setFavoriteItems(favoriteItemsData);
+      } catch (error) {
+        console.error('Error fetching favorite items:', error);
+        // Handle the error
+      }
+    };
 
-    // Clean up subscription when component unmounts
+    // Call the function to fetch favorite items when component mounts
+    fetchFavoriteItems();
+
+    // Clean up function
     return () => {
-      subscription.stop();
+      // Any cleanup code if needed
     };
   }, []);
 
-  // Function to handle toggling favorite status
-  const toggleFavorite = (itemId) => {
-    // Toggle favorite status locally
-    setFavoriteItems(prevItems => {
-      return prevItems.map(item => {
-        if (item._id === itemId) {
-          return { ...item, favorited: !item.favorited };
-        }
-        return item;
-      });
-    });
-
-    // Update favoritedBy field in the database
-    const item = ItemsList.collection.findOne(itemId);
-    const favorited = !item.favorited;
-    ItemsList.collection.update({ _id: itemId }, { $set: { favoritedBy: favorited ? Meteor.user().username : null } });
-  };
-
   return (
-      <Container id="userhome-page" fluid className="pt-3">
-        <Row>
-          {/* Render favorite items */}
-          {favoriteItems.map((item) => (
-              <ItemListing key={item._id} item={item} toggleFavorite={toggleFavorite} />
-          ))}
-        </Row>
-      </Container>
+    <Container id="userhome-page" fluid className="pt-3">
+      <Row xs={1} md={3} className="g-4">
+        {favoriteItems.map((item) => (
+          <Col key={item._id}>
+            <Card>
+              <Card.Img variant="top" src={item.image} style={{ width: '100px', height: '100px' }} />
+              <Card.Body>
+                <Card.Title>{item.title}</Card.Title>
+                <Card.Text>{item.description}</Card.Text>
+              </Card.Body>
+              <Card.Footer>
+                <small className="text-muted">{item.category} - {item.condition} - ${item.price}</small>
+              </Card.Footer>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </Container>
   );
 };
 
