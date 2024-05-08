@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
 import { ItemsList } from '../../api/items/ListItems';
 import { Profiles } from '../../api/user/Profiles.js';
 import { CategoryStuffs } from '../../api/category/CategoryStuff';

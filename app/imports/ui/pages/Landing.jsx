@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card, CardTitle, CardSubtitle, CardText, CardLink, Col, Container, Row, CardBody } from 'react-bootstrap';
+import { Meteor } from 'meteor/meteor';
+import { Card, CardTitle, CardSubtitle, CardText, Col, Container, Row, CardBody } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useTracker } from 'meteor/react-meteor-data';
 import { ItemsList } from '../../api/items/ListItems';

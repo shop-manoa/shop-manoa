@@ -13,10 +13,10 @@ const ListItems = () => {
     const subscription = Meteor.subscribe(Profiles.userPublicationName);
     const rdy = subscription.ready();
     const user = Meteor.user();
-    const userFavorites = user && user.profile && user.profile.favorites ? user.profile.favorites : [];
+    const favoriteItems = user && user.profile && user.profile.favorites ? user.profile.favorites : [];
     return {
       ready: rdy,
-      userFavorites,
+      userFavorites: favoriteItems,
     };
   }, []);
 
