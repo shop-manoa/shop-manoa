@@ -81,6 +81,8 @@ const ListItems = () => {
                         {isFavorited(stuff._id) ? 'Favorited' : 'Favorite'}
                       </Button>
                       <Link to={`/profile/${stuff.owner}`} className="btn btn-outline-primary btn-sm custom-button">View Profile</Link>
+                      {/* Added a link to AddReport page */}
+                      <Link to="../addReport" id="report-button" className="btn btn-outline-danger btn-sm custom-button" style={{ marginLeft: '10px' }}>report</Link>
                     </Card.Body>
                   </Card>
                 </Col>
