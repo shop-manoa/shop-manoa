@@ -18,7 +18,14 @@ Meteor.publish(ItemsList.userPublicationName, function () {
 // User-level publication for user profiles.
 Meteor.publish(Profiles.userPublicationName, function () {
   if (this.userId) {
-    return Profiles.collection.find();
+    const user = Meteor.users.findOne(this.userId);
+    if (user) {
+      const userFavorites = user.profile && user.profile.favorites ? user.profile.favorites : [];
+      return [
+        Profiles.collection.find(),
+        ItemsList.collection.find({ _id: { $in: userFavorites } }, { fields: { title: 1, description: 1, image: 1, category: 1, condition: 1, price: 1, favoritedBy: 1 } })
+      ];
+    }
   }
   return this.ready();
 });
