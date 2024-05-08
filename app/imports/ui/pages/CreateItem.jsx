@@ -1,5 +1,5 @@
-import React from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Card, Col, Container, Row, Form, Image, CardTitle } from 'react-bootstrap';
 import { AutoForm, ErrorsField, LongTextField, NumField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
@@ -9,8 +9,11 @@ import { ItemsList } from '../../api/items/ListItems';
 
 const formSchema = new SimpleSchema({
   title: String,
+  image: {
+    type: String,
+    optional: true,
+  },
   description: String,
-  image: String,
   category: {
     type: String,
     allowedValues: ['Electronics', 'Transportation', 'Furniture', 'Books', 'Services', 'Other'],
@@ -27,40 +30,64 @@ const formSchema = new SimpleSchema({
 const bridge = new SimpleSchema2Bridge(formSchema);
 
 const CreateItem = () => {
+  const [imageUrl, setImageUrl] = useState('');
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageUrl(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const submit = (data, formRef) => {
-    const { title, description, image, category, condition, price } = data;
-    const owner = Meteor.user()?.username; // handle null or undefined case
+    const { title, description, category, condition, price } = data;
+    const owner = Meteor.user()?.username;
+
     if (!owner) {
       swal('Error', 'User not logged in', 'error');
       return;
     }
 
-    ItemsList.collection.insert(
-      { title, description, image, category, condition, price, owner },
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          swal('Success', 'Item added successfully', 'success');
-          formRef.reset();
-        }
-      },
-    );
+    if (imageUrl) {
+      // No need to store the file, just the URL
+      ItemsList.collection.insert(
+        { title, image: imageUrl, description, category, condition, price, owner },
+        (insertError) => {
+          if (insertError) {
+            swal('Error', insertError.message, 'error');
+          } else {
+            swal('Success', 'Item added successfully', 'success');
+            formRef.reset();
+            setImageUrl('');
+          }
+        },
+      );
+    } else {
+      swal('Error', 'Please select an image file', 'error');
+    }
   };
 
-  let fRef = null;
   return (
     <Container id="createitem-page" className="py-3">
       <Row className="justify-content-center">
         <Col xs={7}>
-          <Col className="text-center"><h2>Create Item</h2></Col>
-          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
+          <AutoForm schema={bridge} onSubmit={submit}>
             <Card>
+              <CardTitle className="text-center pt-2" style={{ fontSize: '30px' }}>Create Item</CardTitle>
               <Card.Body>
                 <TextField id="createItemFormTitle" name="title" />
+                <Form.Group>
+                  <Form.Label>Upload Image</Form.Label>
+                  <Form.Control id="createItemFormImage" type="file" onChange={handleFileChange} />
+                  {imageUrl && (
+                    <Image src={imageUrl} alt="Uploaded" style={{ width: '100px', height: '100px' }} />
+                  )}
+                </Form.Group>
                 <LongTextField id="createItemFormDescription" name="description" />
-                <TextField id="createItemFormImage" name="image" />
                 <SelectField id="createItemFormCategory" name="category" />
                 <SelectField id="createItemFormCondition" name="condition" />
                 <NumField id="createItemFormPrice" name="price" decimal={null} />

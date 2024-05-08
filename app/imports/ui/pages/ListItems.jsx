@@ -68,8 +68,8 @@ const ListItems = () => {
                   <Card>
                     <Card.Body>
                       <Card.Title>{stuff.title}</Card.Title>
-                      <Card.Text>{stuff.description}</Card.Text>
                       <img src={stuff.image} alt={stuff.title} style={{ width: '100px', height: '100px' }} />
+                      <Card.Text>{stuff.description}</Card.Text>
                       <Card.Text>Category: {stuff.category}</Card.Text>
                       <Card.Text>Condition: {stuff.condition}</Card.Text>
                       <Card.Text>Price: ${stuff.price}</Card.Text>
