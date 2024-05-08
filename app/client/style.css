@@ -81,3 +81,9 @@ body .navbar {
 .delete-button:hover {
   background-color: red;
 }
+
+.white-background {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
