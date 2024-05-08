@@ -1,34 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
+import { useTracker } from 'meteor/react-meteor-data';
 import { ItemsList } from '../../api/items/ListItems';
 
 const UserHome = () => {
   const [favoriteItems, setFavoriteItems] = useState([]);
 
-  useEffect(() => {
-    const fetchFavoriteItems = async () => {
-      try {
-        // Fetch favorite items for the current user
-        const response = await fetch('/api/favoriteItems'); // Assuming you have an API endpoint for fetching favorite items
-        if (!response.ok) {
-          throw new Error('Failed to fetch favorite items');
-        }
-        const favoriteItemsData = await response.json();
-        setFavoriteItems(favoriteItemsData);
-      } catch (error) {
-        console.error('Error fetching favorite items:', error);
-        // Handle the error
-      }
-    };
+  useTracker(() => {
+    const subscription = Meteor.subscribe('userFavorites');
 
-    // Call the function to fetch favorite items when component mounts
-    fetchFavoriteItems();
-
-    // Clean up function
-    return () => {
-      // Any cleanup code if needed
-    };
+    if (subscription.ready()) {
+      const userFavorites = ItemsList.collection.find({ favoritedBy: Meteor.user().username }).fetch();
+      setFavoriteItems(userFavorites);
+    }
   }, []);
 
   return (

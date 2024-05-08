@@ -69,6 +69,7 @@ if (Reports.collection.find().count() === 0) {
 }
 
 // Method to toggle favorite status for an item
+// Add error handling to the 'items.toggleFavorite' method in Mongo.js
 Meteor.methods({
   'items.toggleFavorite'(itemId) {
     check(itemId, String);
@@ -81,10 +82,15 @@ Meteor.methods({
     }
     const userId = this.userId;
     const isFavorited = item.favoritedBy.includes(userId);
-    if (isFavorited) {
-      ItemsList.collection.update(itemId, { $pull: { favoritedBy: userId } });
-    } else {
-      ItemsList.collection.update(itemId, { $addToSet: { favoritedBy: userId } });
+    try {
+      if (isFavorited) {
+        ItemsList.collection.update(itemId, { $pull: { favoritedBy: userId } });
+      } else {
+        ItemsList.collection.update(itemId, { $addToSet: { favoritedBy: userId } });
+      }
+    } catch (error) {
+      throw new Meteor.Error('toggle-favorite-error', 'Error toggling favorite');
     }
   },
 });
+

@@ -31,11 +31,11 @@ Meteor.publish(Profiles.userPublicationName, function () {
 });
 
 // Publication for user's favorite items.
+
 Meteor.publish('userFavorites', function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
-    // Publish only necessary fields
-    return ItemsList.collection.find({ favoritedBy: username }, { fields: { title: 1, description: 1, image: 1, category: 1, condition: 1, price: 1 } });
+    return ItemsList.collection.find({ favoritedBy: username });
   }
   return this.ready();
 });
