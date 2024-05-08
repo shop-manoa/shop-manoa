@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
 import { useParams } from 'react-router-dom';
 import { Container, Button, Card, Form, Modal, Image, Row, Col } from 'react-bootstrap';
 import { Profiles } from '../../api/user/Profiles';
@@ -17,6 +18,8 @@ const ProfilePage = () => {
 
   // State for managing the visibility of the modal
   const [showModal, setShowModal] = useState(false);
+  // Check if the user viewing a profile is an admin
+  const isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin');
 
   useEffect(() => {
     const profile = Profiles.collection.findOne({ owner: owner });
@@ -49,6 +52,11 @@ const ProfilePage = () => {
     }
   };
 
+  const remove = (item) => {
+    ItemsList.collection.remove(item);
+    setItems(ItemsList.collection.find({ owner: owner }).fetch());
+  };
+
   return (
     <Container id="myprofile-page" className="d-flex flex-column align-items-center" style={{ height: 'vh' }}>
       <Card className="shadow-lg p-3 mb-5 bg-white rounded text-center" style={{ marginTop: '50px' }}>
@@ -67,10 +75,10 @@ const ProfilePage = () => {
         <p>{profileData ? profileData.bio : ''}</p>
       </Card>
       {/* Display items */}
-      <Row xs={1} md={3} className="g-4" style={{ marginBottom: '50px' }}>  {/* Wrap items in a Row */}
+      <Row className="g-4" style={{ marginBottom: '50px' }}>  {/* Wrap items in a Row */}
         {items.map(item => (
           <Col key={item._id}>  {/* Wrap each Card in a Col */}
-            <Card className="mb-3" style={{ width: '300px' }}>
+            <Card className="mb-3" style={{ width: '250px' }}>
               <Card.Img variant="top" src={item.image} style={{ width: '100px', height: '100px' }} />
               <Card.Body>
                 <Card.Title>{item.title}</Card.Title>
@@ -80,6 +88,9 @@ const ProfilePage = () => {
               </Card.Body>
               <Card.Footer>
                 <small className="text-muted">{item.category} - {item.condition} - ${item.price}</small>
+                {item.owner === Meteor.user().username || isAdmin ? (
+                  <Button variant="danger" onClick={() => remove(item._id)}>Remove Item</Button>
+                ) : ''}
               </Card.Footer>
             </Card>
           </Col>
