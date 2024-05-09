@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
+import { CiStar } from 'react-icons/ci';
 import { ItemsList } from '../../api/items/ListItems';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Profiles } from '../../api/user/Profiles';
