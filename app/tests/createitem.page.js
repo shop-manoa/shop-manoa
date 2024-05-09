@@ -19,6 +19,7 @@ class CreateItemPage {
     const imageFileName = 'bicycle.jpeg';
     const imageFilePath = path.resolve(process.cwd(), 'public', 'images', imageFileName);
     const price = '100';
+    const contact = 'email@hawaii.edu';
     await this.isDisplayed(testController);
 
     // Define the new item.
@@ -38,6 +39,9 @@ class CreateItemPage {
 
     // Set price.
     await testController.typeText('#createItemFormPrice', price);
+
+    // Set contact.
+    await testController.typeText('#createItemFormContact', contact);
 
     // Submit form.
     await testController.click('#createItemFormSubmit input.btn.btn-primary');
