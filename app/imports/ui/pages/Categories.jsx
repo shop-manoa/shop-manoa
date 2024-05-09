@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Col, Container, Row, Table } from 'react-bootstrap';
+import { Card, Col, Container, Row, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { CategoryStuffs } from '../../api/category/CategoryStuff';
@@ -31,11 +31,17 @@ const Categories = () => {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>Categories</th>
+                <td>Categories</td>
               </tr>
             </thead>
             <tbody>
-              {categorystuff.map((category) => <CategoryList key={category._id} categorystuff={category} />)}
+              {categorystuff.map((category) => (
+                <Card>
+                  <Card.Body>
+                    <CategoryList key={category._id} categorystuff={category} />
+                  </Card.Body>
+                </Card>
+              ))}
             </tbody>
           </Table>
         </Col>
@@ -43,5 +49,26 @@ const Categories = () => {
     </Container>
   ) : <LoadingSpinner />);
 };
+// Original
+// return (ready ? (
+//   <Container id="categories-page" className="py-3">
+//     <Row className="justify-content-center">
+//       <Col md={7}>
+//         <Col className="text-center" />
+//         <Table striped bordered hover>
+//           <thead>
+//           <tr>
+//             <th>Categories</th>
+//           </tr>
+//           </thead>
+//           <tbody>
+//           {categorystuff.map((category) => <CategoryList key={category._id} categorystuff={category} />)}
+//           </tbody>
+//         </Table>
+//       </Col>
+//     </Row>
+//   </Container>
+// ) : <LoadingSpinner />);
+// };
 
 export default Categories;
