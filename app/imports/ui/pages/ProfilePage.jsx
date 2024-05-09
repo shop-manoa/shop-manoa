@@ -12,12 +12,15 @@ const ProfilePage = () => {
     owner = Meteor.user().username;
   }
   const [profileData, setProfileData] = useState(null);
+  const [itemData, setItemData] = useState(null);
   const [newBio, setNewBio] = useState('');
+  const [newDescription, setNewDescription] = useState('');
   const [newImage, setNewImage] = useState('');
   const [items, setItems] = useState([]);
 
-  // State for managing the visibility of the modal
+  // State for managing the visibility of the modals
   const [showModal, setShowModal] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
   // Check if the user viewing a profile is an admin
   const isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin');
 
@@ -50,6 +53,15 @@ const ProfilePage = () => {
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleSaveItem = () => {
+    ItemsList.collection.update(itemData._id, { $set: { description: newDescription } });
+    setItemData(prevState => ({
+      ...prevState,
+      description: newDescription,
+    }));
+    setShowModal2(false); // Hide the modal when the profile is saved
   };
 
   const remove = (item) => {
@@ -88,6 +100,9 @@ const ProfilePage = () => {
               </Card.Body>
               <Card.Footer>
                 <small className="text-muted">{item.category} - {item.condition} - ${item.price}</small>
+                {item.owner === Meteor.user().username ? (
+                  <Button variant="link" onClick={() => setShowModal2(true)}>Edit Item</Button>
+                ) : ''}
                 {item.owner === Meteor.user().username || isAdmin ? (
                   <Button style={{ marginLeft: '10px' }} variant="danger" onClick={() => remove(item._id)}>Remove Item</Button>
                 ) : ''}
@@ -120,6 +135,30 @@ const ProfilePage = () => {
             Close
           </Button>
           <Button variant="primary" onClick={handleSaveProfile}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal show={showModal2} onHide={() => setShowModal2(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Item</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form.Group>
+            <Form.Label>Description</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              value={newDescription}
+              onChange={(e) => setNewDescription(e.target.value)}
+            />
+          </Form.Group>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal2(false)}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleSaveItem}>
             Save Changes
           </Button>
         </Modal.Footer>
