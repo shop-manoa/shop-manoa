@@ -1,7 +1,6 @@
-// ListItems.jsx
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Meteor } from 'meteor/meteor';
 import { Card, Col, Container, Row, Button } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { CiStar } from 'react-icons/ci';
@@ -58,8 +57,7 @@ const ListItems = () => {
         console.error('Error creating chat:', error.reason);
       } else {
         // Redirect user to the chat room
-        // For example, you can use React Router to redirect
-        // window.location.href = `/chat/${chatId}`; // Replace with your actual chat route
+        window.location.href = `/chat/${chatId}`; // Replace with your actual chat route
       }
     });
   };
@@ -93,12 +91,9 @@ const ListItems = () => {
                         <CiStar style={{ marginRight: '5px' }} />
                         {isFavorited(stuff._id) ? 'Favorited' : 'Favorite'}
                       </Button>
-                      <Button
-                        variant="primary"
-                        onClick={() => startChat(stuff.owner)} // Pass owner ID as participantId
-                      >
+                      <Link to={`/chat/${stuff.owner}`} className="btn btn-primary">
                         Start Chat
-                      </Button>
+                      </Link>
                       <Link to={`/profile/${stuff.owner}`} className="btn btn-outline-primary btn-sm custom-button">View Profile</Link>
                     </Card.Body>
                   </Card>

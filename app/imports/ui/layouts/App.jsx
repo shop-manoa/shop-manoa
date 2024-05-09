@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Roles } from 'meteor/alanning:roles';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; // Import BrowserRouter and Routes
 import Landing from '../pages/Landing';
 import ListProfile from '../pages/ListProfile';
 import NotFound from '../pages/NotFound';
@@ -39,7 +39,7 @@ const App = () => {
     <Router>
       <div className="d-flex flex-column min-vh-100">
         <NavBar />
-        <Routes>
+        <Routes> {/* Use Routes instead of Route */}
           <Route exact path="/" element={<Landing />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
