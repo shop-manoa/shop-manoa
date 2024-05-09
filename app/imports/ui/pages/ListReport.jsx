@@ -28,7 +28,7 @@ const ListReport = () => {
       <Row className="justify-content-center">
         <Col md={7}>
           <Col className="text-center">
-            <h2>List Reports</h2>
+            <h2 className="shadow-text" style={{ color: 'white', backgroundColor: 'rgba(0, 0, 0, 0.5)', padding: '10px', display: 'inline-block' }}>List Reports</h2>
           </Col>
           <Table striped bordered hover>
             <thead>

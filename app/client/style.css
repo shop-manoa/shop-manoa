@@ -43,6 +43,10 @@ body .navbar {
   margin: 0.5rem 0;
 }
 
+.shadow-text {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0);
+}
+
 .modal-body {
   display: flex;
   flex-direction: column;

@@ -80,7 +80,7 @@ const AddReport = () => {
     <Container id="addreport-page" className="py-3">
       <Row className="justify-content-center">
         <Col xs={5}>
-          <Col className="text-center"><h2>Add Report</h2></Col>
+          <Col className="text-center"><h2 className="shadow-text" style={{ color: 'white', backgroundColor: 'rgba(0, 0, 0, 0.5)', padding: '10px', display: 'inline-block' }}>Add Report</h2></Col>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
