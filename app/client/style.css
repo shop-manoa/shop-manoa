@@ -82,6 +82,7 @@ body .navbar {
   background-color: red;
 }
 
+
 .link {
   color: Green; /* Default link color */
   text-decoration: none; /* Remove underline */
@@ -89,5 +90,11 @@ body .navbar {
 
 .link:hover {
   color: Black; /* Color when link is hovered over */
+}
+
+.white-background {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
 }
 

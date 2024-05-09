@@ -1,4 +1,5 @@
 import { Selector } from 'testcafe';
+import path from 'path';
 
 class CreateItemPage {
   constructor() {
@@ -15,14 +16,17 @@ class CreateItemPage {
   async createItem(testController) {
     const title = 'Bicycle';
     const description = 'Selling a reliable, lightweight bicycle perfect for campus commutes and weekend adventures. Smooth rides, durable design, and comfortable features make it an ideal companion for navigating city streets or exploring trails.';
-    const image = 'https://www.fivebranches.edu/wp-content/uploads/2021/08/default-image.jpg';
+    const imageFileName = 'bicycle.jpeg';
+    const imageFilePath = path.resolve(process.cwd(), 'public', 'images', imageFileName);
     const price = '100';
     await this.isDisplayed(testController);
 
     // Define the new item.
     await testController.typeText('#createItemFormTitle', title);
     await testController.typeText('#createItemFormDescription', description);
-    await testController.typeText('#createItemFormImage', image);
+
+    // Set image file
+    await testController.setFilesToUpload('#createItemFormImage', [imageFilePath]);
 
     // Select category.
     const categorySelector = Selector('#createItemFormCategory');

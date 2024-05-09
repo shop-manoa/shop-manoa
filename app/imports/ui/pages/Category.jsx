@@ -1,27 +1,66 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { ItemsList } from '../../api/items/ListItems';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { Profiles } from '../../api/user/Profiles';
+import { CiStar } from 'react-icons/ci';
 // PlaceHolder for the Categories Tab
 function helper() {
   const { _name } = useParams();
   return _name;
 }
 const Categories = () => {
-  const pageName = helper();
-
-  const { stuffs, ready } = useTracker(() => {
-    const subscription = Meteor.subscribe(ItemsList.userPublicationName);
+  const categoryName = helper();
+  const { ready, userFavorites } = useTracker(() => {
+    const subscription = Meteor.subscribe(Profiles.userPublicationName);
     const rdy = subscription.ready();
-    const stuffItems = ItemsList.collection.find({ category: pageName }).fetch();
+    const user = Meteor.user();
+    const favoriteItems = user && user.profile && user.profile.favorites ? user.profile.favorites : [];
     return {
-      stuffs: stuffItems,
       ready: rdy,
+      userFavorites: favoriteItems,
     };
   }, []);
+
+  const [stuffs, setStuffs] = useState([]);
+
+  useTracker(() => {
+    const subscription = Meteor.subscribe(ItemsList.userPublicationName);
+    if (subscription.ready()) {
+      const stuffItems = ItemsList.collection.find({ category: categoryName }).fetch();
+      setStuffs(stuffItems);
+    }
+  }, []);
+
+  const isFavorited = (itemId) => userFavorites.includes(itemId);
+
+  const toggleFavorite = (itemId) => {
+    const itemIndex = stuffs.findIndex(item => item._id === itemId);
+    if (itemIndex === -1) return;
+
+    const item = stuffs[itemIndex];
+    const favorited = !isFavorited(itemId);
+
+    const updatedStuffs = [...stuffs];
+    updatedStuffs[itemIndex] = { ...item, favorited };
+    setStuffs(updatedStuffs);
+
+    if (favorited) {
+      Meteor.users.update(Meteor.userId(), { $addToSet: { 'profile.favorites': itemId } });
+    } else {
+      Meteor.users.update(Meteor.userId(), { $pull: { 'profile.favorites': itemId } });
+    }
+  };
+
+  // Sort items by favorited status, favorited items first
+  const sortedStuffs = [...stuffs].sort((a, b) => {
+    if (isFavorited(a._id) && !isFavorited(b._id)) return -1;
+    if (!isFavorited(a._id) && isFavorited(b._id)) return 1;
+    return 0;
+  });
 
   return (
     ready ? (
@@ -29,18 +68,25 @@ const Categories = () => {
         <Row className="justify-content-center">
           <Col md={12}>
             <Row className="justify-content-center">
-              {stuffs.map((stuff) => (
+              {sortedStuffs.map((stuff) => (
                 <Col key={stuff._id} md={4}>
                   <Card>
                     <Card.Body>
                       <Card.Title>{stuff.title}</Card.Title>
-                      <Card.Text>{stuff.description}</Card.Text>
                       <img src={stuff.image} alt={stuff.title} style={{ width: '100px', height: '100px' }} />
+                      <Card.Text>{stuff.description}</Card.Text>
                       <Card.Text>Category: {stuff.category}</Card.Text>
                       <Card.Text>Condition: {stuff.condition}</Card.Text>
                       <Card.Text>Price: ${stuff.price}</Card.Text>
-                      {/* Link to the user's profile page */}
-                      <Link to={`/profile/${stuff.owner}`} className="btn btn-outline-primary btn-sm custom-button" style={{ marginLeft: '10px' }}>View Profile</Link>
+                      <Button
+                        variant={isFavorited(stuff._id) ? 'warning' : 'outline-warning'}
+                        onClick={() => toggleFavorite(stuff._id)}
+                      >
+                        <CiStar style={{ marginRight: '5px' }} />
+                        {isFavorited(stuff._id) ? 'Favorited' : 'Favorite'}
+                      </Button>
+                      <Link to={`/profile/${stuff.owner}`} className="btn btn-outline-primary btn-sm custom-button">View Profile</Link>
+                      {/* Added a link to AddReport page */}
                       <Link to="../addReport" id="report-button" className="btn btn-outline-danger btn-sm custom-button" style={{ marginLeft: '10px' }}>report</Link>
                     </Card.Body>
                   </Card>

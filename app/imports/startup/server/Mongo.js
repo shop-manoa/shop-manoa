@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
 import { ItemsList } from '../../api/items/ListItems';
 import { Profiles } from '../../api/user/Profiles.js';
 import { CategoryStuffs } from '../../api/category/CategoryStuff';
@@ -67,3 +68,27 @@ if (Reports.collection.find().count() === 0) {
     Meteor.settings.defaultReport.forEach(report => addReport(report));
   }
 }
+
+Meteor.methods({
+  'items.toggleFavorite'(itemId) {
+    check(itemId, String);
+    if (!this.userId) {
+      throw new Meteor.Error('not-authorized', 'You are not authorized to perform this action');
+    }
+    const item = ItemsList.collection.findOne(itemId);
+    if (!item) {
+      throw new Meteor.Error('item-not-found', 'Item not found');
+    }
+    const userId = this.userId;
+    const isFavorited = item.favoritedBy.includes(userId);
+    try {
+      if (isFavorited) {
+        ItemsList.collection.update(itemId, { $pull: { favoritedBy: userId } });
+      } else {
+        ItemsList.collection.update(itemId, { $addToSet: { favoritedBy: userId } });
+      }
+    } catch (error) {
+      throw new Meteor.Error('toggle-favorite-error', 'Error toggling favorite');
+    }
+  },
+});

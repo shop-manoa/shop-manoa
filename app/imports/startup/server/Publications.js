@@ -43,6 +43,14 @@ Meteor.publish(ItemsList.userPublicationName, function () {
   return this.ready();
 });
 
+Meteor.publish('userFavorites', function () {
+  if (this.userId) {
+    const username = Meteor.users.findOne(this.userId).username;
+    return ItemsList.collection.find({ favoritedBy: username });
+  }
+  return this.ready();
+});
+
 // Admin-level publication.
 // If logged in and with admin role, then publish all documents from all users. Otherwise, publish nothing.
 Meteor.publish(ItemsList.adminPublicationName, function () {
