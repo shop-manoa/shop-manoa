@@ -1,8 +1,7 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Container, Row } from 'react-bootstrap';
-import ItemListing from '../components/ItemListing';
+import { Container } from 'react-bootstrap';
 import { Profiles } from '../../api/user/Profiles';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ListReportAdmin from './ListReportAdmin';
