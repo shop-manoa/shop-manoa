@@ -6,6 +6,7 @@ import { FaHome, FaUser, FaList, FaShoppingCart } from 'react-icons/fa'; // Impo
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
 const Footer = () => (
   <footer className="mt-auto py-1" style={{ position: 'relative', width: '100%', backgroundColor: '#f8f9fa' }}>
+    {/* You can change the color whatever you think it fits */}
     <Container>
       <Row className="justify-content-md-center text-center py-1">
         <Col xs={6} md={2} className="mb-1 mb-md-0 d-flex align-items-center justify-content-center">
