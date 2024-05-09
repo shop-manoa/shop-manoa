@@ -2,7 +2,6 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Link } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Profiles } from '../../api/user/Profiles';
 import DisplayProfile from '../components/DisplayProfiles';
@@ -33,8 +32,6 @@ const ListProfile = () => {
             {profiles.map((profile) => (
               <Col key={profile._id}>
                 <DisplayProfile profile={profile} currentUser={currentUser} />
-                {/* Link to the user's profile page */}
-                <Link to={`/profile/${profile.owner}`} className="btn btn-outline-primary btn-sm custom-button" style={{ marginLeft: '10px' }}>View Profile</Link>
               </Col>
             ))}
           </Row>
