@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Card, CardTitle, Col, Container, Row } from 'react-bootstrap';
 import { AutoForm, ErrorsField, TextField, LongTextField, SubmitField, SelectField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
@@ -80,9 +80,9 @@ const AddReport = () => {
     <Container id="addreport-page" className="py-3">
       <Row className="justify-content-center">
         <Col xs={5}>
-          <Col className="text-center"><h2>Add Report</h2></Col>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
+              <CardTitle className="text-center pt-2" style={{ fontSize: '30px' }}>Add Report</CardTitle>
               <Card.Body>
                 <TextField name="firstName" placeholder="N/A" />
                 <TextField name="lastName" placeholder="N/A" />
