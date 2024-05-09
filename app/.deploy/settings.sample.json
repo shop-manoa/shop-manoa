@@ -6,35 +6,39 @@
 
   "defaultData": [
     {
-      "title": "Basket",
-      "image": "N/A",
-      "category": "Other",
-      "condition": "excellent",
+      "title": "Compact Desk and Chair Set",
+      "image": "/images/furniture.jpeg",
+      "description": "A space-saving desk and chair set designed specifically for college dorm rooms or small apartments. This set features a compact desk with built-in storage shelves and a comfortable ergonomic chair, providing students with a functional workspace for studying, writing papers, or working on assignments from the comfort of their own room.",
+      "category": "Furniture",
+      "condition": "Fair",
+      "price": 75,
+      "owner": "john@foo.com"
+    },
+    {
+      "title": "Foldable Electric Scooter",
+      "image": "/images/transportation.jpeg",
+      "description": "A foldable electric scooter, ideal for navigating college campuses quickly and efficiently. This scooter is lightweight, easy to fold, and portable, making it perfect for students who need to travel short distances between classes or around town. With a reliable motor and long-lasting battery, it offers a smooth and eco-friendly transportation solution for busy college students.",
+      "category": "Transportation",
+      "condition": "Good",
+      "price": 250,
+      "owner": "john@foo.com"
+    },
+    {
+      "title": "Popular Fiction Paperback Collection",
+      "image": "/images/books.jpeg",
+      "description": "A collection of popular fiction paperbacks, including bestsellers, classics, and contemporary novels. These books offer an escape from academic studies and provide entertainment and relaxation for college students during their free time. From gripping mysteries to heartwarming romances, this diverse collection caters to a variety of reading preferences. Price is per book.",
+      "category": "Books",
+      "condition": "Good",
       "price": 10,
-      "owner": "john@foo.com"
-    },
-    {
-      "name": "Bicycle",
-      "image": "N/A",
-      "category": "Other",
-      "condition": "poor",
-      "price": 30,
-      "owner": "john@foo.com"
-    },
-    {
-      "name": "Banana",
-      "image": "N/A",
-      "category": "Other",
-      "condition": "good",
-      "price": 3,
       "owner": "admin@foo.com"
     },
     {
-      "name": "Boogie Board",
-      "image": "N/A",
-      "category": "Other",
-      "condition": "excellent",
-      "price": 15,
+      "title": "Tutoring Sessions",
+      "image": "/images/tutoring.jpeg",
+      "description": "Professional tutoring sessions tailored to college students' academic needs and schedules. Whether struggling with a particular subject, preparing for exams, or seeking assistance with essay writing, these personalized tutoring sessions offer expert guidance and support to help students succeed in their studies. Flexible scheduling options and individualized lesson plans make it convenient for busy college students to get the academic help they need.",
+      "category": "Services",
+      "condition": "Excellent",
+      "price": 50,
       "owner": "admin@foo.com"
     }
   ],
