@@ -7,8 +7,11 @@ class ListItems {
     this.collection = new Mongo.Collection(this.name);
     this.schema = new SimpleSchema({
       title: String,
+      image: {
+        type: String,
+        optional: true,
+      },
       description: String,
-      image: String,
       category: {
         type: String,
         allowedValues: ['Electronics', 'Transportation', 'Furniture', 'Books', 'Services', 'Other'],

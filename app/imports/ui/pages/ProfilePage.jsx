@@ -75,10 +75,10 @@ const ProfilePage = () => {
         <p>{profileData ? profileData.bio : ''}</p>
       </Card>
       {/* Display items */}
-      <Row className="g-4" style={{ marginBottom: '50px' }}>  {/* Wrap items in a Row */}
+      <Row className="g-5" style={{ marginBottom: '50px' }}>  {/* Wrap items in a Row */}
         {items.map(item => (
           <Col key={item._id}>  {/* Wrap each Card in a Col */}
-            <Card className="mb-3" style={{ width: '250px' }}>
+            <Card className="mb-3" style={{ width: '400px' }}>
               <Card.Img variant="top" src={item.image} style={{ width: '100px', height: '100px' }} />
               <Card.Body>
                 <Card.Title>{item.title}</Card.Title>
@@ -89,7 +89,7 @@ const ProfilePage = () => {
               <Card.Footer>
                 <small className="text-muted">{item.category} - {item.condition} - ${item.price}</small>
                 {item.owner === Meteor.user().username || isAdmin ? (
-                  <Button variant="danger" onClick={() => remove(item._id)}>Remove Item</Button>
+                  <Button style={{ marginLeft: '10px' }} variant="danger" onClick={() => remove(item._id)}>Remove Item</Button>
                 ) : ''}
               </Card.Footer>
             </Card>
