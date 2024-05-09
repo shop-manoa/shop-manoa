@@ -15,6 +15,7 @@ const ProfilePage = () => {
   const [itemData, setItemData] = useState(null);
   const [newBio, setNewBio] = useState('');
   const [newDescription, setNewDescription] = useState('');
+  const [newPrice, setNewPrice] = useState('');
   const [newImage, setNewImage] = useState('');
   const [items, setItems] = useState([]);
 
@@ -32,7 +33,7 @@ const ProfilePage = () => {
 
     const itemsList = ItemsList.collection.find({ owner: owner }).fetch();
     setItems(itemsList);
-  }, [owner]);
+  }, [owner, showModal2]);
 
   const handleSaveProfile = () => {
     Profiles.collection.update(profileData._id, { $set: { bio: newBio, image: newImage } });
@@ -56,12 +57,13 @@ const ProfilePage = () => {
   };
 
   const handleSaveItem = () => {
-    ItemsList.collection.update(itemData._id, { $set: { description: newDescription } });
+    ItemsList.collection.update(itemData._id, { $set: { description: newDescription, price: newPrice } });
     setItemData(prevState => ({
       ...prevState,
       description: newDescription,
+      price: newPrice,
     }));
-    setShowModal2(false); // Hide the modal when the profile is saved
+    setShowModal2(false); // Hide the modal when the item is saved
   };
 
   const remove = (item) => {
@@ -101,7 +103,7 @@ const ProfilePage = () => {
               <Card.Footer>
                 <small className="text-muted">{item.category} - {item.condition} - ${item.price}</small>
                 {item.owner === Meteor.user().username ? (
-                  <Button variant="link" onClick={() => setShowModal2(true)}>Edit Item</Button>
+                  <Button variant="link" onClick={() => { setItemData(item); setNewDescription(item.description); setNewPrice(item.price); setShowModal2(true); }}>Edit Item</Button>
                 ) : ''}
                 {item.owner === Meteor.user().username || isAdmin ? (
                   <Button style={{ marginLeft: '10px' }} variant="danger" onClick={() => remove(item._id)}>Remove Item</Button>
@@ -151,6 +153,14 @@ const ProfilePage = () => {
               rows={3}
               value={newDescription}
               onChange={(e) => setNewDescription(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Price</Form.Label>
+            <Form.Control
+              type="number"
+              value={newPrice}
+              onChange={(e) => setNewPrice(e.target.value)}
             />
           </Form.Group>
         </Modal.Body>
