@@ -6,7 +6,7 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { CiStar } from 'react-icons/ci';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { ItemsList } from '../../api/items/ListItems';
-import { Profiles } from '../../api/user/Profiles'; // Import user profile collection
+import { Profiles } from '../../api/user/Profiles';
 
 const ListItems = () => {
   const { ready, userFavorites } = useTracker(() => {
@@ -52,7 +52,6 @@ const ListItems = () => {
     }
   };
 
-  // Sort items by favorited status, favorited items first
   const sortedStuffs = [...stuffs].sort((a, b) => {
     if (isFavorited(a._id) && !isFavorited(b._id)) return -1;
     if (!isFavorited(a._id) && isFavorited(b._id)) return 1;
@@ -76,7 +75,6 @@ const ListItems = () => {
                       <Card.Text>
                         {`${stuff.description.substring(0, 100)}...`}
                         <br />
-                        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
                         <span onClick={() => { setModalContent(stuff); setIsModalOpen(true); }} style={{ color: 'blue', cursor: 'pointer' }}>
                           View More
                         </span>
@@ -84,6 +82,7 @@ const ListItems = () => {
                       <Card.Text>Category: {stuff.category}</Card.Text>
                       <Card.Text>Condition: {stuff.condition}</Card.Text>
                       <Card.Text>Price: ${stuff.price}</Card.Text>
+                      <Card.Text>Contact: {stuff.contact}</Card.Text> {/* Display contact */}
                       <Button
                         variant={isFavorited(stuff._id) ? 'warning' : 'outline-warning'}
                         onClick={() => toggleFavorite(stuff._id)}
@@ -92,7 +91,6 @@ const ListItems = () => {
                         {isFavorited(stuff._id) ? 'Favorited' : 'Favorite'}
                       </Button>
                       <Link to={`/profile/${stuff.owner}`} className="btn btn-outline-primary btn-sm custom-button">View Profile</Link>
-                      {/* Added a link to AddReport page */}
                       <Link to="../addReport" id="report-button" className="btn btn-outline-danger btn-sm custom-button" style={{ marginLeft: '10px' }}>report</Link>
                     </Card.Body>
                   </Card>
