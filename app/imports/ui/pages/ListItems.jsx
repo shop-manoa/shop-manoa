@@ -75,7 +75,6 @@ const ListItems = () => {
                       <Card.Text>
                         {stuff.description.length > 100 ? `${stuff.description.substring(0, 100)}...` : stuff.description}
                         <br />
-                        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
                         <span onClick={() => { setModalContent(stuff); setIsModalOpen(true); }} style={{ color: 'blue', cursor: 'pointer' }}>
                           View More
                         </span>
@@ -90,6 +89,14 @@ const ListItems = () => {
                       <Card.Text>Condition: {stuff.condition}</Card.Text>
                       <Card.Text>Price: ${stuff.price}</Card.Text>
                       <Card.Text>Contact: {stuff.contact}</Card.Text> {/* Display contact */}
+                      <Button
+                        variant={isFavorited(stuff._id) ? 'warning' : 'outline-warning'}
+                        onClick={() => toggleFavorite(stuff._id)}
+                      >
+                        <CiStar style={{ marginRight: '5px' }} />
+                        {isFavorited(stuff._id) ? 'Favorited' : 'Favorite'}
+                      </Button>
+                      <Link to={`/profile/${stuff.owner}`} className="btn btn-outline-primary btn-sm custom-button">View Profile</Link>
                     </Card.Body>
                     <Card.Footer>
                       <Button className="btn btn-sm custom-button" variant={isFavorited(stuff._id) ? 'warning' : 'outline-warning'} onClick={() => toggleFavorite(stuff._id)}>
