@@ -25,7 +25,6 @@ const formSchema = new SimpleSchema({
     defaultValue: 'Good',
   },
   price: Number,
-  contact: String,
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -45,7 +44,7 @@ const CreateItem = () => {
   };
 
   const submit = (data, formRef) => {
-    const { title, description, category, condition, price, contact } = data;
+    const { title, description, category, condition, price } = data;
     const owner = Meteor.user()?.username;
 
     if (!owner) {
@@ -56,7 +55,7 @@ const CreateItem = () => {
     if (imageUrl) {
       // No need to store the file, just the URL
       ItemsList.collection.insert(
-        { title, image: imageUrl, description, category, condition, price, contact, owner },
+        { title, image: imageUrl, description, category, condition, price, owner },
         (insertError) => {
           if (insertError) {
             swal('Error', insertError.message, 'error');
@@ -92,7 +91,6 @@ const CreateItem = () => {
                 <SelectField id="createItemFormCategory" name="category" />
                 <SelectField id="createItemFormCondition" name="condition" />
                 <NumField id="createItemFormPrice" name="price" decimal={null} />
-                <TextField id="createItemFormContact" name="contact" placeholder="Please enter valid email or phone number" />
                 <SubmitField id="createItemFormSubmit" value="Submit" />
                 <ErrorsField />
               </Card.Body>
