@@ -84,6 +84,7 @@ const ListItems = () => {
                       <Card.Text>Category: {stuff.category}</Card.Text>
                       <Card.Text>Condition: {stuff.condition}</Card.Text>
                       <Card.Text>Price: ${stuff.price}</Card.Text>
+                      <Card.Text>Contact: {stuff.contact}</Card.Text> {/* Display contact */}
                       <Button
                         variant={isFavorited(stuff._id) ? 'warning' : 'outline-warning'}
                         onClick={() => toggleFavorite(stuff._id)}
