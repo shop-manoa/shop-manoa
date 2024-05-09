@@ -18,6 +18,7 @@
       "category": "Furniture",
       "condition": "Fair",
       "price": 75,
+      "contact" : "john@foo.com",
       "owner": "john@foo.com"
     },
     {
@@ -27,6 +28,7 @@
       "category": "Transportation",
       "condition": "Good",
       "price": 250,
+      "contact" : "john@foo.com",
       "owner": "john@foo.com"
     },
     {
@@ -36,6 +38,7 @@
       "category": "Books",
       "condition": "Good",
       "price": 10,
+      "contact" : "john@foo.com",
       "owner": "admin@foo.com"
     },
     {
@@ -45,6 +48,7 @@
       "category": "Services",
       "condition": "Excellent",
       "price": 50,
+      "contact" : "admin@foo.com",
       "owner": "admin@foo.com"
     }
   ],
