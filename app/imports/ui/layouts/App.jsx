@@ -20,7 +20,6 @@ import ListReport from '../pages/ListReport';
 import ListReportAdmin from '../pages/ListReportAdmin';
 import EditItem from '../pages/EditItem';
 import CreateItem from '../pages/CreateItem';
-import UserHome from '../pages/UserHome';
 import AdminHome from '../pages/AdminHome';
 import ListItems from '../pages/ListItems';
 import Footer from '../components/Footer';
@@ -49,7 +48,6 @@ const App = () => {
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/list" element={<ProtectedRoute><ListProfile /></ProtectedRoute>} />
           <Route path="/items" element={<ProtectedRoute><ListItems /></ProtectedRoute>} />
-          <Route path="/userHome" element={<UserHome />} />
           {/* Duplicated /list path */}
           <Route path="/list" element={<ProtectedRoute><ListProfile /></ProtectedRoute>} />
           {/* --- */}
