@@ -14,7 +14,6 @@ import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Categories from '../pages/Categories';
-import AddCategories from '../pages/AddCategories';
 import Category from '../pages/Category';
 import ProfilePage from '../pages/ProfilePage';
 import ListReport from '../pages/ListReport';
@@ -26,6 +25,7 @@ import AdminHome from '../pages/AdminHome';
 import ListItems from '../pages/ListItems';
 import Footer from '../components/Footer';
 import AddReport from '../pages/AddReport';
+import AddCategories from '../pages/AddCategories';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -57,8 +57,8 @@ const App = () => {
           <Route path="/edit/:_id" element={<ProtectedRoute><EditItem /></ProtectedRoute>} />
           <Route path="/addReport" element={<ProtectedRoute><AddReport /></ProtectedRoute>} />
           <Route path="/listReport" element={<ProtectedRoute><ListReport /></ProtectedRoute>} />
-          <Route path="/addCategory" element={<AddCategories />} />
           <Route path="/adminReport" element={<AdminProtectedRoute ready={ready}><ListReportAdmin /></AdminProtectedRoute>} />
+          <Route path="/addCategory" element={<AdminProtectedRoute ready={ready}><AddCategories /></AdminProtectedRoute>} />
           <Route path="/adminHome" element={<AdminProtectedRoute ready={ready}><AdminHome /></AdminProtectedRoute>} />
           <Route path="/profile/:owner" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
