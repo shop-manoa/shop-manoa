@@ -20,8 +20,8 @@ body .navbar {
   --bs-navbar-color: white;
   --bs-navbar-brand-color: white;
   --bs-navbar-active-color: white;
-  --bs-navbar-hover-color: white;
-  --bs-navbar-brand-hover-color: white;
+  --bs-navbar-hover-color: black;
+  --bs-navbar-brand-hover-color: black;
 }
 
 /* Set the alert background on the signin and signup pages. */

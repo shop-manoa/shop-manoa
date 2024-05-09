@@ -11,6 +11,10 @@ const DisplayProfile = ({ profile, currentUser }) => {
   const [averageRating, setAverageRating] = useState('No Ratings');
   const [show, setShow] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [showBioModal, setShowBioModal] = useState(false);
+
+  const handleBioModalOpen = () => setShowBioModal(true);
+  const handleBioModalClose = () => setShowBioModal(false);
 
   const handleClose = () => {
     setShow(false);
@@ -51,14 +55,25 @@ const DisplayProfile = ({ profile, currentUser }) => {
   };
 
   return (
-    <Card className="h-100 shadow">
-      <Card.Header className="bg-primary text-white">
+    <Card className="h-100">
+      <Card.Header className="text-white" style={{ backgroundColor: '#024731' }}>
         <Image src={imgSrc} width={100} height={100} roundedCircle />
         <Card.Title>{profile.firstName} {profile.lastName}</Card.Title>
         <Card.Subtitle>Average Rating: {averageRating}</Card.Subtitle>
       </Card.Header>
       <Card.Body>
-        <Card.Text>{profile.bio}</Card.Text>
+        <Card.Text>
+          {profile.bio.length > 100 ? `${profile.bio.substring(0, 100)}...` : profile.bio}
+          <br />
+          {profile.bio.length > 100 && (
+            // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
+            <span onClick={() => { handleBioModalOpen(); }} style={{ color: 'blue', cursor: 'pointer' }}>
+              View More
+            </span>
+          )}
+        </Card.Text>
+      </Card.Body>
+      <Card.Footer>
         <Button variant="outline-primary" onClick={handleShow} className="btn-sm custom-button" style={{ marginRight: '10px' }}>
           Give Rating
         </Button>
@@ -69,31 +84,43 @@ const DisplayProfile = ({ profile, currentUser }) => {
         <Link to="../addReport" id="reportButton" className="btn btn-outline-danger btn-sm custom-button" style={{ marginLeft: '10px' }}>
           Report
         </Link>
-
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Give Rating</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form onSubmit={handleSubmit}>
-              <Form.Group controlId="formBasicSelect">
-                <Form.Label>Rating</Form.Label>
-                <Form.Control as="select" value={rating} onChange={(e) => setRating(e.target.value)}>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </Form.Control>
-              </Form.Group>
-              <Button variant="primary" type="submit" className="custom-button">
-                Submit
-              </Button>
-            </Form>
-            {submitted && <Alert variant="success" onClose={() => setSubmitted(false)} dismissible>Rating submitted successfully!</Alert>}
-          </Modal.Body>
-        </Modal>
-      </Card.Body>
+      </Card.Footer>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Give Rating</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="formBasicSelect">
+              <Form.Label>Rating</Form.Label>
+              <Form.Control as="select" value={rating} onChange={(e) => setRating(e.target.value)}>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </Form.Control>
+            </Form.Group>
+            <Button variant="primary" type="submit" className="custom-button">
+              Submit
+            </Button>
+          </Form>
+          {submitted && <Alert variant="success" onClose={() => setSubmitted(false)} dismissible>Rating submitted successfully!</Alert>}
+        </Modal.Body>
+      </Modal>
+      <Modal className="modal-xl" show={showBioModal} onHide={handleBioModalClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>{profile.firstName} {profile.lastName} Bio</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>{profile.bio}</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleBioModalClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Card>
   );
 };
