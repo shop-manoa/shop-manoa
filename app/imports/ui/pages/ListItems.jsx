@@ -75,6 +75,7 @@ const ListItems = () => {
                       <Card.Text>
                         {stuff.description.length > 100 ? `${stuff.description.substring(0, 100)}...` : stuff.description}
                         <br />
+                        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
                         <span onClick={() => { setModalContent(stuff); setIsModalOpen(true); }} style={{ color: 'blue', cursor: 'pointer' }}>
                           View More
                         </span>
