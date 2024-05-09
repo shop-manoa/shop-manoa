@@ -23,6 +23,7 @@ class ListItems {
         defaultValue: 'Good',
       },
       price: Number,
+      contact: String,
       owner: String,
     });
     this.collection.attachSchema(this.schema);
