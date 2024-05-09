@@ -21,7 +21,7 @@ const AdminHome = () => {
   }, []);
   return (ready ? (
     <>
-      <Container fluid className="pt-3">
+      <Container id="adminhome-page" fluid className="pt-3">
         {/* Calling ListProfile to show the table */}
         <ListProfile />
       </Container>

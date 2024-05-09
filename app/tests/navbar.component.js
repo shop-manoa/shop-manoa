@@ -31,17 +31,7 @@ class NavBar {
     await testController.expect(loggedInUser).eql(username);
   }
 
-  /** Check that home page is visible. */
-  async gotoHomePage(testController) {
-    const visible = await Selector('#basic-navbar-nav').visible;
-    if (!visible) {
-      await testController.click('button.navbar-toggler');
-    }
-    await testController.expect(Selector('#navbar-current-user').exists).ok();
-    await testController.click('#user-home-nav');
-  }
-
-  /** Check that home page is visible. */
+  /** Check that admin home page is visible. */
   async gotoAdminHomePage(testController) {
     const visible = await Selector('#basic-navbar-nav').visible;
     if (!visible) {
@@ -89,16 +79,6 @@ class NavBar {
     }
     await testController.expect(Selector('#navbar-current-user').exists).ok();
     await testController.click('#list-profile-nav');
-  }
-
-  /** Check that add report page is visible. */
-  async gotoAddReportPage(testController) {
-    const visible = await Selector('#basic-navbar-nav').visible;
-    if (!visible) {
-      await testController.click('button.navbar-toggler');
-    }
-    await testController.expect(Selector('#navbar-current-user').exists).ok();
-    await testController.click('#add-report-nav');
   }
 
   /** Check that categories page is visible. */

@@ -3,7 +3,6 @@ import { signinPage } from './signin.page';
 import { signoutPage } from './signout.page';
 import { navBar } from './navbar.component';
 import { listProfilePage } from './listprofile.page';
-import { homePage } from './home.page';
 import { adminHomePage } from './adminhome.page';
 import { myProfilePage } from './myprofile.page';
 import { createItemPage } from './createitem.page';
@@ -18,7 +17,7 @@ const credentials = { username: 'john@foo.com', password: 'changeme' };
 
 const adminCredentials = { username: 'admin@foo.com', password: 'changeme' };
 
-fixture('meteor-application-template-react localhost test with default db')
+fixture('shop-manoa localhost test with default db')
   .page('http://localhost:3000');
 
 test('Test that landing page shows up', async (testController) => {
@@ -31,13 +30,6 @@ test('Test that signin and signout work', async (testController) => {
   await navBar.isLoggedIn(testController, credentials.username);
   await navBar.logout(testController);
   await signoutPage.isDisplayed(testController);
-});
-
-test('Test the Home page', async (testController) => {
-  await navBar.gotoSignInPage(testController);
-  await signinPage.signin(testController, credentials.username, credentials.password);
-  await navBar.gotoHomePage(testController);
-  await homePage.isDisplayed(testController);
 });
 
 test('Test the Admin Home page', async (testController) => {
