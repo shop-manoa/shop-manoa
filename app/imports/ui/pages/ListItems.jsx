@@ -1,12 +1,14 @@
+// ListItems.jsx
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Meteor } from 'meteor/meteor';
 import { Card, Col, Container, Row, Button } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { CiStar } from 'react-icons/ci';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { ItemsList } from '../../api/items/ListItems';
-import { Profiles } from '../../api/user/Profiles'; // Import user profile collection
+import { Profiles } from '../../api/user/Profiles';
+import { Chats } from '../../api/chat/chat'; // Import the Chats collection
 
 const ListItems = () => {
   const { ready, userFavorites } = useTracker(() => {
@@ -50,7 +52,18 @@ const ListItems = () => {
     }
   };
 
-  // Sort items by favorited status, favorited items first
+  const startChat = (participantId) => {
+    Meteor.call('chats.createChat', participantId, (error, chatId) => {
+      if (error) {
+        console.error('Error creating chat:', error.reason);
+      } else {
+        // Redirect user to the chat room
+        // For example, you can use React Router to redirect
+        // window.location.href = `/chat/${chatId}`; // Replace with your actual chat route
+      }
+    });
+  };
+
   const sortedStuffs = [...stuffs].sort((a, b) => {
     if (isFavorited(a._id) && !isFavorited(b._id)) return -1;
     if (!isFavorited(a._id) && isFavorited(b._id)) return 1;
@@ -79,6 +92,12 @@ const ListItems = () => {
                       >
                         <CiStar style={{ marginRight: '5px' }} />
                         {isFavorited(stuff._id) ? 'Favorited' : 'Favorite'}
+                      </Button>
+                      <Button
+                        variant="primary"
+                        onClick={() => startChat(stuff.owner)} // Pass owner ID as participantId
+                      >
+                        Start Chat
                       </Button>
                       <Link to={`/profile/${stuff.owner}`} className="btn btn-outline-primary btn-sm custom-button">View Profile</Link>
                     </Card.Body>

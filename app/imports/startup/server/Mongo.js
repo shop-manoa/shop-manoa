@@ -5,6 +5,7 @@ import { CategoryStuffs } from '../../api/category/CategoryStuff';
 import { Reports } from '../../api/report/Report.js';
 import { Ratings } from '../../api/rating/Ratings.js';
 
+
 /* eslint-disable no-console */
 
 // Initialize the database with a default data document.

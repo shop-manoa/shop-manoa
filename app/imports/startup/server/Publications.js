@@ -5,6 +5,7 @@ import { Profiles } from '../../api/user/Profiles';
 import { CategoryStuffs } from '../../api/category/CategoryStuff';
 import { Reports } from '../../api/report/Report';
 import { Ratings } from '../../api/rating/Ratings';
+import { Chats } from '../../api/chat/chat';
 
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise, publish nothing.
@@ -91,6 +92,20 @@ Meteor.publish(null, function () {
 Meteor.publish(null, function () {
   if (this.userId) {
     return Meteor.roleAssignment.find({ 'user._id': this.userId });
+  }
+  return this.ready();
+});
+
+Meteor.publish('userChats', function () {
+  if (this.userId) {
+    return Chats.find({ participants: this.userId });
+  }
+  return this.ready();
+});
+
+Meteor.publish('chatMessages', function (chatId) {
+  if (this.userId) {
+    return Chats.find({ _id: chatId });
   }
   return this.ready();
 });
