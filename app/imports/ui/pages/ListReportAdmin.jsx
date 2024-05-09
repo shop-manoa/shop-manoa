@@ -25,7 +25,7 @@ const ListReportAdmin = () => {
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col md="auto">
-          <Col className="text-center"><h2>List Reports(Admin)</h2></Col>
+          <Col className="text-center"><h2 className="shadow-text" style={{ color: 'white', backgroundColor: 'rgba(0, 0, 0, 0.5)', padding: '10px', display: 'inline-block' }}>List Reports(Admin)</h2></Col>
           <Table striped bordered hover>
             <thead>
               <tr className="text-center">

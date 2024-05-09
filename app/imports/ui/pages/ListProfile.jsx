@@ -26,7 +26,7 @@ const ListProfile = () => {
       <Row className="justify-content-center">
         <Col>
           <Col className="text-center">
-            <h2>List Seller Profile</h2>
+            <h2 className="shadow-text" style={{ color: 'white', backgroundColor: 'rgba(0, 0, 0, 0.5)', padding: '10px', display: 'inline-block' }}>List Seller Profile</h2>
           </Col>
           <Row xs={1} md={2} lg={3} className="g-4">
             {profiles.map((profile) => (
