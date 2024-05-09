@@ -66,24 +66,18 @@ const ListItems = () => {
             <Row className="justify-content-center">
               {sortedStuffs.map((stuff) => (
                 <Col key={stuff._id} md={4} className="d-flex align-items-stretch">
-                  <Card className="mb-4" style={{ width: '500px' }}>
+                  <Card className="mb-4">
                     <Card.Body>
                       <Card.Title>{stuff.title}</Card.Title>
                       <div className="d-flex justify-content-center">
                         <img src={stuff.image} alt={stuff.title} style={{ width: '200px', height: '200px' }} />
                       </div>
                       <Card.Text>
-                        {stuff.description.length > 100 ? `${stuff.description.substring(0, 100)}...` : stuff.description}
+                        {`${stuff.description.substring(0, 100)}...`}
                         <br />
                         <span onClick={() => { setModalContent(stuff); setIsModalOpen(true); }} style={{ color: 'blue', cursor: 'pointer' }}>
                           View More
                         </span>
-                        {stuff.description.length > 100 && (
-                          // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-                          <span onClick={() => { setModalContent(stuff); setIsModalOpen(true); }} style={{ color: 'blue', cursor: 'pointer' }}>
-                            View More
-                          </span>
-                        )}
                       </Card.Text>
                       <Card.Text>Category: {stuff.category}</Card.Text>
                       <Card.Text>Condition: {stuff.condition}</Card.Text>
@@ -97,16 +91,8 @@ const ListItems = () => {
                         {isFavorited(stuff._id) ? 'Favorited' : 'Favorite'}
                       </Button>
                       <Link to={`/profile/${stuff.owner}`} className="btn btn-outline-primary btn-sm custom-button">View Profile</Link>
-                    </Card.Body>
-                    <Card.Footer>
-                      <Button className="btn btn-sm custom-button" variant={isFavorited(stuff._id) ? 'warning' : 'outline-warning'} onClick={() => toggleFavorite(stuff._id)}>
-                        <CiStar style={{ marginRight: '5px' }} />
-                        {isFavorited(stuff._id) ? 'Favorited' : 'Favorite'}
-                      </Button>
-                      <Link to={`/profile/${stuff.owner}`} className="btn btn-outline-primary btn-sm custom-button" style={{ marginLeft: '10px' }}>View Profile</Link>
-                      {/* Added a link to AddReport page */}
                       <Link to="../addReport" id="report-button" className="btn btn-outline-danger btn-sm custom-button" style={{ marginLeft: '10px' }}>report</Link>
-                    </Card.Footer>
+                    </Card.Body>
                   </Card>
                 </Col>
               ))}
