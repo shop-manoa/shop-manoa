@@ -19,6 +19,9 @@ const ProfilePage = () => {
   const [newImage, setNewImage] = useState('');
   const [items, setItems] = useState([]);
 
+  const [isDesModalOpen, setIsDesModalOpen] = useState(false);
+  const [desModalContent, setDesModalContent] = useState('');
+
   // State for managing the visibility of the modals
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
@@ -73,7 +76,7 @@ const ProfilePage = () => {
 
   return (
     <Container id="myprofile-page" className="d-flex flex-column align-items-center" style={{ height: 'vh' }}>
-      <Card className="shadow-lg p-3 mb-5 bg-white rounded text-center" style={{ marginTop: '50px' }}>
+      <Card className="shadow-lg p-3 mb-5 bg-white rounded text-center" style={{ width: '750px', marginTop: '50px' }}>
         <div className="profile-picture-container d-flex flex-column align-items-center">
           {profileData && profileData.image ? (
             <Image src={newImage || profileData.image} alt="Profile" className="profile-picture" roundedCircle style={{ width: '200px', height: '200px' }} />
@@ -89,24 +92,31 @@ const ProfilePage = () => {
         <p>{profileData ? profileData.bio : ''}</p>
       </Card>
       {/* Display items */}
-      <Row className="g-5" style={{ marginBottom: '50px' }}>  {/* Wrap items in a Row */}
+      <Row className="g-5" style={{ marginBottom: '50px' }}>
         {items.map(item => (
-          <Col key={item._id}>  {/* Wrap each Card in a Col */}
-            <Card className="mb-3" style={{ width: '400px' }}>
-              <Card.Img variant="top" src={item.image} style={{ width: '200px', height: '200px' }} />
+          <Col key={item._id} md={4} className="d-flex align-items-stretch">
+            <Card className="mb-4" style={{ width: '1000px' }}>
+              <Card.Img variant="top" src={item.image} className="mx-auto d-block" style={{ marginTop: '20px', width: '200px', height: '200px' }} />
               <Card.Body>
                 <Card.Title>{item.title}</Card.Title>
                 <Card.Text>
-                  {item.description}
+                  {item.description.length > 100 ? `${item.description.substring(0, 100)}...` : item.description}
+                  <br />
+                  {item.description.length > 100 && (
+                    // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
+                    <span onClick={() => { setDesModalContent(item.description); setIsDesModalOpen(true); }} style={{ color: 'blue', cursor: 'pointer' }}>
+                      View More
+                    </span>
+                  )}
                 </Card.Text>
               </Card.Body>
               <Card.Footer>
                 <small className="text-muted">{item.category} - {item.condition} - ${item.price}</small>
                 {item.owner === Meteor.user().username ? (
-                  <Button variant="link" onClick={() => { setItemData(item); setNewDescription(item.description); setNewPrice(item.price); setShowModal2(true); }}>Edit Item</Button>
+                  <Button variant="outline-primary" className="btn-sm" style={{ marginLeft: '10px' }} onClick={() => { setItemData(item); setNewDescription(item.description); setNewPrice(item.price); setShowModal2(true); }}>Edit</Button>
                 ) : ''}
                 {item.owner === Meteor.user().username || isAdmin ? (
-                  <Button style={{ marginLeft: '10px' }} variant="danger" onClick={() => remove(item._id)}>Remove Item</Button>
+                  <Button variant="outline-danger" className="btn-sm" style={{ marginLeft: '10px' }} onClick={() => remove(item._id)}>Remove</Button>
                 ) : ''}
               </Card.Footer>
             </Card>
@@ -138,6 +148,17 @@ const ProfilePage = () => {
           </Button>
           <Button variant="primary" onClick={handleSaveProfile}>
             Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal show={isDesModalOpen} onHide={() => setIsDesModalOpen(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Description</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{desModalContent}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setIsDesModalOpen(false)}>
+            Close
           </Button>
         </Modal.Footer>
       </Modal>
