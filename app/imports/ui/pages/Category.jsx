@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
@@ -25,8 +25,7 @@ const Categories = () => {
 
   return (
     ready ? (
-      <Container id="category-page" className="py-3">
-        <h2>This page is for {pageName}</h2>
+      <Container id="items-page" className="py-3">
         <Row className="justify-content-center">
           <Col md={12}>
             <Row className="justify-content-center">
@@ -40,7 +39,9 @@ const Categories = () => {
                       <Card.Text>Category: {stuff.category}</Card.Text>
                       <Card.Text>Condition: {stuff.condition}</Card.Text>
                       <Card.Text>Price: ${stuff.price}</Card.Text>
-                      <Card.Text>Owner: {stuff.owner}</Card.Text>
+                      {/* Link to the user's profile page */}
+                      <Link to={`/profile/${stuff.owner}`} className="btn btn-outline-primary btn-sm custom-button" style={{ marginLeft: '10px' }}>View Profile</Link>
+                      <Link to="../addReport" id="report-button" className="btn btn-outline-danger btn-sm custom-button" style={{ marginLeft: '10px' }}>report</Link>
                     </Card.Body>
                   </Card>
                 </Col>
@@ -51,17 +52,6 @@ const Categories = () => {
       </Container>
     ) : <LoadingSpinner />
   );
-  // const { _id } = useParams();
-
-  // Posts.find({id:Meteor.userId()}).fetch()[0].title
-  // const subscription = Meteor.subscribe(CategoryStuffs.userPublicationName);
-  // Determine if the subscription is ready
-  // Get the document
-  // const document = CategoryStuffs.collection.findOne(_id);
-  // const pog = CategoryStuffs.collection.findOne(_id);
-  // const test = pog.CategoryStuffs().name();
-  // return <div>{_id} WTF</div>;
 };
-// Fiqure Out how to get the name of the Category
 
 export default Categories;
