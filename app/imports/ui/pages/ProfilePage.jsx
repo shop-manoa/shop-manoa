@@ -79,7 +79,7 @@ const ProfilePage = () => {
         {items.map(item => (
           <Col key={item._id}>  {/* Wrap each Card in a Col */}
             <Card className="mb-3" style={{ width: '400px' }}>
-              <Card.Img variant="top" src={item.image} style={{ width: '100px', height: '100px' }} />
+              <Card.Img variant="top" src={item.image} style={{ width: '200px', height: '200px' }} />
               <Card.Body>
                 <Card.Title>{item.title}</Card.Title>
                 <Card.Text>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
-import { Card, Col, Container, Row, Button } from 'react-bootstrap';
+import { Card, Col, Container, Row, Button, Modal } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { CiStar } from 'react-icons/ci';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -21,6 +21,8 @@ const ListItems = () => {
   }, []);
 
   const [stuffs, setStuffs] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState('');
 
   useTracker(() => {
     const subscription = Meteor.subscribe(ItemsList.userPublicationName);
@@ -64,12 +66,21 @@ const ListItems = () => {
           <Col md={12}>
             <Row className="justify-content-center">
               {sortedStuffs.map((stuff) => (
-                <Col key={stuff._id} md={4}>
-                  <Card>
+                <Col key={stuff._id} md={4} className="d-flex align-items-stretch">
+                  <Card className="mb-4">
                     <Card.Body>
                       <Card.Title>{stuff.title}</Card.Title>
-                      <img src={stuff.image} alt={stuff.title} style={{ width: '100px', height: '100px' }} />
-                      <Card.Text>{stuff.description}</Card.Text>
+                      <div className="d-flex justify-content-center">
+                        <img src={stuff.image} alt={stuff.title} style={{ width: '200px', height: '200px' }} />
+                      </div>
+                      <Card.Text>
+                        {`${stuff.description.substring(0, 100)}...`}
+                        <br />
+                        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
+                        <span onClick={() => { setModalContent(stuff); setIsModalOpen(true); }} style={{ color: 'blue', cursor: 'pointer' }}>
+                          View More
+                        </span>
+                      </Card.Text>
                       <Card.Text>Category: {stuff.category}</Card.Text>
                       <Card.Text>Condition: {stuff.condition}</Card.Text>
                       <Card.Text>Price: ${stuff.price}</Card.Text>
@@ -87,6 +98,25 @@ const ListItems = () => {
                   </Card>
                 </Col>
               ))}
+              <Modal show={isModalOpen} onHide={() => setIsModalOpen(false)}>
+                <Modal.Header closeButton>
+                  <Modal.Title>{modalContent.title}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <div className="d-flex justify-content-center">
+                    <img src={modalContent.image} alt={modalContent.title} style={{ width: '200px', height: '200px' }} />
+                  </div>
+                  <p>{modalContent.description}</p>
+                  <p>Category: {modalContent.category}</p>
+                  <p>Condition: {modalContent.condition}</p>
+                  <p>Price: ${modalContent.price}</p>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={() => setIsModalOpen(false)}>
+                    Close
+                  </Button>
+                </Modal.Footer>
+              </Modal>
             </Row>
           </Col>
         </Row>
