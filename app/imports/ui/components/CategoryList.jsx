@@ -6,7 +6,7 @@ import { Container } from 'react-bootstrap';
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 const CategoryList = ({ categorystuff }) => (
   <Container>
-    <Link to={`/categories/${categorystuff.name}`}>{categorystuff.name}</Link>
+    <Link to={`/categories/${categorystuff.name}`} className="link">{categorystuff.name}</Link>
   </Container>
 );
 

@@ -81,3 +81,13 @@ body .navbar {
 .delete-button:hover {
   background-color: red;
 }
+
+.link {
+  color: Green; /* Default link color */
+  text-decoration: none; /* Remove underline */
+}
+
+.link:hover {
+  color: Black; /* Color when link is hovered over */
+}
+

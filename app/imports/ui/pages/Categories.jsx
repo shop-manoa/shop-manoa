@@ -1,11 +1,10 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Card, CardLink, Col, Container, Row, Table } from 'react-bootstrap';
+import { Card, Col, Container, Row, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { CategoryStuffs } from '../../api/category/CategoryStuff';
 import CategoryList from '../components/CategoryList';
-import { Link } from 'react-router-dom';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 const Categories = () => {
@@ -32,7 +31,7 @@ const Categories = () => {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>Categories</th>
+                <td>Categories</td>
               </tr>
             </thead>
             <tbody>
