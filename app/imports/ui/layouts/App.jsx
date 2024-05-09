@@ -26,6 +26,8 @@ import AdminHome from '../pages/AdminHome';
 import ListItems from '../pages/ListItems';
 import Footer from '../components/Footer';
 import AddReport from '../pages/AddReport';
+import ChatPage from '../pages/ChatPage';
+import MessagesPage from '../pages/MessagesPage';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -35,6 +37,8 @@ const App = () => {
       ready: rdy,
     };
   });
+
+  const [chats, setChats] = useState([]);
   return (
     <Router>
       <div className="d-flex flex-column min-vh-100">
@@ -62,6 +66,8 @@ const App = () => {
           <Route path="/adminHome" element={<AdminProtectedRoute ready={ready}><AdminHome /></AdminProtectedRoute>} />
           <Route path="/profile/:owner" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
+          <Route path="/chat/:chatId" element={<ChatPage />} />
+          <Route path="/messages" element={<ProtectedRoute><MessagesPage chats={chats} /></ProtectedRoute>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

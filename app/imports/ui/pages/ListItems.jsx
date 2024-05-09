@@ -57,7 +57,11 @@ const ListItems = () => {
         console.error('Error creating chat:', error.reason);
       } else {
         // Redirect user to the chat room
-        window.location.href = `/chat/${chatId}`; // Replace with your actual chat route
+        // For example, you can use React Router to redirect
+        // window.location.href = `/chat/${chatId}`; // Replace with your actual chat route
+
+        // Add the new chat to the state
+        setChats(prevChats => [...prevChats, { id: chatId, participant: participantId }]);
       }
     });
   };

@@ -87,3 +87,20 @@ body .navbar {
   padding: 20px;
   border-radius: 10px;
 }
+
+/* UNDER THIS IS FOR CHAT */
+.user-message {
+  background-color: #007bff; /* Blue background for messages from the main user */
+  color: #fff; /* White text color for messages from the main user */
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.other-message {
+  background-color: #28a745; /* Green background for messages from other users */
+  color: #fff; /* White text color for messages from other users */
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
